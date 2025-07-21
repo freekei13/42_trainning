@@ -15,6 +15,11 @@ $(NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+test:
+	$(CC) $(CFLAGS) main.c $(INCLUDES) $(NAME) -o test
+	./test
+	rm test
+
 clean:
 	rm -f $(OBJ)
 

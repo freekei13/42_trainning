@@ -10,5 +10,14 @@ int main(void)
 	char buffer[10];
 	ft_memset(buffer, '*', 10);
 	printf("ft_memset: %s\n", buffer);
+	int *buffer2 = ft_calloc(10, sizeof(int));
+	printf("ft_calloc:");
+	for (int i = 0; i < 10; i++)
+		printf(" %d", buffer2[i]);
+	printf("\n");
+	char *itoa = ft_itoa(1303);
+	printf("ft_itoa: %s\n", itoa);
+	free(itoa);
+	free(buffer2);
 	return 0;
 }
