@@ -1,6 +1,6 @@
 # C Training - École 42
 
-![42 Logo](https://i.imgur.com/9uQFL8y.png)  
+![42 Logo](https://fr.wikipedia.org/wiki/Fichier:42_Logo.svg)  
 *Dépôt d'entraînement*
 
 ## 📚 Description
