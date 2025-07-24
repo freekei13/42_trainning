@@ -1,55 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 01:07:33 by csamakka          #+#    #+#             */
-/*   Updated: 2025/07/24 01:07:35 by csamakka         ###   ########.fr       */
+/*   Created: 2025/07/24 22:33:48 by csamakka          #+#    #+#             */
+/*   Updated: 2025/07/24 23:04:28 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_intlen(int nb)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	int	i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	i = 0;
-	if (nb == 0)
-		return (1);
-	while (nb != 0)
+	d = (unsigned char *) dest;
+	s = (const unsigned char *) src;
+	if (d == s || len == 0)
+		return (dest);
+	if (d > s)
 	{
-		nb = nb / 10;
-		i++;
+		d = d + len - 1;
+		s = s + len - 1;
+		while (len--)
+			*d-- = *s--;
 	}
-	return (i);
-}
-
-char	*ft_itoa(int nb)
-{
-	int			len;
-	char		*str;
-	long int	n;
-
-	n = nb;
-	len = ft_intlen(n);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len--] = '\0';
-	if (n == 0)
-		str[0] = '0';
-	if (n < 0)
+	else
 	{
-		str[0] = '-';
-		n = -n;
+		while (len--)
+			*d++ = *s++;
 	}
-	while (n > 0)
-	{
-		str[len--] = n % 10 + 48;
-		n = n / 10;
-	}
-	return (str);
+	return (dest);
 }

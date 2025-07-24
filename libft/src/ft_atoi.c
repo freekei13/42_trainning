@@ -1,26 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 23:59:11 by csamakka          #+#    #+#             */
+/*   Updated: 2025/07/24 17:28:04 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
+#include <limits.h>
+
+int	str_convert(int sign, long res, const char *str)
+{
+	while (*str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - 48);
+		if ((sign == 1 && res > INT_MAX)
+			|| (sign == -1 && res > (long)INT_MAX + 1))
+		{
+			if (sign == 1)
+				return (INT_MAX);
+			else
+				return (INT_MIN);
+		}
+		str++;
+	}
+	return ((int)res);
+}
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	res;
-	int	sign;
-	
+	long	res;
+	int		sign;
+
 	sign = 1;
 	res = 0;
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= 7 && str[i] <= 13))
-		i++;
-	while (str[i] == '-' || str[i] == '+')
+	while (*str == ' ' || (*str >= 7 && *str <= 13))
+		str++;
+	while (*str == '-' || *str == '+')
 	{
-		if (str[i] == '-')
-			sign = sign * -1;
-		i++;
+		if (*str == '-')
+			sign *= -1;
+		str++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + (str[i] - 48);
-		i++;
-	}
-	return (res * sign);
+	res = str_convert(sign, res, str);
+	return ((int)res * sign);
 }

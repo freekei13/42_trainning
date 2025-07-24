@@ -17,7 +17,7 @@ $(NAME): $(OBJ)
 
 test:
 	$(CC) $(CFLAGS) main.c $(INCLUDES) $(NAME) -o test
-	./test
+	valgrind -s ./test
 	rm test
 
 clean:
