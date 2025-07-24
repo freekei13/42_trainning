@@ -15,7 +15,7 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'éco
 ## GESTION MÉMOIRE 
 - [x] ft_bzero
 - [x] ft_memmove
-- [ ] ft_memchr
+- [x] ft_memchr
 - [ ] ft_memcmp
 ## TESTS DE CARACTÈRES
 - [ ] ft_isalpha
