@@ -24,6 +24,9 @@ int main(void)
 	printf("ft_bzero: %s\n", dup);
 	ft_memmove(itoa + 2, itoa, 2);
 	printf("ft_memmove: %s\n", itoa);
+	char *buffer3 = "Hello\0World!";
+	char *memchr = ft_memchr(buffer3, 'W', 11);
+	printf("ft_memchr: %s\n", memchr);
 	free(dup);
 	free(buffer2);
 	free(itoa);
