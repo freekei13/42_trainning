@@ -1,7 +1,7 @@
-# Mini Libft Starter
+# Libft Starter
 
 ## Objectifs
-Recode quelques fonctions utiles de la libC pour t’échauffer au C.
+Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'école 42.
 
 ## Fonctions à implémenter
 - [x] ft_atoi
@@ -12,12 +12,12 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C.
 - [x] ft_strdup
 - [x] ft_strlen
 - [x] ft_strcmp
-## GESTION MÉMOIRE (à faire)
+## GESTION MÉMOIRE 
 - [x] ft_bzero
 - [x] ft_memmove
 - [ ] ft_memchr
 - [ ] ft_memcmp
-## TESTS DE CARACTÈRES (à faire)
+## TESTS DE CARACTÈRES
 - [ ] ft_isalpha
 - [ ] ft_isdigit
 - [ ] ft_isalnum
@@ -25,24 +25,24 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C.
 - [ ] ft_isprint
 - [ ] ft_toupper
 - [ ] ft_tolower
-## CHAÎNES DE CARACTÈRES (à faire)
+## CHAÎNES DE CARACTÈRES
 - [ ] ft_strchr
 - [ ] ft_strrchr
 - [ ] ft_strncmp
 - [ ] ft_strnstr
 - [ ] ft_strlcpy
 - [ ] ft_strlcat
-## FONCTIONS UTILES (à faire)
+## FONCTIONS UTILES
 - [ ] ft_substr
 - [ ] ft_strjoin
 - [ ] ft_strtrim
 - [ ] ft_split
-## AFFICHAGE & CONVERSIONS (à faire)
+## AFFICHAGE & CONVERSIONS
 - [ ] ft_putchar_fd
 - [ ] ft_putstr_fd
 - [ ] ft_putendl_fd
 - [ ] ft_putnbr_fd
-## BONUS - LISTES CHAÎNÉES (facultatif)
+## BONUS - LISTES CHAÎNÉES
 - [ ] ft_lstnew
 - [ ] ft_lstadd_front
 - [ ] ft_lstsize
@@ -56,5 +56,5 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C.
 ## Compilation
 ```bash
 make
-./a.out
+make test
 ```
