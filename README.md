@@ -5,3 +5,5 @@
 
 ## 📚 Description
 Ce dépôt contient mes implémentations des fonctions de base en C dans le cadre du cursus de l'école 42.
+
+- [ ] libft.h
