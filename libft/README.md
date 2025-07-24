@@ -4,17 +4,17 @@
 Recode quelques fonctions utiles de la libC pour t’échauffer au C.
 
 ## Fonctions à implémenter
-- [ ] ft_atoi
-- [ ] ft_calloc
-- [ ] ft_itoa
-- [ ] ft_memcpy
-- [ ] ft_memset
-- [ ] ft_strdup
-- [ ] ft_strlen
-- [ ] ft_strcmp
+- [x] ft_atoi
+- [x] ft_calloc
+- [x] ft_itoa
+- [x] ft_memcpy
+- [x] ft_memset
+- [x] ft_strdup
+- [x] ft_strlen
+- [x] ft_strcmp
 ## GESTION MÉMOIRE (à faire)
-- [ ] ft_bzero
-- [ ] ft_memmove
+- [x] ft_bzero
+- [x] ft_memmove
 - [ ] ft_memchr
 - [ ] ft_memcmp
 ## TESTS DE CARACTÈRES (à faire)
