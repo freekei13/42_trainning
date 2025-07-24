@@ -4,7 +4,7 @@
 Recode quelques fonctions utiles de la libC pour t’échauffer au C.
 
 ## Fonctions à implémenter
-+ [ ] ft_atoi
+- [ ] ft_atoi
 - [ ] ft_calloc
 - [ ] ft_itoa
 - [ ] ft_memcpy
