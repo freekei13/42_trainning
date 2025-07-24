@@ -4,6 +4,6 @@
 *Dépôt d'entraînement*
 
 ## 📚 Description
-Ce dépôt contient mes implémentations des fonctions de base en C dans le cadre du cursus de l'école 42.
+Ce dépôt contient les implémentations des fonctions de base en C de l'école 42.
 
 - [ ] libft.h
