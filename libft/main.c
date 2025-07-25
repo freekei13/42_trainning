@@ -3,14 +3,14 @@
 
 int main(void)
 {
-	printf("ft_strlen(Hello, 42!):\n%zu\n", ft_strlen("Hello, 42!"));
+	printf("ft_strlen('Hello, 42!'):\n%zu\n", ft_strlen("Hello, 42!"));
 
 	char *dup = ft_strdup("Hello, 42!");
-	printf("ft_strdup(Hello, 42!): \n%s\n", dup);
+	printf("ft_strdup('Hello, 42!'): \n%s\n", dup);
 
-	printf("ft_strcmp(Hello, World!, Hello ,42!) et (Hello, 42!, Hello, 42!): \n%d %d\n", ft_strcmp("Hello, World!", "Hello, 42!"), ft_strcmp("Hello, 42!", "Hello, 42!"));
+	printf("ft_strcmp('Hello, World!', 'Hello ,42!') et ('Hello, 42!', 'Hello, 42!'): \n%d %d\n", ft_strcmp("Hello, World!", "Hello, 42!"), ft_strcmp("Hello, 42!", "Hello, 42!"));
 	
-	printf("ft_atoi(-131629): \n%d\n", ft_atoi("-131629"));
+	printf("ft_atoi('-131629'): \n%d\n", ft_atoi("-131629"));
 	
 	char buffer[10];
 	ft_memset(buffer, '*', 10);
@@ -29,15 +29,25 @@ int main(void)
 	printf("ft_memcpy(buffer, itoa, 4): \n%s\n", buffer);
 	
 	ft_bzero(dup, ft_strlen(dup));
-	printf("ft_bzero(Hello, 42!, ft_strlen(Hello, 42!)): \n%s\n", dup);
+	printf("ft_bzero('Hello, 42!', ft_strlen('Hello, 42!')): \n%s\n", dup);
 	
 	ft_memmove(itoa + 2, itoa, 2);
 	printf("ft_memmove(itoa + 2, itoa, 2): \n%s\n", itoa);
 	
 	char *buffer3 = "Hello\0World!";
 	char *memchr = ft_memchr(buffer3, 'W', 11);
-	printf("ft_memchr(Hello World!, 'W', 11): \n%s\n", memchr);
+	printf("ft_memchr('Hello/0World!', 'W', 11): \n%s\n", memchr);
 	
+	int memcmp = ft_memcmp(buffer2, buffer2, sizeof(int) * 10);
+	int memcmp2 = ft_memcmp(dup, itoa, 4);
+	printf("ft_memcmp(*int, *int) et (str1, str2):\n%d %d\n", memcmp, memcmp2);
+	
+	printf("ft_isalpha('b') ('2'): \n%d %d\n", ft_isalpha('b'), ft_isalpha('2'));
+
+	printf("ft_isdigit('H') ('4'): \n%d %d\n", ft_isdigit('H'), ft_isdigit('4'));
+
+	printf("ft_isalnum('y') ('9'): \n%d %d\n", ft_isalnum('y'), ft_isalnum('9'));
+
 	free(dup);
 	free(buffer2);
 	free(itoa);

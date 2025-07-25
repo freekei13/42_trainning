@@ -16,11 +16,11 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'éco
 - [x] ft_bzero
 - [x] ft_memmove
 - [x] ft_memchr
-- [ ] ft_memcmp
+- [x] ft_memcmp
 ## TESTS DE CARACTÈRES
-- [ ] ft_isalpha
-- [ ] ft_isdigit
-- [ ] ft_isalnum
+- [x] ft_isalpha
+- [x] ft_isdigit
+- [x] ft_isalnum
 - [ ] ft_isascii
 - [ ] ft_isprint
 - [ ] ft_toupper
