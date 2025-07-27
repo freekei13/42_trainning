@@ -48,6 +48,16 @@ int main(void)
 
 	printf("ft_isalnum('y') ('9'): \n%d %d\n", ft_isalnum('y'), ft_isalnum('9'));
 
+	printf("ft_isascii(0) (255): \n%d %d\n", ft_isascii(0), ft_isascii(255));
+
+	printf("ft_isprint(0) ('*'): \n%d %d\n", ft_isprint(0), ft_isprint('*'));
+	
+	char a = ft_toupper('b');
+	char b = ft_toupper('5');
+	printf("ft_toupper('b') ('5'): \n%c %c\n", a, b);
+
+	printf("ft_tolower('B') ('a'): \n%c %c\n", ft_tolower(a), ft_tolower('a'));
+
 	free(dup);
 	free(buffer2);
 	free(itoa);

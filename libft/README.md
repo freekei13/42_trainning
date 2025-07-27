@@ -21,10 +21,10 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'éco
 - [x] ft_isalpha
 - [x] ft_isdigit
 - [x] ft_isalnum
-- [ ] ft_isascii
-- [ ] ft_isprint
-- [ ] ft_toupper
-- [ ] ft_tolower
+- [x] ft_isascii
+- [x] ft_isprint
+- [x] ft_toupper
+- [x] ft_tolower
 ## CHAÎNES DE CARACTÈRES
 - [ ] ft_strchr
 - [ ] ft_strrchr
