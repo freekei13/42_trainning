@@ -26,9 +26,9 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'éco
 - [x] ft_toupper
 - [x] ft_tolower
 ## CHAÎNES DE CARACTÈRES
-- [ ] ft_strchr
-- [ ] ft_strrchr
-- [ ] ft_strncmp
+- [x] ft_strchr
+- [x] ft_strrchr
+- [x] ft_strncmp
 - [ ] ft_strnstr
 - [ ] ft_strlcpy
 - [ ] ft_strlcat
