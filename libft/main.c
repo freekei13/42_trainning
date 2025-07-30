@@ -58,12 +58,13 @@ int main(void)
 
 	printf("ft_tolower('B') ('a'): \n%c %c\n", ft_tolower(a), ft_tolower('a'));
 
-	printf("ft_strchr('Hello', 'l'): \n%s\n", ft_strchr("Hello", 'l'));
+	printf("ft_strchr(\"Hello\", 'l'): \n%s\n", ft_strchr("Hello", 'l'));
 
-	printf("ft_strrchr('Hello', 'l'): \n%s\n", ft_strrchr("Hello", 'l'));
+	printf("ft_strrchr(\"Hello\", 'l'): \n%s\n", ft_strrchr("Hello", 'l'));
 
-	printf("ft_strncmp('Hello', 'Hellno', 4): \n%d\n", ft_strncmp("Hello", "Hellno", 4));
-	printf("ft_strncmp('Hello', 'Hellno', 6): \n%d\n", ft_strncmp("Hello", "hellno", 6));
+	printf("ft_strncmp(\"Hello\", \"Hellno\", 4):\n%d\n", ft_strncmp("Hello", "Hellno", 4));
+	printf("ft_strncmp(\"Hello\", \"Hellno\", 6):\n%d\n", ft_strncmp("Hello", "Hellno", 6)); 
+	printf("ft_strncmp(\"1234\", \"1235\", 3):\n%d\n", ft_strncmp("1234", "1237", 3)); 
 
 	free(dup);
 	free(buffer2);
