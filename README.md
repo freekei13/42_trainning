@@ -4,6 +4,4 @@
 *Dépôt d'entraînement*
 
 ## 📚 Description
-Ce dépôt contient les implémentations des fonctions de base en C.
-
-- [ ] libft.h
+Ce dépôt contient les fichiers entraînement, les exercises etc...
