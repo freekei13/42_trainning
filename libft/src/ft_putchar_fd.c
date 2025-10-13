@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 15:33:10 by csamakka          #+#    #+#             */
-/*   Updated: 2025/09/20 15:41:02 by csamakka         ###   ########.fr       */
+/*   Created: 2025/10/13 16:15:11 by freekei           #+#    #+#             */
+/*   Updated: 2025/10/13 16:18:22 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void    ft_putchar_fd(char c, int fd)
 {
-	if (needle == NULL || needle == "")
-		return	(haystack);
-	if (haystack != NULL)
-	{
-		
+    write(fd, &c, 1);
+}

@@ -4,7 +4,7 @@
 Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'école 42.
 
 ## Fonctions à implémenter
-- [x] ft_atoi
+- [] ft_atoi
 - [x] ft_calloc
 - [x] ft_itoa
 - [x] ft_memcpy
@@ -38,10 +38,10 @@ Recode quelques fonctions utiles de la libC pour t’échauffer au C pour l'éco
 - [ ] ft_strtrim
 - [ ] ft_split
 ## AFFICHAGE & CONVERSIONS
-- [ ] ft_putchar_fd
-- [ ] ft_putstr_fd
-- [ ] ft_putendl_fd
-- [ ] ft_putnbr_fd
+- [x] ft_putchar_fd
+- [x] ft_putstr_fd
+- [x] ft_putendl_fd
+- [x] ft_putnbr_fd
 ## BONUS - LISTES CHAÎNÉES
 - [ ] ft_lstnew
 - [ ] ft_lstadd_front

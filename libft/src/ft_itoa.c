@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 01:07:33 by csamakka          #+#    #+#             */
-/*   Updated: 2025/07/24 01:07:35 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:48:50 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_intlen(int nb)
 	i = 0;
 	if (nb == 0)
 		return (1);
+	if (nb < 0)
+		i++;
 	while (nb != 0)
 	{
 		nb = nb / 10;
@@ -35,7 +37,7 @@ char	*ft_itoa(int nb)
 
 	n = nb;
 	len = ft_intlen(n);
-	str = malloc(sizeof(char) * (len + 1));
+	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	str[len--] = '\0';
