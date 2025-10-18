@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_px.c                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:14:52 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/18 14:34:32 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/01 11:44:12 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/07 16:26:53 by csamakka         ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libftprintf.h"
-int ft_ptr_len(unsigned int arg)
-{
-    
-}
+#include "libft.h"
 
-int ft_print_ptr(unsigned int arg)
+void	ft_bzero(void *s, size_t n)
 {
-    
-}
+	unsigned char	*str;
 
-int ft_hex_len(unsigned int arg)
-{
-    
-}
-int ft_print_hex(unsigned int arg)
-{
-    
+	str = (unsigned char *)s;
+	while (n--)
+		*str++ = 0;
 }

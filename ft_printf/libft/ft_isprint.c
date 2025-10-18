@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_px.c                                      :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:14:52 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/18 14:34:32 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/01 11:15:10 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/07 10:25:45 by csamakka         ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libftprintf.h"
-int ft_ptr_len(unsigned int arg)
+int	ft_isprint(int c)
 {
-    
-}
-
-int ft_print_ptr(unsigned int arg)
-{
-    
-}
-
-int ft_hex_len(unsigned int arg)
-{
-    
-}
-int ft_print_hex(unsigned int arg)
-{
-    
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

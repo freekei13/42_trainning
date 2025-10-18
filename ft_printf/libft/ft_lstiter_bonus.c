@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_px.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:14:52 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/18 14:34:32 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/14 12:16:02 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/14 13:31:56 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libftprintf.h"
-int ft_ptr_len(unsigned int arg)
-{
-    
-}
+#include "libft.h"
 
-int ft_print_ptr(unsigned int arg)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    
-}
+	t_list	*tmp;
 
-int ft_hex_len(unsigned int arg)
-{
-    
-}
-int ft_print_hex(unsigned int arg)
-{
-    
+	tmp = lst;
+	while (tmp)
+	{
+		f(tmp->content);
+		tmp = tmp->next;
+	}
 }

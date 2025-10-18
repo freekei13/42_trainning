@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_px.c                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:14:52 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/18 14:34:32 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/18 13:42:33 by freekei           #+#    #+#             */
+/*   Updated: 2025/10/18 14:20:46 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libftprintf.h"
-int ft_ptr_len(unsigned int arg)
-{
-    
-}
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int ft_print_ptr(unsigned int arg)
-{
-    
-}
+# include   <stdarg.h>
 
-int ft_hex_len(unsigned int arg)
-{
-    
-}
-int ft_print_hex(unsigned int arg)
-{
-    
-}
+#endif

@@ -6,18 +6,30 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:21:51 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/16 16:06:57 by freekei          ###   ########.fr       */
+/*   Updated: 2025/10/18 14:26:55 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
+
+int ft_arguments(va_list args, char type)
+{
+    int len;
+
+    len = 0;
+    if (type == 'c')
+        len += ft_print_char(va_arg(args, char));
+    else if (type == 's')
+        len += ft_print_str(va_arg(args, char *));
+    else if (type == 'p')
+}
 
 int ft_printf(const char *format, ...)
 {
     va_list args;
-    size_t  i;
-    size_t  len_total; //every print: len_total = len_total + printed len.
+    int     i;
+    int     len_total; //every print: len_total = len_total + printed len.
     
     i = 0;
     len_total = 0;
@@ -26,7 +38,7 @@ int ft_printf(const char *format, ...)
     {
         if (format[i] == '%')
         {
-            //if for all type : ft_print will print that var type and count len printed
+            len_total += ft_arguments(args, format[i + 1]);
                 //print a char
                 //print a string
                 //print pointer hex base 16
@@ -37,7 +49,10 @@ int ft_printf(const char *format, ...)
                 //print % sign
         }
         else
-            //putchar(format[i])
+        {
+            write(1, &format[i], 1);
+            len_total++;
+        }
         i++;
     }
     va_end(args);

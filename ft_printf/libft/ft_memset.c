@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_s.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 16:05:54 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/16 16:28:02 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/01 11:19:14 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/07 13:21:32 by csamakka         ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stddef.h>
 
-#include "libft/libft.h"
-#include "libftprintf.h"
-
-size_t  ft_print_str(char *arg, size_t len)
+void	*ft_memset(void *s, int c, size_t n)
 {
-    size_t  i;
-    
-    i = 0;
-    while (arg[i++])
-        ft_putchar_fd(1, arg[i], 1);
-    return (len + i);
+	unsigned char	*str;
+
+	str = (unsigned char *)s;
+	while (n--)
+		*str++ = (unsigned char)c;
+	return (s);
 }
