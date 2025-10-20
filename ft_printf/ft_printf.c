@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:21:51 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/18 14:26:55 by freekei          ###   ########.fr       */
+/*   Updated: 2025/10/20 12:28:49 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int ft_arguments(va_list args, char type)
         len += ft_print_char(va_arg(args, char));
     else if (type == 's')
         len += ft_print_str(va_arg(args, char *));
-    else if (type == 'p')
 }
 
 int ft_printf(const char *format, ...)
@@ -39,8 +38,6 @@ int ft_printf(const char *format, ...)
         if (format[i] == '%')
         {
             len_total += ft_arguments(args, format[i + 1]);
-                //print a char
-                //print a string
                 //print pointer hex base 16
                 //print dec base 10
                 //print int base 10 (use ft_itoa)
