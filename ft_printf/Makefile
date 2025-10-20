@@ -6,12 +6,12 @@
 #    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 13:17:42 by freekei           #+#    #+#              #
-#    Updated: 2025/10/20 21:12:01 by freekei          ###   ########.fr        #
+#    Updated: 2025/10/20 23:56:05 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf.a
-SRC = ft_printf.c ft_print_tools.c
+SRC = ft_printf.c ft_print_chars.c ft_print_dec.c ft_print_hex_p.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_chars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/18 13:42:33 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/21 00:14:35 by freekei          ###   ########.fr       */
+/*   Created: 2025/10/20 23:27:24 by freekei           #+#    #+#             */
+/*   Updated: 2025/10/20 23:56:37 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
-int		ft_printf(const char *format, ...);
-void	ft_putchar(char c);
-int		ft_print_char(int arg);
-int		ft_print_str(char *arg);
-int		ft_print_nbr(long nb);
-int		ft_print_unbr(unsigned long nb);
-int		ft_print_hex(unsigned long long arg, char c);
-int		ft_print_ptr(void *arg);
+int	ft_print_char(int arg)
+{
+	write(1, &arg, 1);
+	return (1);
+}
 
-#endif
+int	ft_print_str(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		write(1, &arg[i], 1);
+		i++;
+	}
+	return (i);
+}
