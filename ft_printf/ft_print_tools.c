@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_tools.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:05:54 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/20 15:35:26 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:42:38 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int ft_print_nbr(long nb)
     return (len);
 }
 
-int ft_hexlen(unsigned int nb)
+int ft_hexlen(unsigned long long nb)
 {
     int i;
     
@@ -86,47 +86,53 @@ int ft_hexlen(unsigned int nb)
     return (i);
 }
 
-int ft_print_hex(unsigned int arg, char c)
+int ft_print_hex(unsigned long long arg, char c)
 {
     char    *base_hex;
-    char    *hex;
+    char    hex[16];
     int     i;
+    int     len;
     
     if (c == 'X')
         base_hex = "0123456789ABCDEF";
     else
         base_hex = "0123456789abcdef";
-    hex = malloc(ft_hexlen(arg) + 1);
-    if (!hex)
-        return (-1);
     i = 0;
+    len = ft_hexlen(arg);
     while (arg != 0)
     {
         hex[i] = base_hex[arg % 16];
         arg = arg / 16;
         i++;
     }
-    hex[i] = 0;
     while (hex[i - 1])
     {
         write(1, &hex[i - 1], 1);
         i--;
     }
-    free(hex);
-    return (ft_hexlen(arg));
+    return (len);
 }
 
 int ft_print_ptr(void *arg)
 {
-    unsigned int    *ptr;
-
-    ptr = (unsigned int *)arg;
-    return(0);
+    unsigned long long    ptr;
+    int                   len;  
+    
+    len = 0;
+    ptr = (unsigned long long)arg;
+    len += ft_print_str("0x");
+    len += ft_print_hex(ptr, 'x');
+    
+    return(len);
 }
 
 #include <stdio.h>
 int main(void)
 {
     char *test = "Kaito";
-    ft_print_ptr(test);
+    int len = ft_print_ptr(test);
+    ft_putchar('\n');
+    printf("%p\n", test);
+    ft_print_nbr(len);
+    ft_putchar('\n');
 }
