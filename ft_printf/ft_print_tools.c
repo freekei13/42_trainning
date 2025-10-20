@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:05:54 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/20 15:00:21 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:35:26 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,16 @@ int ft_hexlen(unsigned int nb)
     return (i);
 }
 
-int ft_print_hex(unsigned int arg)
+int ft_print_hex(unsigned int arg, char c)
 {
     char    *base_hex;
     char    *hex;
     int     i;
     
-    base_hex = "0123456789abcdef";
+    if (c == 'X')
+        base_hex = "0123456789ABCDEF";
+    else
+        base_hex = "0123456789abcdef";
     hex = malloc(ft_hexlen(arg) + 1);
     if (!hex)
         return (-1);
@@ -109,16 +112,21 @@ int ft_print_hex(unsigned int arg)
         write(1, &hex[i - 1], 1);
         i--;
     }
-    return (0);
+    free(hex);
+    return (ft_hexlen(arg));
+}
+
+int ft_print_ptr(void *arg)
+{
+    unsigned int    *ptr;
+
+    ptr = (unsigned int *)arg;
+    return(0);
 }
 
 #include <stdio.h>
 int main(void)
 {
-    int test = 130390;
-    ft_print_nbr(ft_hexlen(test));
-    ft_putchar('\n');
-    ft_print_hex(test);
-    ft_putchar('\n');
-    printf("%x", test);
+    char *test = "Kaito";
+    ft_print_ptr(test);
 }
