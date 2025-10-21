@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex_p.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:29:05 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/20 23:49:58 by freekei          ###   ########.fr       */
+/*   Updated: 2025/10/21 12:21:37 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_print_hex(unsigned long long arg, char c)
 	int		i;
 	int		len;
 
+	if (arg == 0)
+		return (ft_print_char('0'));
 	if (c == 'X')
 		base_hex = "0123456789ABCDEF";
 	else
@@ -59,6 +61,8 @@ int	ft_print_ptr(void *arg)
 
 	len = 0;
 	ptr = (unsigned long long)arg;
+	if (ptr == 0)
+		return (ft_print_str("(nil)"));
 	len += ft_print_str("0x");
 	len += ft_print_hex(ptr, 'x');
 	return (len);

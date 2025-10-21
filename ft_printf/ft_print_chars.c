@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_chars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:27:24 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/20 23:56:37 by freekei          ###   ########.fr       */
+/*   Updated: 2025/10/21 12:20:01 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ int	ft_print_str(char *arg)
 	int	i;
 
 	i = 0;
+	if (!arg)
+	{
+		write (1, "(null)", 6);
+		return (6);
+	}
 	while (arg[i])
 	{
-		write(1, &arg[i], 1);
+		ft_putchar(arg[i]);
 		i++;
 	}
 	return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:21:51 by freekei           #+#    #+#             */
-/*   Updated: 2025/10/21 00:15:17 by freekei          ###   ########.fr       */
+/*   Updated: 2025/10/21 11:58:59 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ int	ft_arguments(va_list args, char type)
 	else if (type == 'p')
 		len += ft_print_ptr(va_arg(args, void *));
 	else if (type == 'd' || type == 'i')
-		len += ft_print_nbr(va_arg(args, long));
+		len += ft_print_nbr(va_arg(args, int));
 	else if (type == 'u')
-		len += ft_print_unbr(va_arg(args, long));
+		len += ft_print_unbr(va_arg(args, unsigned int));
+	else if (type == 'x')
+		len += ft_print_hex(va_arg(args, unsigned int), 'x');
+	else if (type == 'X')
+		len += ft_print_hex(va_arg(args, unsigned int), 'X');
+	else if (type == '%')
+		len += ft_print_char('%');
 	return (len);
 }
 
