@@ -6,6 +6,6 @@
 ## 📚 Description
 Ce dépôt contient les fichiers entraînement, les exercises etc...
 - [x] libft
-- [ ] ft_printf *En cours*
-- [ ] get_next_line *Soon*
-- [ ] born2beRoot *Soon*
+- [x] ft_printf
+- [ ] get_next_line  *en cours*
+- [ ] born2beRoot    *Soon*
