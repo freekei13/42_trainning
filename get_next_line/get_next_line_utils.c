@@ -68,6 +68,36 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr[i] = 0;
 	return (substr);
 }
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*strjoin;
+	size_t	i;
+	size_t	j;
+
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	strjoin = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!strjoin)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		strjoin[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		strjoin[i + j] = s2[j];
+		j++;
+	}
+	strjoin[i + j] = 0;
+	return (strjoin);
+}
+
 size_t	ft_line_len(const char *s)
 {
 	size_t	i;
