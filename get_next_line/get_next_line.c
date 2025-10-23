@@ -1,41 +1,50 @@
 #include "get_next_line.h"
 
-static char	*fill_left_lines(int fd, char *buffer);
+static char	*fill_left_line(int fd, char *buffer);
+static char *fill_line(char *left_line, char *line);
 
 char	*get_next_line(int fd)
 {
-	static char	*left_lines;
+	static char	*left_line;
 	char		*buffer;
+	char		*line;
 
+	line = ft_strdup("");
 	buffer = malloc(BUFFER_SIZE * sizeof(char) + 1);
 	if (fd < 0 || BUFFER_SIZE < 0)
 	{
 		free(buffer);
 		buffer = NULL;
-		free(left_lines);
-		left_lines = NULL;
+		free(left_line);
+		left_line = NULL;
 		return (NULL);
 	}
 	if (!buffer)
 		return (NULL);
-	left_lines = fill_left_lines(fd, buffer);
-	return (left_lines);
+	left_line = fill_left_line(fd, buffer);
+	line = fill_line(left_line, line);
+	return (line);
 }
 
-static char	*fill_left_lines(int fd, char *buffer)
+static char	*fill_left_line(int fd, char *buffer)
 {
-	char	*left_lines;
+	char	*left_line;
 	char	*tmp;
 
-	left_lines = ft_strdup("");
-	while (read(fd, buffer, BUFFER_SIZE))
-	{
-		tmp = ft_strdup(buffer);
-		left_lines = ft_strjoin(left_lines, tmp);
-	}
-	return (left_lines);
+	left_line = ft_strdup("");
+	read(fd, buffer, BUFFER_SIZE);
+	tmp = ft_strdup(buffer);
+	left_line = ft_strjoin(left_line, tmp);
+	free(buffer);
+	free(tmp);
+	return (left_line);
 }
 
+char *fill_line(char *left_line, char *line)
+{
+	line = ft_substr(left_line, 0, ft_line_len(left_line));
+	return (line);
+}
 #include <stdio.h>
 
 int	main (void)
