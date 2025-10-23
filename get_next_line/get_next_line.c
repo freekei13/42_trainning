@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-char	*fill_line_left_line(int fd, char *buffer);
+char	*fill_line(int fd, char *buffer);
 
 char	*get_next_line(int fd)
 {
@@ -19,19 +19,20 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	line = fill_line_left_line(fd, buffer);
+	line = fill_line(fd, buffer);
 	return (line);
 }
 
-char	*fill_line_left_line(int fd, char *buffer)
+char	*fill_line(int fd, char *buffer)
 {
 	char	*line;
 
 	read(fd, buffer, BUFFER_SIZE);
-	line = ft_strdup(buffer);
+	line = ft_substr(buffer, 0, ft_line_len(buffer));
 	free(buffer);
 	return (line);
 }
+
 #include <stdio.h>
 
 int	main (void)
