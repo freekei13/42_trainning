@@ -103,7 +103,7 @@ size_t	ft_line_len(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\n')
+	while (s[i] != '\n' && s[i] != '\0')
 		i++;
 	return (i);
 }

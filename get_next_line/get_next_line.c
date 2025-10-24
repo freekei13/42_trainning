@@ -1,7 +1,7 @@
 #include "get_next_line.h"
 
-static char	*fill_left_line(int fd, char *buffer);
-static char *fill_line(char *left_line, char *line);
+char		*fill_line(int fd, char *buffer);
+static char *fill_left_line(char *buffer);
 
 char	*get_next_line(int fd)
 {
@@ -9,7 +9,6 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	char		*line;
 
-	line = ft_strdup("");
 	buffer = malloc(BUFFER_SIZE * sizeof(char) + 1);
 	if (fd < 0 || BUFFER_SIZE < 0)
 	{
@@ -21,29 +20,29 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	left_line = fill_left_line(fd, buffer);
-	line = fill_line(left_line, line);
+	line = fill_line(fd, buffer);
+	left_line = fill_left_line(buffer);
+	free(buffer);
+	buffer = NULL;
 	return (line);
 }
 
-static char	*fill_left_line(int fd, char *buffer)
+char	*fill_line(int fd, char *buffer)
 {
-	char	*left_line;
+	char	*line;
+
+	read(fd, buffer, BUFFER_SIZE);
+	line = ft_substr(buffer, 0, ft_line_len(buffer) - 1);
+	return (line);
+}
+
+static char *fill_left_line(char *buffer, char *left_line)
+{
 	char	*tmp;
 
-	left_line = ft_strdup("");
-	read(fd, buffer, BUFFER_SIZE);
-	tmp = ft_strdup(buffer);
-	left_line = ft_strjoin(left_line, tmp);
-	free(buffer);
-	free(tmp);
+	tmp = ft_strdup(left_line);
+	left_line = ft_strjoin(tmp, buffer);
 	return (left_line);
-}
-
-char *fill_line(char *left_line, char *line)
-{
-	line = ft_substr(left_line, 0, ft_line_len(left_line));
-	return (line);
 }
 #include <stdio.h>
 
@@ -52,4 +51,8 @@ int	main (void)
 	int fd = open("text.txt", O_RDONLY);
 	char *nextline = get_next_line(fd);
 	printf("%s\n", nextline);
+	nextline = get_next_line(fd);
+	printf("%s\n", nextline);
+	free(nextline);
+	nextline = NULL;
 }
