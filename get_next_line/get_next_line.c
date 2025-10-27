@@ -24,8 +24,11 @@ char	*get_next_line(int fd)
 	left_line = fill_all_line(fd, buffer, left_line);
 	free(buffer);
 	buffer = NULL;
+	if (!left_line)
+		return (NULL);
 	line = fill_line(left_line);
-	left_line = fill_left_line(left_line);
+	if (left_line)
+		left_line = fill_left_line(left_line);
 	return (line);
 }
 char	*fill_all_line(int fd, char *buffer, char *left_line)
@@ -38,7 +41,10 @@ char	*fill_all_line(int fd, char *buffer, char *left_line)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
+		{
+			free(left_line);
 			return (NULL);
+		}
 		if (bytes == 0)
 			break;
 		if (!left_line)
@@ -48,7 +54,7 @@ char	*fill_all_line(int fd, char *buffer, char *left_line)
 		left_line = ft_strjoin(tmp, buffer);
 		free(tmp);
 		tmp = NULL;
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr(left_line, '\n'))
 			break;
 	}
 	return (left_line);
@@ -57,19 +63,37 @@ char	*fill_all_line(int fd, char *buffer, char *left_line)
 char	*fill_line(char *left_line)
 {
 	char	*line;
+	int		i;
 
-	line = ft_substr(left_line, 0, ft_line_len(left_line));
+	i = 0;
+	while (left_line[i] != '\n' && left_line[i] != '\0')
+		i++;
+	if (left_line[i] == '\n')
+		line = ft_substr(left_line, 0, i + 1);
+	else
+	{
+		line = ft_substr(left_line, 0, i);
+		line[i] = '\n';
+		line[i + 1] = '\0';
+	}
 	return (line);
 }
 
 char	*fill_left_line(char *left_line)
 {
 	char	*tmp;
-
-	if (left_line[0] == 0 && left_line[1] == 0)
+	int		i;
+	
+	if (!ft_strchr(left_line, '\n'))
+	{
+		free(left_line);
 		return (NULL);
+	}
+	i = 0;
+	while (left_line[i] != '\n' && left_line[i] != '\0')
+		i++;
 	tmp = left_line;
-	left_line = ft_substr(left_line, ft_line_len(tmp) + 1, ft_strlen(tmp) - 1);
+	left_line = ft_substr(left_line, i + 1, ft_strlen(tmp) - (i + 1));
 	free(tmp);
 	tmp = NULL;
 	return (left_line);
@@ -80,15 +104,27 @@ char	*fill_left_line(char *left_line)
 // {
 // 	int fd = open("text.txt", O_RDONLY);
 // 	char *nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // 	nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // 	nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // 	nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // 	nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // 	nextline = get_next_line(fd);
-// 	printf("%s\n", nextline);
+// 	printf("%s", nextline);
+// 	free(nextline);
+// 	nextline = NULL;
 // }
