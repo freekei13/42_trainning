@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/28 10:42:33 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/28 11:56:24 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -27,6 +39,7 @@ char	*ft_strdup(const char *s)
 	dup[i] = 0;
 	return (dup);
 }
+
 char	*ft_strchr(const char *s, int c)
 {
 	const unsigned char	*str;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/28 10:42:59 by csamakka          #+#    #+#             */
+/*   Updated: 2025/10/28 13:16:20 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*fill_all_line(int fd, char *buffer, char *left_line);
@@ -31,6 +43,7 @@ char	*get_next_line(int fd)
 		left_line = fill_left_line(left_line);
 	return (line);
 }
+
 char	*fill_all_line(int fd, char *buffer, char *left_line)
 {
 	char	*tmp;
@@ -46,7 +59,7 @@ char	*fill_all_line(int fd, char *buffer, char *left_line)
 			return (NULL);
 		}
 		if (bytes == 0)
-			break;
+			break ;
 		if (!left_line)
 			left_line = ft_strdup("");
 		buffer[bytes] = 0;
@@ -55,7 +68,7 @@ char	*fill_all_line(int fd, char *buffer, char *left_line)
 		free(tmp);
 		tmp = NULL;
 		if (ft_strchr(left_line, '\n'))
-			break;
+			break ;
 	}
 	return (left_line);
 }
@@ -65,6 +78,8 @@ char	*fill_line(char *left_line)
 	char	*line;
 	int		i;
 
+	if (!left_line)
+		return (NULL);
 	i = 0;
 	while (left_line[i] != '\n' && left_line[i] != '\0')
 		i++;
@@ -73,8 +88,6 @@ char	*fill_line(char *left_line)
 	else
 	{
 		line = ft_substr(left_line, 0, i);
-		line[i] = '\n';
-		line[i + 1] = '\0';
 	}
 	return (line);
 }
@@ -83,7 +96,7 @@ char	*fill_left_line(char *left_line)
 {
 	char	*tmp;
 	int		i;
-	
+
 	if (!ft_strchr(left_line, '\n'))
 	{
 		free(left_line);
@@ -98,33 +111,33 @@ char	*fill_left_line(char *left_line)
 	tmp = NULL;
 	return (left_line);
 }
-// #include <stdio.h>
+#include <stdio.h>
 
-// int	main (void)
-// {
-// 	int fd = open("text.txt", O_RDONLY);
-// 	char *nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// 	nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// 	nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// 	nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// 	nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// 	nextline = get_next_line(fd);
-// 	printf("%s", nextline);
-// 	free(nextline);
-// 	nextline = NULL;
-// }
+int	main (void)
+{
+	int fd = open("text.txt", O_RDONLY);
+	char *nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+	nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+	nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+	nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+	nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+	nextline = get_next_line(fd);
+	printf("%s", nextline);
+	free(nextline);
+	nextline = NULL;
+}
