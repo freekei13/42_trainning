@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 10:42:59 by csamakka          #+#    #+#             */
-/*   Updated: 2025/10/28 13:16:20 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/10/29 14:17:13 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ char	*fill_line(char *left_line)
 	char	*line;
 	int		i;
 
-	if (!left_line)
-		return (NULL);
 	i = 0;
+	if (!left_line[i])
+		return (NULL);
 	while (left_line[i] != '\n' && left_line[i] != '\0')
 		i++;
 	if (left_line[i] == '\n')
@@ -97,47 +97,14 @@ char	*fill_left_line(char *left_line)
 	char	*tmp;
 	int		i;
 
-	if (!ft_strchr(left_line, '\n'))
-	{
-		free(left_line);
-		return (NULL);
-	}
 	i = 0;
 	while (left_line[i] != '\n' && left_line[i] != '\0')
 		i++;
+	if (!left_line[i])
+		return (free(left_line), NULL);
 	tmp = left_line;
 	left_line = ft_substr(left_line, i + 1, ft_strlen(tmp) - (i + 1));
 	free(tmp);
 	tmp = NULL;
 	return (left_line);
-}
-#include <stdio.h>
-
-int	main (void)
-{
-	int fd = open("text.txt", O_RDONLY);
-	char *nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
-	nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
-	nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
-	nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
-	nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
-	nextline = get_next_line(fd);
-	printf("%s", nextline);
-	free(nextline);
-	nextline = NULL;
 }

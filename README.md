@@ -7,5 +7,5 @@
 Ce dépôt contient les fichiers entraînement, les exercises etc...
 - [x] libft
 - [x] ft_printf
-- [ ] get_next_line  *en cours*
+- [x] get_next_line
 - [ ] born2beRoot    *Soon*
