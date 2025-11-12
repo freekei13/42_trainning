@@ -6,13 +6,8 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:17 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/11 11:44:14 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/12 14:12:12 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	main(int argc, char *argv[])
-{
-	
-}
