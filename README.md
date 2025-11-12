@@ -8,4 +8,7 @@ Ce dépôt contient les fichiers entraînement, les exercises etc...
 - [x] libft
 - [x] ft_printf
 - [x] get_next_line
-- [ ] born2beRoot    *Soon*
+- [x] born2beRoot
+- [ ] push_swap		*in progress*
+- [ ] so_long		*Soon*
+- [ ] pipex			*Soon*
