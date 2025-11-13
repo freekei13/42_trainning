@@ -3,15 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
+#    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/12 14:20:00 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/13 15:50:30 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRC = src/push.c src/reverse_rotate.c src/rotate.c src/swap.c
+SRC = src/push_swap.c src/reverse_rotate.c src/rotate.c src/swap.c \
+	src/push.c \
+	
 OBJ = $(SRC:.c=.o)
 
 CC = cc
