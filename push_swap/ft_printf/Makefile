@@ -6,7 +6,7 @@
 #    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 13:17:42 by freekei           #+#    #+#              #
-#    Updated: 2025/10/21 11:09:30 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/17 15:46:43 by csamakka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ FLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 
+GREEN = \033[38;5;76m
+BLUE = \033[0;34m
+RESET = \033[00m
+
 all:$(NAME)
 
 $(NAME):$(OBJ)
@@ -26,6 +30,8 @@ $(NAME):$(OBJ)
 	
 %.o:%.c ft_printf.h
 	$(CC) $(FLAGS) -c $< -o $@
+	@printf "$(BLUE)=$(RESET)"
+
 
 clean:
 	$(RM) $(OBJ)

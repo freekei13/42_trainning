@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
+#    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/13 15:50:30 by freekei          ###   ########.fr        #
+#    Updated: 2025/11/17 16:25:59 by csamakka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 SRC = src/push_swap.c src/reverse_rotate.c src/rotate.c src/swap.c \
-	src/push.c \
+	src/push.c src/main.c src/input_check.c \
 	
 OBJ = $(SRC:.c=.o)
 
@@ -26,33 +26,40 @@ PRINT_NAME = ft_printf/libftprintf.a
 LIBFT_PATH = libft/
 LIBFT_NAME = libft/libft.a
 
-GREEN	= \033[38;5;76m
-RESET	= \033[00m
+GREEN = \033[38;5;76m
+RED = \033[0;31m
+BLUE = \033[0;34m
+RESET = \033[00m
+MAKEFLAGS += -s
 
 all:$(NAME) $(PRINT_NAME) $(LIBFT_NAME)
-	
-%.o:%.c
-	@printf "\n $(GREEN) Compiling... \n$(RESET)"
-	$(CC) $(FLAGS) -c $< -o $@
 
 $(PRINT_NAME):
 	@make -C $(PRINT_PATH)
+	@printf "$(GREEN)\nft_printf compiled\n$(RESET)"
 
 $(LIBFT_NAME):
 	@make bonus -C $(LIBFT_PATH)
+	@printf "$(GREEN)\nlibft compiled$(RESET)"
 
-$(NAME):$(OBJ) $(PRINT_NAME) $(LIBFT_NAME) 
-	$(AR) $@ $^
-	@printf "\n $(GREEN)*** push_swap is ready *** \n $(RESET)"
+%.o:%.c
+	$(CC) $(FLAGS) -c $< -o $@
+	@printf "$(BLUE)$< -> $@\n$(RESET)"
+	
+$(NAME):$(OBJ) $(PRINT_NAME) $(LIBFT_NAME)
+	$(CC) $(FLAGS) $^ -o $(NAME) -g
+	@printf "$(GREEN)\npush_swap is ready$(RESET)"
 
 clean:
 	@make clean -C $(PRINT_PATH)
 	@make clean -C $(LIBFT_PATH)
 	$(RM) $(OBJ)
+	@printf "$(RED)$(OBJ) deleted\n$(RESET)"
 	
 fclean: clean
 	@make fclean -C $(PRINT_PATH)
 	@make fclean -C $(LIBFT_PATH)
 	$(RM) $(NAME)
+	@printf "$(RED)$(NAME) deleted\n$(RESET)"
 	
 re: fclean all

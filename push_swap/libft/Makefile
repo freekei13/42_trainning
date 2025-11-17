@@ -6,7 +6,7 @@
 #    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/01 10:10:31 by csamakka          #+#    #+#              #
-#    Updated: 2025/10/14 13:26:20 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/17 15:04:14 by csamakka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,17 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
+GREEN = \033[38;5;76m
+BLUE = \033[0;34m
+RESET = \033[00m
+
 all:$(NAME)
 
 $(NAME):$(OBJ)
 	$(AR) $@ $^
 
 %.o:%.c libft.h
+	@printf "$(BLUE)=$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 bonus:all $(OBJ_BONUS)
