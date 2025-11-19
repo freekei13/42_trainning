@@ -6,11 +6,19 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/19 12:07:54 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/19 15:15:42 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	error_check(char **inputs)
+{
+	if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
+		return (1);
+	else
+		return (ft_printf("ERROR"), 0);
+}
 
 int	main(int argc, char **argv)
 {

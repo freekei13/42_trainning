@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/19 14:54:37 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/19 17:29:06 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,29 @@
 
 int	int_minmax_check(char **inputs)
 {
-	int			i;
-	int			j;
 	long long	res;
 	long long	limit;
+	char		*str;
 
-	i = 0;
-	while (inputs[i])
+	while (*inputs)
 	{
 		res = 0;
-		j = 0;
 		limit = INT_MAX;
-		if (inputs[i][0] == '-' || inputs[i][0] == '+')
+		str = *inputs;
+		if (*str == '-' || *str == '+')
 		{
-			if (inputs[i][0] == '-')
+			if (*str++ == '-')
 				limit = (long long)INT_MAX + 1;
-			j++;
 		}
-		while (inputs[i][j])
+		while (*str)
 		{
 			if (res > limit / 10
-				|| (res == limit / 10 && (inputs[i][j] - '0') > limit % 10))
+				|| (res == limit / 10 && (*str - '0') > limit % 10))
 				return (0);
-			res = res * 10 + (inputs[i][j] - '0');
-			j++;
+			res = res * 10 + (*str - '0');
+			str++;
 		}
-		i++;
+		inputs++;
 	}
 	return (1);
 }
@@ -88,14 +85,6 @@ int	digit_check(char **inputs)
 		i++;
 	}
 	return (1);
-}
-
-int	error_check(char **inputs)
-{
-	if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
-		return (1);
-	else
-		return (ft_printf("ERROR"), 0);
 }
 
 char	**input_check(int ac, char *av[])
