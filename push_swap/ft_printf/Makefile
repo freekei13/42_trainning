@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
+#    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 13:17:42 by freekei           #+#    #+#              #
-#    Updated: 2025/11/17 15:46:43 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/19 12:45:30 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ $(NAME):$(OBJ)
 	$(AR) $(NAME) $^
 	
 %.o:%.c ft_printf.h
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -g -c $< -o $@
 	@printf "$(BLUE)=$(RESET)"
 
 

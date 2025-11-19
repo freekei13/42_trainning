@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
+#    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/01 10:10:31 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/17 15:04:14 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/19 12:44:54 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME):$(OBJ)
 
 %.o:%.c libft.h
 	@printf "$(BLUE)=$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -g $(CFLAGS) -c $< -o $@
 	
 bonus:all $(OBJ_BONUS)
 	$(AR) $(NAME) $(OBJ) $(OBJ_BONUS)

@@ -3,16 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/18 16:24:21 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:54:37 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	error_check(char **inputs)
+int	int_minmax_check(char **inputs)
+{
+	int			i;
+	int			j;
+	long long	res;
+	long long	limit;
+
+	i = 0;
+	while (inputs[i])
+	{
+		res = 0;
+		j = 0;
+		limit = INT_MAX;
+		if (inputs[i][0] == '-' || inputs[i][0] == '+')
+		{
+			if (inputs[i][0] == '-')
+				limit = (long long)INT_MAX + 1;
+			j++;
+		}
+		while (inputs[i][j])
+		{
+			if (res > limit / 10
+				|| (res == limit / 10 && (inputs[i][j] - '0') > limit % 10))
+				return (0);
+			res = res * 10 + (inputs[i][j] - '0');
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	repeat_check(char **inputs)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (inputs[i])
+	{
+		j = 1;
+		while (inputs[j + i])
+		{
+			if (ft_memcmp(inputs[i], inputs[j + i], 12) != 0)
+				j++;
+			else
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	digit_check(char **inputs)
 {
 	int	i;
 	int	j;
@@ -21,22 +74,15 @@ int	error_check(char **inputs)
 	while (inputs[i])
 	{
 		j = 0;
+		if ((inputs[i][0] == '-' || inputs[i][0] == '+')
+			&& inputs[i][1] == '\0')
+			return (0);
 		while (inputs[i][j])
 		{
-			if (j == 0 && (inputs[i][j] == '-' || inputs[i][j] == '+'))
-			{
-				if (ft_strlen(inputs[i]) == 1)
-					return (ft_printf("ERROR"), 0);
-				while (inputs[i][j + 1])
-				{
-					if (!ft_isdigit(inputs[i][j + 1]))
-						return (ft_printf("ERROR"), 0);
-					j++;
-				}
-				break ;
-			}
+			if (j == 0 && (inputs[i][0] == '-' || inputs[i][0] == '+'))
+				j++;
 			if (!ft_isdigit(inputs[i][j]))
-				return (ft_printf("ERROR"), 0);
+				return (0);
 			j++;
 		}
 		i++;
@@ -44,12 +90,20 @@ int	error_check(char **inputs)
 	return (1);
 }
 
+int	error_check(char **inputs)
+{
+	if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
+		return (1);
+	else
+		return (ft_printf("ERROR"), 0);
+}
+
 char	**input_check(int ac, char *av[])
 {
 	char	**arg;
 	int		i;
 	char	*tmp;
-	
+
 	if (ac < 2)
 		return (0);
 	if (ac == 2)

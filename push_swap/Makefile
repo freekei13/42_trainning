@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
+#    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/18 11:49:56 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/19 12:48:11 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(LIBFT_NAME):
 	@printf "$(GREEN)\nlibft compiled$(RESET)"
 
 %.o:%.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) -g $(FLAGS) -c $< -o $@
 	@printf "$(BLUE)$< -> $@\n$(RESET)"
 	
 $(NAME):$(OBJ) $(PRINT_NAME) $(LIBFT_NAME)
