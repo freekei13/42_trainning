@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/19 15:15:42 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:20:52 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	error_check(char **inputs)
 {
-	if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
+	if (!inputs)
+		return (0);
+	else if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
 		return (1);
 	else
-		return (ft_printf("ERROR"), 0);
+		return (ft_printf("Error\n"), 0);
 }
 
 int	main(int argc, char **argv)

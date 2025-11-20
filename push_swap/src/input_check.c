@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/19 17:29:06 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:24:34 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**input_check(int ac, char *av[])
 	char	*tmp;
 
 	if (ac < 2)
-		return (0);
+		return (NULL);
 	if (ac == 2)
 		arg = ft_split(av[1], 32);
 	if (ac > 2)
