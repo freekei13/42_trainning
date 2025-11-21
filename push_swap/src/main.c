@@ -6,11 +6,34 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/21 15:45:25 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/21 18:33:42 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	print_stacks(t_list *a, t_list *b)
+{
+	while (a || b)
+	{
+		if (a && b)
+		{
+			ft_printf("a %d index %d --- b %d index %d\n", a->content, a->index, b->content, b->index);
+			a = a->next;
+			b = b->next;
+		}
+		if (a && !b)
+		{
+			ft_printf("a %d index %d --- b\n", a->content, a->index);
+			a = a->next;
+		}
+		if (!a && b)
+		{
+			ft_printf("a           --- b %d index %d\n", b->content, b->index);
+			b = b->next;
+		}
+	}
+}
 
 int	error_check(char **inputs)
 {
@@ -35,23 +58,7 @@ int	main(int argc, char **argv)
 		return (0);
 	a = parse_inputs(arg);
 	index_assign(a);
-	while (a || b)
-	{
-		if (a && b)
-		{
-			ft_printf("a %d index %d --- b %d\n", a->content, a->index, b->content);
-			a = a->next;
-			b = b->next;
-		}
-		if (a && !b)
-		{
-			ft_printf("a %d index %d --- b\n", a->content, a->index);
-			a = a->next;
-		}
-		if (!a && b)
-		{
-			ft_printf("a    --- b %d\n", b->content);
-			b = b->next;
-		}
-	}
+	print_stacks(a, b);
+	push_swap(&a, &b);
+	print_stacks(a, b);
 }

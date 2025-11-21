@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/21 14:51:25 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/21 18:26:17 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include	"../libft/libft.h"
 # include	"../ft_printf/ft_printf.h"
 
+void	push_swap(t_list **stack_a, t_list **stack_b);
 char	**input_check(int ac, char *av[]);
 int		error_check(char **inputs);
 int		digit_check(char **inputs);
@@ -23,4 +24,9 @@ int		repeat_check(char **inputs);
 int		int_minmax_check(char **inputs);
 t_list	*parse_inputs(char **args);
 void	index_assign(t_list *args);
+void	push_a(t_list **stack_a, t_list **stack_b);
+void	push_b(t_list **stack_a, t_list **stack_b);
+void	swap_a(t_list **stack_a);
+void	swap_b(t_list **stack_b);
+void	sa_sb(t_list **stack_a, t_list **stack_b);
 #endif
