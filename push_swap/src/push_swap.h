@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/20 19:25:13 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/21 14:51:25 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int		digit_check(char **inputs);
 int		repeat_check(char **inputs);
 int		int_minmax_check(char **inputs);
 t_list	*parse_inputs(char **args);
-int		*index_assign(t_list *args);
+void	index_assign(t_list *args);
 #endif

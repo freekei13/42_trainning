@@ -17,7 +17,7 @@ t_list	*parse_inputs(char **args)
 	return (stack_a);
 }
 
-int	*index_assign(t_list *args)
+int		*parse_list(t_list *args)
 {
 	int	*tmp;
 	int	i;
@@ -33,4 +33,52 @@ int	*index_assign(t_list *args)
 		args = args->next;
 	}
 	return (tmp);
+}
+
+void	buble_sort(int *args, int counter)
+{
+	int	nb_tmp;
+	int	i;
+
+	while (counter > 0)
+	{
+		i = 0;
+		while (args[i] && args[i + 1])
+		{
+			if (args[i] > args[i + 1])
+			{
+				nb_tmp = args[i];
+				args[i] = args[i + 1];
+				args[i + 1] = nb_tmp;
+			}
+			i++;
+		}
+		counter--;
+	}
+}
+
+void	index_assign(t_list *args)
+{
+	int		*tmp;
+	int		i;
+	t_list	*head;
+
+	head = args;
+	i = ft_lstsize(args);
+	tmp = parse_list(args);
+	buble_sort(tmp, i);
+	i = 0;
+	while (tmp[i])
+	{
+		args = head;
+		while (args)
+		{
+			if (args->content == tmp[i])
+				args->index = i;
+			args = args->next;
+		}
+		i++;
+	}
+	free(tmp);
+	tmp = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/20 19:25:47 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/21 15:45:25 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ int	main(int argc, char **argv)
 	if (!error_check(arg))
 		return (0);
 	a = parse_inputs(arg);
-	b = ft_lstnew(1303);
+	index_assign(a);
 	while (a || b)
 	{
 		if (a && b)
 		{
-			ft_printf("a %d --- b %d\n", a->content, b->content);
+			ft_printf("a %d index %d --- b %d\n", a->content, a->index, b->content);
 			a = a->next;
 			b = b->next;
 		}
 		if (a && !b)
 		{
-			ft_printf("a %d --- b\n", a->content);
+			ft_printf("a %d index %d --- b\n", a->content, a->index);
 			a = a->next;
 		}
 		if (!a && b)
