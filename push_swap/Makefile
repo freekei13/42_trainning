@@ -6,13 +6,14 @@
 #    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/21 16:20:07 by freekei          ###   ########.fr        #
+#    Updated: 2025/11/23 00:27:50 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 SRC = src/push_swap.c src/reverse_rotate.c src/rotate.c src/swap.c \
 	src/push.c src/main.c src/input_check.c src/parse_input.c \
+	src/sort_algo.c
 	
 OBJ = $(SRC:.c=.o)
 
