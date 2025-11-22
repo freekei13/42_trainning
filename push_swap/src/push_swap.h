@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/22 13:34:20 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/22 22:07:19 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void	sa_sb(t_list **stack_a, t_list **stack_b);
 void	rotate_a(t_list	**stack_a);
 void	rotate_b(t_list	**stack_b);
 void	ra_rb(t_list **stack_a, t_list **stack_b);
+void	re_rotate_a(t_list **stack_a);
+void	re_rotate_b(t_list **stack_b);
+void	rra_rrb(t_list **stack_a, t_list **stack_b);
+
+//For testing only
+void	print_stacks(t_list *a, t_list *b);
 #endif
