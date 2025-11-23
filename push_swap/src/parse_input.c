@@ -32,6 +32,7 @@ int		*parse_list(t_list *args)
 		i++;
 		args = args->next;
 	}
+	tmp[i] = 0;
 	return (tmp);
 }
 
@@ -39,22 +40,25 @@ void	buble_sort(int *args, int counter)
 {
 	int	nb_tmp;
 	int	i;
+	int	*tmp;
 
+	tmp = args;
 	while (counter > 0)
 	{
 		i = 0;
-		while (args[i] && args[i + 1])
+		while (tmp[i] && tmp[i + 1])
 		{
-			if (args[i] > args[i + 1])
+			if (tmp[i] > tmp[i + 1])
 			{
-				nb_tmp = args[i];
-				args[i] = args[i + 1];
-				args[i + 1] = nb_tmp;
+				nb_tmp = tmp[i];
+				tmp[i] = tmp[i + 1];
+				tmp[i + 1] = nb_tmp;
 			}
 			i++;
 		}
 		counter--;
 	}
+	args = tmp;
 }
 
 void	index_assign(t_list *args)

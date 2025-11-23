@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/23 00:27:20 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/23 22:15:42 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void	push_swap(t_list **stack_a, t_list **stack_b);
 
 char	**input_check(int ac, char *av[]);
+void	free_lst(t_list **lst);
 int		error_check(char **inputs);
 int		digit_check(char **inputs);
 int		repeat_check(char **inputs);

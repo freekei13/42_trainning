@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/20 14:24:34 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/23 21:14:53 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,39 @@ int	digit_check(char **inputs)
 	return (1);
 }
 
+char	*join_args(char **av)
+{
+	int		i;
+	char	*tmp;
+	char	*join;
+	
+	tmp = ft_strdup("");
+	i = 1;
+	while (av[i])
+	{
+		join = ft_strjoin(tmp, av[i]);
+		free(tmp);
+		tmp = join;
+		join = ft_strjoin(tmp, " ");
+		free(tmp);
+		tmp = join;
+		i++;
+	}
+	return (tmp);
+}
+
 char	**input_check(int ac, char *av[])
 {
 	char	**arg;
-	int		i;
 	char	*tmp;
-
+	
 	if (ac < 2)
 		return (NULL);
 	if (ac == 2)
 		arg = ft_split(av[1], 32);
 	if (ac > 2)
 	{
-		tmp = ft_strdup("");
-		i = 1;
-		while (av[i])
-		{
-			tmp = ft_strjoin(tmp, av[i]);
-			tmp = ft_strjoin(tmp, " ");
-			i++;
-		}
+		tmp = join_args(av);
 		arg = ft_split(tmp, 32);
 		free(tmp);
 		tmp = NULL;
