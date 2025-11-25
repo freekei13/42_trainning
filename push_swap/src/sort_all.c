@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:27:07 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 14:17:29 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:37:32 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,23 @@
 void	sort_all(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
-	int	b_size;
+	int	min;
+	int	mid;
+	int	max;
 
 	size = ft_lstsize(*stack_a);
-	b_size = size - 3;
-	while (b_size != 0)
+	min = 0;
+	mid = size / 2;
+	max = size - 1;
+	while (1)
 	{
-		push_b(stack_a, stack_b);
-		b_size--;
+		if (ft_lstsize(*stack_a) == 3)
+			break ;
+		if ((*stack_a)->index == min || (*stack_a)->index == mid
+			|| (*stack_a)->index == max)
+			rotate_a(stack_a);
+		else
+			push_b(stack_a, stack_b);
 	}
+	three_args_sort(stack_a, stack_b);
 }

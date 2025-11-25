@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:43:38 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:37:48 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	re_rotate_a(t_list **stack_a);
 void	re_rotate_b(t_list **stack_b);
 void	rra_rrb(t_list **stack_a, t_list **stack_b);
 
-int		find_min(t_list *stack_a);
+int		find_min_index(t_list *stack_a);
+int		find_max_index(t_list *stack_a);
+int		find_index_pos(t_list *stack_a, int index);
+
 void	three_args_sort(t_list **stack_a, t_list **stack_b);
-void	three_args_sort_four(t_list **stack_a, t_list **stack_b);
-void	three_args_sort_five(t_list **stack_a, t_list **stack_b);
 void	four_args_sort(t_list **stack_a, t_list **stack_b);
 void	five_args_sort(t_list **stack_a, t_list **stack_b);
 void	sort_all(t_list **stack_a, t_list **stack_b);
