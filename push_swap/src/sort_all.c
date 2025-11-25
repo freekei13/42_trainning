@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   sort_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 11:27:15 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:27:17 by csamakka         ###   ########.fr       */
+/*   Created: 2025/11/25 11:27:07 by csamakka          #+#    #+#             */
+/*   Updated: 2025/11/25 14:17:29 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_lst(t_list **lst)
+void	sort_all(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*tmp;
+	int	size;
+	int	b_size;
 
-	if (!lst || !*lst)
-		return ;
-	while (*lst)
+	size = ft_lstsize(*stack_a);
+	b_size = size - 3;
+	while (b_size != 0)
 	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
+		push_b(stack_a, stack_b);
+		b_size--;
 	}
 }

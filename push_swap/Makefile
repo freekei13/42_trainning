@@ -6,14 +6,15 @@
 #    By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/25 10:57:53 by csamakka         ###   ########.fr        #
+#    Updated: 2025/11/25 11:43:26 by csamakka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 SRC = src/push_swap.c src/reverse_rotate.c src/rotate.c src/swap.c \
 	src/push.c src/main.c src/input_check.c src/parse_input.c \
-	src/sort_three.c src/sort_four.c src/sort_five.c src/ft_free.c
+	src/sort_three.c src/sort_four.c src/sort_five.c src/sort_all.c \
+	src/ft_free.c
 	
 OBJ = $(SRC:.c=.o)
 

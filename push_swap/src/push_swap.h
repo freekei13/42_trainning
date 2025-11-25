@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:16:05 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:43:38 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	three_args_sort_four(t_list **stack_a, t_list **stack_b);
 void	three_args_sort_five(t_list **stack_a, t_list **stack_b);
 void	four_args_sort(t_list **stack_a, t_list **stack_b);
 void	five_args_sort(t_list **stack_a, t_list **stack_b);
+void	sort_all(t_list **stack_a, t_list **stack_b);
 //For testing only
 void	print_stacks(t_list *a, t_list *b);
 #endif
