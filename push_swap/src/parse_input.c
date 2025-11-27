@@ -3,88 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:27:28 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:27:30 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/27 01:15:09 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*parse_inputs(char **args)
+t_list *parse_inputs(char **args)
 {
 	t_list	*stack_a;
-	int		nb;
-	int		i;
+	t_list	*node;
+	int 	nb;
+	int 	i;
 
 	stack_a = NULL;
 	i = 0;
 	while (args[i])
 	{
 		nb = ft_atoi(args[i]);
-		ft_lstadd_back(&stack_a, ft_lstnew(nb));
+		node = ft_lstnew(nb);
+		if (!node)
+			return (NULL);
+		ft_lstadd_back(&stack_a, node);
 		i++;
 	}
 	return (stack_a);
 }
 
-int		*parse_list(t_list *args)
+int *parse_list(t_list *args)
 {
-	int	*tmp;
-	int	i;
+	t_list *stack;
+	int *tmp;
+	int i;
 
-	tmp = malloc((ft_lstsize(args) + 1) * sizeof(int));
+	tmp = malloc(ft_lstsize(args) * sizeof(int));
 	if (!tmp)
 		return (NULL);
+	stack = args;
 	i = 0;
-	while (args)
+	while (stack)
 	{
-		tmp[i] = args->content;
+		tmp[i] = stack->content;
 		i++;
-		args = args->next;
+		stack = stack->next;
 	}
-	tmp[i] = 0;
 	return (tmp);
 }
 
-void	buble_sort(int *args, int counter)
+int *parse_index(t_list *args)
 {
-	int	nb_tmp;
-	int	i;
-	int	*tmp;
+	t_list *stack;
+	int *tmp;
+	int i;
 
-	tmp = args;
-	while (counter > 0)
+	tmp = malloc(ft_lstsize(args) * sizeof(int));
+	if (!tmp)
+		return (NULL);
+	stack = args;
+	i = 0;
+	while (stack)
 	{
-		i = 0;
-		while (tmp[i] && tmp[i + 1])
-		{
-			if (tmp[i] > tmp[i + 1])
-			{
-				nb_tmp = tmp[i];
-				tmp[i] = tmp[i + 1];
-				tmp[i + 1] = nb_tmp;
-			}
-			i++;
-		}
-		counter--;
+		tmp[i] = stack->index;
+		i++;
+		stack = stack->next;
 	}
-	args = tmp;
+	return (tmp);
 }
 
-void	index_assign(t_list *args)
+void buble_sort(int *args, int size)
 {
-	int		*tmp;
-	int		i;
-	t_list	*head;
+	int nb_tmp;
+	int i;
+	int j;
 
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - 1 - i)
+		{
+			if (args[j] > args[j + 1])
+			{
+				nb_tmp = args[j];
+				args[j] = args[j + 1];
+				args[j + 1] = nb_tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void index_assign(t_list *args)
+{
+	int 	*tmp;
+	int 	i;
+	t_list *head;
+	int		size;
+	
 	head = args;
 	i = ft_lstsize(args);
 	tmp = parse_list(args);
 	buble_sort(tmp, i);
 	i = 0;
-	while (tmp[i])
+	size = ft_lstsize(head);
+	while (i < size)
 	{
 		args = head;
 		while (args)
@@ -96,5 +122,4 @@ void	index_assign(t_list *args)
 		i++;
 	}
 	free(tmp);
-	tmp = NULL;
 }

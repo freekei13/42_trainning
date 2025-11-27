@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:28:32 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/27 01:19:45 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ int	main(int argc, char **argv)
 	push_swap(&a, &b);
 	print_stacks(a, b);
 	free_lst(&a);
+	free_lst(&b);
 }
