@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/27 16:39:24 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/28 03:40:31 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	rra_rrb(t_list **stack_a, t_list **stack_b);
 int		find_min_index(t_list *stack_a);
 int		find_max_index(t_list *stack_a);
 int		find_index_pos(t_list *stack_a, int index);
+int		find_max(int first, int second);
 
 void	three_args_sort(t_list **stack_a, t_list **stack_b);
 void	four_args_sort(t_list **stack_a, t_list **stack_b);
@@ -50,11 +51,13 @@ void	five_args_sort(t_list **stack_a, t_list **stack_b);
 
 void	push_b_all_except_lis(int size, int *lis, t_list **stack_a, t_list **stack_b);
 int		set_pos_a_target(t_list *stack_a, int index_b);
-int		cost_ra_rb(int pos_a, int pos_b);
-int		cost_rra_rrb(int pos_a, int pos_b, int size_a, int size_b);
-int		cost_ra_rrb(int pos_a, int pos_b, int size_b);
-int		cost_rra_rb(int pos_a, int pos_b, int size_a);
-int		cheapest_cost(int ra_rb, int rra_rrb, int ra_rrb, int rra_rb);
+int		set_best_pos_b(t_list *stack_a, t_list *stack_b);
+
+int		*cost_diff_scena(int pos_a, int pos_b, int size_a, int size_b);
+int		cheapest_cost(int *costs);
+int		cheapest_scena(int *costs);
+
+void	rotations_push_a(t_list **stack_a, t_list **stack_b);
 void	sort_all(t_list **stack_a, t_list **stack_b);
 //For testing only
 void	print_stacks(t_list *a, t_list *b);

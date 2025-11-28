@@ -1,53 +1,52 @@
 #include "push_swap.h"
 
-
-int	cost_ra_rb(int pos_a, int pos_b)
+int	*cost_diff_scena(int pos_a, int pos_b, int size_a, int size_b)
 {
-	int	cost;
+	int	*costs;
 
-	if (pos_a > pos_b)
-		cost = pos_a;
-	else
-		cost = pos_b;
-	return (cost);
-}
-int	cost_rra_rrb(int pos_a, int pos_b, int size_a, int size_b)
-{
-	int	cost;
-
-	if (size_a - pos_a > size_b - pos_b)
-		cost = size_a - pos_a;
-	else
-		cost = size_b - pos_b;
-	return (cost);
+	costs = malloc(sizeof(int) * 4);
+	if (!costs)
+		return (NULL);
+	costs[0] = find_max(pos_a, pos_b);
+	costs[1] = find_max(size_a - pos_a, size_b - pos_b);
+	costs[2] = pos_a + (size_b - pos_b);
+	costs[3] = (size_a - pos_a) + pos_b;
+	return (costs);
 }
 
-int	cost_ra_rrb(int pos_a, int pos_b, int size_b)
-{
-	int cost;
-
-	cost = pos_a + (size_b - pos_b);
-	return (cost);
-}
-
-int	cost_rra_rb(int pos_a, int pos_b, int size_a)
-{
-	int cost;
-
-	cost = (size_a - pos_a) + pos_b;
-	return (cost);
-}
-
-int	cheapest_cost(int ra_rb, int rra_rrb, int ra_rrb, int rra_rb)
+int	cheapest_cost(int *costs)
 {
 	int	cheapest;
+	int	i;
 
-	cheapest = ra_rb;
-	if (cheapest > rra_rrb)
-		cheapest = rra_rrb;
-	if (cheapest > ra_rrb)
-		cheapest = ra_rrb;
-	if (cheapest > rra_rb)
-		cheapest = rra_rb;
+	i = 0;
+	cheapest = costs[0];
+	while (i < 4)
+	{
+		if (cheapest > costs[i])
+			cheapest = costs[i];
+		i++;
+	}
 	return (cheapest);
+}
+
+int	cheapest_scena(int *costs)
+{
+	int	cheapest;
+	int	i;
+	int	scena;
+
+	scena = 0;
+	i = 0;
+	cheapest = costs[0];
+	while (i < 4)
+	{
+		if (cheapest > costs[i])
+		{
+			cheapest = costs[i];
+			scena = i;
+		}
+		i++;
+	}
+	return (scena);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_turkish_p1.c                                  :+:      :+:    :+:   */
+/*   sort_turkish_lis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:27:07 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/27 15:40:12 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/27 21:58:29 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void	sort_all(t_list **stack_a, t_list **stack_b)
 		return ;
 	size = ft_lstsize(*stack_a);
 	push_b_all_except_lis(size, lis, stack_a, stack_b);
+	rotations_push_a(stack_a, stack_b);
 	free(lis);
 }

@@ -46,3 +46,11 @@ int	find_index_pos(t_list *stack_a, int index)
 	}
 	return (pos);
 }
+
+int	find_max(int first, int second)
+{
+	if (first > second)
+		return (first);
+	else
+		return (second);
+}

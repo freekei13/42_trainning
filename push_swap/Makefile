@@ -6,7 +6,7 @@
 #    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 11:28:14 by csamakka          #+#    #+#              #
-#    Updated: 2025/11/27 16:07:35 by freekei          ###   ########.fr        #
+#    Updated: 2025/11/27 20:50:35 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC = src/push_swap.c src/reverse_rotate.c src/rotate.c src/swap.c \
 	src/push.c src/main.c src/input_check.c src/parse_input.c \
 	src/sort_three.c src/sort_four.c src/sort_five.c src/ft_utils.c \
 	src/ft_free.c src/sort_turkish_lis.c src/sort_turkish_pos.c \
-	src/sort_turkish_cheapcost.c
+	src/sort_turkish_cheapcost.c src/sort_turkish_rotations.c
 	
 OBJ = $(SRC:.c=.o)
 
