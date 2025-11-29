@@ -25,16 +25,17 @@ void	push_b_all_except_lis(int size, int *lis, t_list **stack_a, t_list **stack_
 
 int find_pos_b_index(int pos_b, t_list *stack_b)
 {
-    int i = 0;
+    int 	i;
+	t_list	*tmp;
 
-    while (stack_b && i < pos_b)
+	i = 0;
+	tmp = stack_b;
+    while (tmp && i < pos_b)
     {
-        stack_b = stack_b->next;
+        tmp = tmp->next;
         i++;
     }
-    if (!stack_b)
-        return (-1);
-    return (stack_b->index);
+    return (tmp->index);
 }
 
 int	set_pos_a_target(t_list *stack_a, int index_b)
@@ -43,8 +44,6 @@ int	set_pos_a_target(t_list *stack_a, int index_b)
 	t_list	*tmp;
 
 	pos = 0;
-	if (index_b == -1)
-		return (0);
 	tmp = stack_a;
 	if (index_b < find_min_index(stack_a) || index_b > find_max_index(stack_a))
 	{
@@ -67,24 +66,30 @@ int	set_pos_a_target(t_list *stack_a, int index_b)
 
 int set_best_pos_b(t_list *stack_a, t_list *stack_b)
 {
-    int best_b = 0;
-    int prev_cheapest = INT_MAX;
-    int pos_b = 0;
+    int best_b;
+	int pos_a;
+    int pos_b;
+	int	index_b;
+	int	size_a;
+	int	size_b;
+	int	*costs;
+	int	cheap;
+	int prev_cheapest;
 
+	pos_b = 0;
     t_list *tmp = stack_b;
-
+	prev_cheapest = INT_MAX;
     while (tmp)
     {
-        int index_b = tmp->index;
-        int pos_a = set_pos_a_target(stack_a, index_b);
-        int size_a = ft_lstsize(stack_a);
-        int size_b = ft_lstsize(stack_b);
-        int *costs = cost_diff_scena(pos_a, pos_b, size_a, size_b);
+        index_b = tmp->index;
+        pos_a = set_pos_a_target(stack_a, index_b);
+        size_a = ft_lstsize(stack_a);
+        size_b = ft_lstsize(stack_b);
+        costs = cost_diff_scena(pos_a, pos_b, size_a, size_b);
         if (!costs)
             return (-1);
-        int cheap = cheapest_cost(costs);
+        cheap = cheapest_cost(costs);
         free(costs);
-
         if (cheap < prev_cheapest)
         {
             prev_cheapest = cheap;

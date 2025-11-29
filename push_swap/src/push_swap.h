@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/28 03:40:31 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/29 14:30:58 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	five_args_sort(t_list **stack_a, t_list **stack_b);
 void	push_b_all_except_lis(int size, int *lis, t_list **stack_a, t_list **stack_b);
 int		set_pos_a_target(t_list *stack_a, int index_b);
 int		set_best_pos_b(t_list *stack_a, t_list *stack_b);
+int		find_pos_b_index(int pos_b, t_list *stack_b);
 
 int		*cost_diff_scena(int pos_a, int pos_b, int size_a, int size_b);
 int		cheapest_cost(int *costs);

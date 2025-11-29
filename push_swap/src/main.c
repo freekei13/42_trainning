@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/29 03:08:51 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/29 17:30:30 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int	main(int argc, char **argv)
 	a = parse_inputs(arg);
 	free_all(arg);
 	index_assign(a);
-	print_stacks(a, b);
 	push_swap(&a, &b);
-	print_stacks(a, b);
 	free_lst(&a);
 	free_lst(&b);
 }
