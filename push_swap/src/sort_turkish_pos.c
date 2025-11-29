@@ -23,23 +23,18 @@ void	push_b_all_except_lis(int size, int *lis, t_list **stack_a, t_list **stack_
 	}
 }
 
-int	find_pos_b_index(int pos_b, t_list *stack_b)
+int find_pos_b_index(int pos_b, t_list *stack_b)
 {
-	t_list	*tmp;
-	int		i;
-	int		size_b;
+    int i = 0;
 
-	size_b = ft_lstsize(stack_b);
-	if (pos_b < 0 || pos_b >= size_b)
-		return (-1);
-	tmp = stack_b;
-	i = 0;
-	while (i < pos_b)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (tmp->index);
+    while (stack_b && i < pos_b)
+    {
+        stack_b = stack_b->next;
+        i++;
+    }
+    if (!stack_b)
+        return (-1);
+    return (stack_b->index);
 }
 
 int	set_pos_a_target(t_list *stack_a, int index_b)
@@ -70,3 +65,33 @@ int	set_pos_a_target(t_list *stack_a, int index_b)
 	return (0);
 }
 
+int set_best_pos_b(t_list *stack_a, t_list *stack_b)
+{
+    int best_b = 0;
+    int prev_cheapest = INT_MAX;
+    int pos_b = 0;
+
+    t_list *tmp = stack_b;
+
+    while (tmp)
+    {
+        int index_b = tmp->index;
+        int pos_a = set_pos_a_target(stack_a, index_b);
+        int size_a = ft_lstsize(stack_a);
+        int size_b = ft_lstsize(stack_b);
+        int *costs = cost_diff_scena(pos_a, pos_b, size_a, size_b);
+        if (!costs)
+            return (-1);
+        int cheap = cheapest_cost(costs);
+        free(costs);
+
+        if (cheap < prev_cheapest)
+        {
+            prev_cheapest = cheap;
+            best_b = pos_b;
+        }
+        pos_b++;
+        tmp = tmp->next;
+    }
+    return (best_b);
+}

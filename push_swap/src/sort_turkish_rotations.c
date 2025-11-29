@@ -91,26 +91,24 @@ void	scena_rra_rb(int pos_a, int pos_b, t_list **a, t_list **b)
 void	rotations_push_a(t_list **stack_a, t_list **stack_b)
 {
 	int	pos_a;
-	int	pos_b;
-	int	*costs;
-	int	scena;
+	int size_a;
 
 	while (*stack_b)
 	{
-		pos_b = 0;
+		size_a = ft_lstsize(*stack_a);
 		pos_a = set_pos_a_target(*stack_a, (*stack_b)->index);
-		costs = cost_diff_scena(pos_a, pos_b, ft_lstsize(*stack_a), ft_lstsize(*stack_b));
-		scena = cheapest_scena(costs);
-		if (scena == 0)
-			scena_rr(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 1)
-			scena_rrr(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 2)
-			scena_ra_rrb(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 3)
-			scena_rra_rb(pos_a, pos_b, stack_a, stack_b);
+		if (pos_a > size_a)
+		{
+			pos_a = size_a - pos_a;
+			while (pos_a--)
+				re_rotate_a(stack_a);
+		}
+		else
+		{
+			while (pos_a--)
+				rotate_a(stack_a);
+		}
 		push_a(stack_a, stack_b);
-		free(costs);
 	}
 	while ((*stack_a)->index != 0)
 	{
