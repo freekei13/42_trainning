@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/01 17:22:39 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:00:47 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ int	error_check(char **inputs)
 		return (ft_printf("Error\n"), 0);
 }
 
+int	issorted(t_list *stack)
+{
+	int		i;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = stack;
+	while (tmp && tmp->next)
+	{
+		if (tmp->index != i)
+			return (0);
+		i++;
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**arg;
@@ -57,11 +74,15 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	arg = input_check(argc, argv);
+	if (!arg)
+		return (0);
 	if (!error_check(arg))
-		return (free_all(arg), 0);
+		return (0);
 	a = parse_inputs(arg);
 	free_all(arg);
 	index_assign(a);
+	if (issorted(a) == 1)
+		return (free_lst(&a), free_lst(&b), 0);
 	push_swap(&a, &b);
 	free_lst(&a);
 	free_lst(&b);
