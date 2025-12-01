@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 11:27:28 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/27 01:15:09 by freekei          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-t_list *parse_inputs(char **args)
+t_list	*parse_inputs(char **args)
 {
 	t_list	*stack_a;
 	t_list	*node;
-	int 	nb;
-	int 	i;
+	int		nb;
+	int		i;
 
 	stack_a = NULL;
 	i = 0;
@@ -33,11 +21,11 @@ t_list *parse_inputs(char **args)
 	return (stack_a);
 }
 
-int *parse_list(t_list *args)
+int	*parse_list(t_list *args)
 {
-	t_list *stack;
-	int *tmp;
-	int i;
+	t_list	*stack;
+	int		*tmp;
+	int		i;
 
 	tmp = malloc(ft_lstsize(args) * sizeof(int));
 	if (!tmp)
@@ -53,11 +41,11 @@ int *parse_list(t_list *args)
 	return (tmp);
 }
 
-int *parse_index(t_list *args)
+int	*parse_index(t_list *args)
 {
-	t_list *stack;
-	int *tmp;
-	int i;
+	t_list	*stack;
+	int		*tmp;
+	int		i;
 
 	tmp = malloc(ft_lstsize(args) * sizeof(int));
 	if (!tmp)
@@ -73,11 +61,11 @@ int *parse_index(t_list *args)
 	return (tmp);
 }
 
-void buble_sort(int *args, int size)
+void	buble_sort(int *args, int size)
 {
-	int nb_tmp;
-	int i;
-	int j;
+	int	nb_tmp;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size - 1)
@@ -97,13 +85,13 @@ void buble_sort(int *args, int size)
 	}
 }
 
-void index_assign(t_list *args)
+void	index_assign(t_list *args)
 {
-	int 	*tmp;
-	int 	i;
-	t_list *head;
+	int		*tmp;
+	int		i;
+	t_list	*head;
 	int		size;
-	
+
 	head = args;
 	i = ft_lstsize(args);
 	tmp = parse_list(args);

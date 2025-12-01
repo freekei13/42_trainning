@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/29 17:30:30 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/30 19:06:07 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	print_stacks(t_list *a, t_list *b)
 	{
 		if (a && b)
 		{
-			ft_printf("a %d index %d --- b %d index %d\n", a->content, a->index, b->content, b->index);
+			ft_printf("a %d index %d --- b %d index %d\n",
+				a->content, a->index, b->content, b->index);
 			a = a->next;
 			b = b->next;
 		}
@@ -39,7 +40,9 @@ int	error_check(char **inputs)
 {
 	if (!inputs)
 		return (0);
-	else if (digit_check(inputs) && repeat_check(inputs) && int_minmax_check(inputs))
+	else if (digit_check(inputs)
+		&& repeat_check(inputs)
+		&& int_minmax_check(inputs))
 		return (1);
 	else
 		return (ft_printf("Error\n"), 0);
@@ -50,7 +53,7 @@ int	main(int argc, char **argv)
 	char	**arg;
 	t_list	*a;
 	t_list	*b;
-	
+
 	a = NULL;
 	b = NULL;
 	arg = input_check(argc, argv);

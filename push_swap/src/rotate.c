@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:02 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:28:55 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:40:16 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	rotate_a(t_list	**stack_a)
 {
 	t_list	*first;
 	t_list	*last;
-	
-	if(ft_lstsize(*stack_a) < 2)
+
+	if (ft_lstsize(*stack_a) < 2)
 		return ;
 	first = *stack_a;
 	*stack_a = (*stack_a)->next;
@@ -31,8 +31,8 @@ void	rotate_b(t_list **stack_b)
 {
 	t_list	*first;
 	t_list	*last;
-	
-	if(ft_lstsize(*stack_b) < 2)
+
+	if (ft_lstsize(*stack_b) < 2)
 		return ;
 	first = *stack_b;
 	*stack_b = (*stack_b)->next;
@@ -48,8 +48,8 @@ void	ra_rb(t_list **stack_a, t_list **stack_b)
 	t_list	*last_a;
 	t_list	*first_b;
 	t_list	*last_b;
-	
-	if(ft_lstsize(*stack_a) > 1)
+
+	if (ft_lstsize(*stack_a) > 1)
 	{
 		first_a = *stack_a;
 		*stack_a = (*stack_a)->next;
@@ -57,7 +57,7 @@ void	ra_rb(t_list **stack_a, t_list **stack_b)
 		last_a->next = first_a;
 		first_a->next = NULL;
 	}
-	if(ft_lstsize(*stack_b) > 1)
+	if (ft_lstsize(*stack_b) > 1)
 	{
 		first_b = *stack_b;
 		*stack_b = (*stack_b)->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:07 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:28:04 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:26:29 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	swap_a(t_list **stack_a)
 {
 	t_list	*first;
 	t_list	*second;
-	
+
 	if (ft_lstsize(*stack_a) < 2)
 		return ;
 	first = *stack_a;

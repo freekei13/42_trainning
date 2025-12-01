@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_turkish_lis.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 11:27:07 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/29 02:16:46 by freekei          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 int	*lis_assem(int *a, int *prev, int max_len, int end)
 {
-	int *lis;
+	int	*lis;
 	int	i;
 	int	j;
-	
+
 	lis = malloc(sizeof(int) * (max_len + 1));
 	if (!lis)
 		return (NULL);
@@ -35,8 +23,8 @@ int	*lis_assem(int *a, int *prev, int max_len, int end)
 
 void	set_lis_maxlen_end(int *max_len, int *end, int size, int *len)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < size)
 	{
@@ -48,6 +36,7 @@ void	set_lis_maxlen_end(int *max_len, int *end, int size, int *len)
 		i++;
 	}
 }
+
 void	set_len_prev(int *a, int *len, int *prev, int size)
 {
 	int	i;
@@ -72,23 +61,12 @@ void	set_len_prev(int *a, int *len, int *prev, int size)
 	}
 }
 
-int	*set_lis(t_list *stack_a)
+int	*build_lis(int *a, int *len, int *prev, int size)
 {
-	int	*a;
-	int	*len;
-	int	*prev;
-	int	size;
-	int max_len;
-	int end;
-	int *lis;
-	
-	size = ft_lstsize(stack_a);
-	a = parse_index(stack_a);
-	len = malloc(sizeof(int) * size);
-	prev = malloc(sizeof(int) * size);
-	if (!len || !prev || !a)
-		return (free(len), free(prev), free(a), NULL);
-	set_len_prev(a, len, prev, size);
+	int	max_len;
+	int	end;
+	int	*lis;
+
 	max_len = 0;
 	end = 0;
 	set_lis_maxlen_end(&max_len, &end, size, len);
@@ -98,16 +76,23 @@ int	*set_lis(t_list *stack_a)
 	return (free(len), free(prev), free(a), lis);
 }
 
-void	sort_all(t_list **stack_a, t_list **stack_b)
+int	*set_lis(t_list *stack_a)
 {
-	int	*lis;
+	int	*a;
+	int	*len;
+	int	*prev;
 	int	size;
-	
-	lis = set_lis(*stack_a);
+	int	*lis;
+
+	size = ft_lstsize(stack_a);
+	a = parse_index(stack_a);
+	len = malloc(sizeof(int) * size);
+	prev = malloc(sizeof(int) * size);
+	if (!len || !prev || !a)
+		return (free(len), free(prev), free(a), NULL);
+	set_len_prev(a, len, prev, size);
+	lis = build_lis(a, len, prev, size);
 	if (!lis)
-		return ;
-	size = ft_lstsize(*stack_a);
-	push_b_all_except_lis(size, lis, stack_a, stack_b);
-	rotations_push_a(stack_a, stack_b);
-	free(lis);
+		return (NULL);
+	return (lis);
 }

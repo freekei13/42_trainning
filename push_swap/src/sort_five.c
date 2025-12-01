@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 10:46:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/29 17:27:53 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/30 19:41:36 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pre_sort_five(t_list	**stack_a, t_list **stack_b, int min)
 void	five_args_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	min;
-	int second_min;
+	int	second_min;
 
 	if ((*stack_a)->index == 0 && (*stack_a)->next->index == 1
 		&& (*stack_a)->next->next->index == 2

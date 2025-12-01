@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:28:25 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:01:21 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*join_args(char **av)
 	int		i;
 	char	*tmp;
 	char	*join;
-	
+
 	tmp = ft_strdup("");
 	i = 1;
 	while (av[i])
@@ -112,7 +112,7 @@ char	**input_check(int ac, char *av[])
 {
 	char	**arg;
 	char	*tmp;
-	
+
 	if (ac < 2)
 		return (NULL);
 	if (ac == 2)

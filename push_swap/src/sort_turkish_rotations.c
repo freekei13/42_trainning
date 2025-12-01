@@ -66,7 +66,7 @@ void	scena_ra_rrb(int pos_a, int pos_b, t_list **a, t_list **b)
 	while (++i < pos_a)
 		rotate_a(a);
 	i = -1;
-	while (++i <  size_b - pos_b)
+	while (++i < size_b - pos_b)
 		re_rotate_b(b);
 }
 
@@ -80,7 +80,7 @@ void	scena_rra_rb(int pos_a, int pos_b, t_list **a, t_list **b)
 	while (++i < pos_b)
 		rotate_b(b);
 	i = -1;
-	while (++i <  size_a - pos_a)
+	while (++i < size_a - pos_a)
 		re_rotate_a(a);
 }
 
@@ -88,7 +88,7 @@ void	rotations_push_a(t_list **stack_a, t_list **stack_b)
 {
 	int	pos_a;
 	int	pos_b;
-	int size_a;
+	int	size_a;
 	int	size_b;
 	int	b_index;
 	int	*costs;

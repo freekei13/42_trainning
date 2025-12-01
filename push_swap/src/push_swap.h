@@ -6,15 +6,15 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/29 14:30:58 by freekei          ###   ########.fr       */
+/*   Updated: 2025/12/01 00:28:54 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		PUSH_SWAP_H
-# define	PUSH_SWAP_H
-# include	<limits.h>
-# include	"../libft/libft.h"
-# include	"../ft_printf/ft_printf.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+# include <limits.h>
+# include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
 void	push_swap(t_list **stack_a, t_list **stack_b);
 
@@ -49,7 +49,7 @@ void	three_args_sort(t_list **stack_a, t_list **stack_b);
 void	four_args_sort(t_list **stack_a, t_list **stack_b);
 void	five_args_sort(t_list **stack_a, t_list **stack_b);
 
-void	push_b_all_except_lis(int size, int *lis, t_list **stack_a, t_list **stack_b);
+int		*set_lis(t_list *stack_a);
 int		set_pos_a_target(t_list *stack_a, int index_b);
 int		set_best_pos_b(t_list *stack_a, t_list *stack_b);
 int		find_pos_b_index(int pos_b, t_list *stack_b);

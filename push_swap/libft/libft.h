@@ -6,7 +6,7 @@
 /*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 10:22:18 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/23 20:09:10 by freekei          ###   ########.fr       */
+/*   Updated: 2025/11/30 19:02:24 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 typedef struct s_list
 {
-	int			content;
-	int			index;
+	int				content;
+	int				index;
 	struct s_list	*next;
 }					t_list;
 

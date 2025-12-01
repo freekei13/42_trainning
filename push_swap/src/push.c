@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:24:03 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/25 11:28:43 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:13:27 by freekei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	push_a(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
-	
+
 	if (!*stack_b)
 		return ;
 	tmp = *stack_b;
@@ -25,7 +25,7 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 	ft_printf("pa\n");
 }
 
-void push_b(t_list	**stack_a, t_list **stack_b)
+void	push_b(t_list	**stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 
