@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/30 19:01:21 by freekei          ###   ########.fr       */
+/*   Updated: 2025/12/01 14:15:21 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ int	repeat_check(char **inputs)
 	i = 0;
 	while (inputs[i])
 	{
-		j = 1;
-		while (inputs[j + i])
+		j = i + 1;
+		while (inputs[j])
 		{
-			if (ft_memcmp(inputs[i], inputs[j + i], 12) != 0)
-				j++;
-			else
+			if (ft_strncmp(inputs[i], inputs[j], 12) == 0)
 				return (0);
+			j++;
 		}
 		i++;
 	}
@@ -94,6 +93,8 @@ char	*join_args(char **av)
 	char	*join;
 
 	tmp = ft_strdup("");
+	if (!tmp)
+		return (NULL);
 	i = 1;
 	while (av[i])
 	{
@@ -120,8 +121,12 @@ char	**input_check(int ac, char *av[])
 	if (ac > 2)
 	{
 		tmp = join_args(av);
+		if (!tmp)
+			return (NULL);
 		arg = ft_split(tmp, 32);
 		free(tmp);
+		if (!arg)
+			return (NULL);
 		tmp = NULL;
 	}
 	return (arg);

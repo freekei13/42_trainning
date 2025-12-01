@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_turkish_pos.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 10:29:23 by csamakka          #+#    #+#             */
+/*   Updated: 2025/12/01 14:14:08 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	find_pos_b_index(int pos_b, t_list *stack_b)
@@ -41,35 +53,40 @@ int	set_pos_a_target(t_list *stack_a, int index_b)
 	return (0);
 }
 
+int	find_cheapest(int pos_a, int pos_b, t_list *a, t_list *b)
+{
+	int	*costs;
+	int	cheap;
+
+	costs = cost_diff_scena(pos_a, pos_b, ft_lstsize(a), ft_lstsize(b));
+	if (!costs)
+		return (0);
+	cheap = cheapest_cost(costs);
+	free(costs);
+	return (cheap);
+}
+
 int	set_best_pos_b(t_list *stack_a, t_list *stack_b)
 {
-	int		best_b;
-	int		pos_a;
-	int		pos_b;
-	int		*costs;
 	int		cheap;
 	int		prev_cheapest;
+	t_pos	pos;
 	t_list	*tmp;
 
-	pos_b = 0;
+	pos.pos_b = 0;
 	tmp = stack_b;
 	prev_cheapest = INT_MAX;
 	while (tmp)
 	{
-		pos_a = set_pos_a_target(stack_a, tmp->index);
-		costs = cost_diff_scena(pos_a, pos_b,
-				ft_lstsize(stack_a), ft_lstsize(stack_b));
-		if (!costs)
-			return (-1);
-		cheap = cheapest_cost(costs);
-		free(costs);
+		pos.pos_a = set_pos_a_target(stack_a, tmp->index);
+		cheap = find_cheapest(pos.pos_a, pos.pos_b, stack_a, stack_b);
 		if (cheap < prev_cheapest)
 		{
 			prev_cheapest = cheap;
-			best_b = pos_b;
+			pos.best_b = pos.pos_b;
 		}
-		pos_b++;
+		pos.pos_b++;
 		tmp = tmp->next;
 	}
-	return (best_b);
+	return (pos.best_b);
 }

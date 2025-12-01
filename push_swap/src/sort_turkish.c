@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_turkish.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 10:29:41 by csamakka          #+#    #+#             */
+/*   Updated: 2025/12/01 11:58:36 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	push_b_keep_lis(int size, int *lis, t_list **stack_a, t_list **stack_b)
@@ -20,6 +32,26 @@ void	push_b_keep_lis(int size, int *lis, t_list **stack_a, t_list **stack_b)
 		else
 			push_b(stack_a, stack_b);
 		size--;
+	}
+}
+
+void	rotations_push_a(t_list **stack_a, t_list **stack_b)
+{
+	int	pos_a;
+	int	pos_b;
+
+	while (*stack_b)
+	{
+		pos_b = set_best_pos_b(*stack_a, *stack_b);
+		pos_a = set_pos_a_target(*stack_a, find_pos_b_index(pos_b, *stack_b));
+		scena_action(pos_a, pos_b, stack_a, stack_b);
+	}
+	while ((*stack_a)->index != 0)
+	{
+		if (find_index_pos(*stack_a, 0) > ft_lstsize(*stack_a) / 2)
+			re_rotate_a(stack_a);
+		else
+			rotate_a(stack_a);
 	}
 }
 

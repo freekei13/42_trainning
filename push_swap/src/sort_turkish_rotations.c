@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_turkish_rotations.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 10:29:34 by csamakka          #+#    #+#             */
+/*   Updated: 2025/12/01 11:58:45 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	scena_rr(int pos_a, int pos_b, t_list **a, t_list **b)
@@ -29,30 +41,26 @@ void	scena_rr(int pos_a, int pos_b, t_list **a, t_list **b)
 void	scena_rrr(int pos_a, int pos_b, t_list **a, t_list **b)
 {
 	int	i;
-	int	size_a;
-	int	size_b;
 
 	i = -1;
-	size_a = ft_lstsize(*a);
-	size_b = ft_lstsize(*b);
-	if (size_a - pos_a > size_b - pos_b)
+	if (ft_lstsize(*a) - pos_a > ft_lstsize(*b) - pos_b)
 	{
-		while (++i < size_b - pos_b)
+		while (++i < ft_lstsize(*b) - pos_b)
 			rra_rrb(a, b);
 		i = -1;
-		while (++i < (size_a - pos_a) - (size_b - pos_b))
+		while (++i < (ft_lstsize(*a) - pos_a) - (ft_lstsize(*b) - pos_b))
 			re_rotate_a(a);
 	}
-	else if (size_a - pos_a < size_b - pos_b)
+	else if (ft_lstsize(*a) - pos_a < ft_lstsize(*b) - pos_b)
 	{
-		while (++i < size_a - pos_a)
+		while (++i < ft_lstsize(*a) - pos_a)
 			rra_rrb(a, b);
 		i = -1;
-		while (++i < (size_b - pos_b) - (size_a - pos_a))
+		while (++i < (ft_lstsize(*b) - pos_b) - (ft_lstsize(*a) - pos_a))
 			re_rotate_b(b);
 	}
 	else
-		while (++i < size_a - pos_a)
+		while (++i < ft_lstsize(*a) - pos_a)
 			rra_rrb(a, b);
 }
 
@@ -84,41 +92,27 @@ void	scena_rra_rb(int pos_a, int pos_b, t_list **a, t_list **b)
 		re_rotate_a(a);
 }
 
-void	rotations_push_a(t_list **stack_a, t_list **stack_b)
+void	scena_action(int pos_a, int pos_b, t_list **a, t_list **b)
 {
-	int	pos_a;
-	int	pos_b;
-	int	size_a;
-	int	size_b;
-	int	b_index;
 	int	*costs;
 	int	scena;
+	int	size_a;
+	int	size_b;
 
-	while (*stack_b)
-	{
-		size_a = ft_lstsize(*stack_a);
-		size_b = ft_lstsize(*stack_b);
-		pos_b = set_best_pos_b(*stack_a, *stack_b);
-		b_index = find_pos_b_index(pos_b, *stack_b);
-		pos_a = set_pos_a_target(*stack_a, b_index);
-		costs = cost_diff_scena(pos_a, pos_b, size_a, size_b);
-		scena = cheapest_scena(costs);
-		free(costs);
-		if (scena == 0)
-			scena_rr(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 1)
-			scena_rrr(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 2)
-			scena_ra_rrb(pos_a, pos_b, stack_a, stack_b);
-		else if (scena == 3)
-			scena_rra_rb(pos_a, pos_b, stack_a, stack_b);
-		push_a(stack_a, stack_b);
-	}
-	while ((*stack_a)->index != 0)
-	{
-		if (find_index_pos(*stack_a, 0) > ft_lstsize(*stack_a) / 2)
-			re_rotate_a(stack_a);
-		else
-			rotate_a(stack_a);
-	}
+	size_a = ft_lstsize(*a);
+	size_b = ft_lstsize(*b);
+	costs = cost_diff_scena(pos_a, pos_b, size_a, size_b);
+	if (!costs)
+		return ;
+	scena = cheapest_scena(costs);
+	free(costs);
+	if (scena == 0)
+		scena_rr(pos_a, pos_b, a, b);
+	else if (scena == 1)
+		scena_rrr(pos_a, pos_b, a, b);
+	else if (scena == 2)
+		scena_ra_rrb(pos_a, pos_b, a, b);
+	else if (scena == 3)
+		scena_rra_rb(pos_a, pos_b, a, b);
+	push_a(a, b);
 }

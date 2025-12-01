@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:18:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/30 19:06:07 by freekei          ###   ########.fr       */
+/*   Updated: 2025/12/01 13:03:14 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 	b = NULL;
 	arg = input_check(argc, argv);
 	if (!error_check(arg))
-		return (0);
+		return (free_all(arg), 0);
 	a = parse_inputs(arg);
 	free_all(arg);
 	index_assign(a);

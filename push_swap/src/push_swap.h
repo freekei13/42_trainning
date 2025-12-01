@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/01 00:28:54 by freekei          ###   ########.fr       */
+/*   Updated: 2025/12/01 15:47:24 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # include <limits.h>
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
+
+typedef struct s_pos
+{
+	int		best_b;
+	int		pos_a;
+	int		pos_b;
+}			t_pos;
 
 void	push_swap(t_list **stack_a, t_list **stack_b);
 
@@ -58,7 +65,7 @@ int		*cost_diff_scena(int pos_a, int pos_b, int size_a, int size_b);
 int		cheapest_cost(int *costs);
 int		cheapest_scena(int *costs);
 
-void	rotations_push_a(t_list **stack_a, t_list **stack_b);
+void	scena_action(int pos_a, int pos_b, t_list **a, t_list **b);
 void	sort_all(t_list **stack_a, t_list **stack_b);
 //For testing only
 void	print_stacks(t_list *a, t_list *b);
