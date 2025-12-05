@@ -1,29 +1,12 @@
-#include <mlx.h>
+#include "so_long.h"
 
-typedef struct	s_data 
+#include <stdio.h>
+
+int	main(int argc, char **argv)
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-int	main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
-	mlx_pixel_put(mlx, mlx_win, 50, 50, 0x00FF0000);
-	mlx_loop(mlx);
+	if (argc > 2 || argc < 2)
+		return (0);
+	if (map_check(argv[1]) == 0)
+		return (0);
+	boot_game(argv[1]);
 }
