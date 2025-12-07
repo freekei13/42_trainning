@@ -67,7 +67,7 @@ int	element_to_count(char **map, char element)
 	return (ft_printf("%c = %d\n", element, counter), counter);
 }
 
-int	map_check(char *file_path)
+char	**map_check(char *file_path)
 {
 	int		fd;
 	char	**map;
@@ -79,15 +79,14 @@ int	map_check(char *file_path)
 	if (!map)
 		return (0);
 	if (ismap_rectang(map) == 0)
-		return (free_all(map), ft_printf("Error: map is not rectangular\n"), 0);
+		return (free_all(map), ft_printf("Error: map is not rectangular\n"), NULL);
 	if (ismap_wallaround(map) == 0)
-		return (free_all(map), ft_printf("Error: No wall arounded\n"), 0);
+		return (free_all(map), ft_printf("Error: No wall arounded\n"), NULL);
 	if (element_to_count(map, 'E') != 1)
-		return (free_all(map), ft_printf("Error: 0 or more than 1 Exit\n"), 0);
+		return (free_all(map), ft_printf("Error: 0 or more than 1 Exit\n"), NULL);
 	if (element_to_count(map, 'P') != 1)
-		return (free_all(map), ft_printf("Error: 0 or more than 1 Start position\n"), 0);
+		return (free_all(map), ft_printf("Error: 0 or more than 1 Start position\n"), NULL);
 	if (element_to_count(map, 'C') == 0)
-		return (free_all(map), ft_printf("Error: 0 Collectible\n"), 0);
-	free_all(map);
-	return (ft_printf("--All check passed!--\n"), 1);
+		return (free_all(map), ft_printf("Error: 0 Collectible\n"), NULL);
+	return (ft_printf("--All check passed!--\n"), map);
 }

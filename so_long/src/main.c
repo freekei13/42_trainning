@@ -1,12 +1,18 @@
 #include "so_long.h"
 
-#include <stdio.h>
-
 int	main(int argc, char **argv)
 {
+	char	**map;
+	t_data	data;
+
 	if (argc > 2 || argc < 2)
 		return (0);
-	if (map_check(argv[1]) == 0)
+	map = map_check(argv[1]);
+	if (!map)
 		return (0);
-	boot_game(argv[1]);
+	data = set_data(map);
+	map_render(data);
+	mlx_hook(data.window, 2, 1L<<0, key_actions, &data);
+	mlx_hook(data.window, 17, 0, exit_game, &data);
+	mlx_loop(data.mlx);
 }

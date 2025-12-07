@@ -28,12 +28,20 @@ typedef	struct s_player
 	void	*img_go_right;
 }			t_player;
 
+typedef	struct s_pos
+{
+	int	x;
+	int	y;
+}		t_pos;
+
+
 typedef struct s_data
 {
 	void		*mlx;
 	void		*window;
 	char		**map;
 	t_map		size;
+	t_pos		p_pos;
 	void		*c_img;
 	void		*e_img;
 	void		*p_img;
@@ -42,10 +50,14 @@ typedef struct s_data
 }				t_data;
 
 void	free_all(char **strs);
+void	free_all_img(t_data *data);
 int		ft_tablen(char **strs);
-
+int		exit_game(t_data *data);
 char	**map_parse(int fd);
-int		map_check(char *file_path);
+char	**map_check(char *file_path);
 
-void	boot_game(char *file_path);
+t_data	set_data(char **map);
+void	map_render(t_data data);
+
+int		key_actions(int key, t_data *data);
 #endif

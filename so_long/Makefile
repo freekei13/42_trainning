@@ -6,13 +6,13 @@
 #    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 00:13:10 by csamakka          #+#    #+#              #
-#    Updated: 2025/12/05 22:01:38 by freekei          ###   ########.fr        #
+#    Updated: 2025/12/07 03:09:53 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 SRC = src/main.c src/get_next_line.c src/get_next_line_utils.c src/map_checker.c \
-		src/utils.c src/parsing.c src/boot.c
+		src/utils.c src/parsing.c src/set_data.c src/rendering.c src/key_config.c
 OBJ = $(SRC:.c=.o)
 
 LIB = libft/libft.a
@@ -21,7 +21,7 @@ PRINTF = ft_printf/libftprintf.a
 PRINTF_P = ft_printf/
 
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Werror -Wextra
 RM = rm -f
 
 all:$(NAME)
