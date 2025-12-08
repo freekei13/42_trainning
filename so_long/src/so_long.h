@@ -14,20 +14,6 @@ typedef struct s_map
 	int	height;
 }		t_map;
 
-typedef	struct s_player
-{
-	void	*img_down;
-	void	*img_go1_down;
-	void	*img_go2_down;
-	void	*img_up;
-	void	*img_go1_up;
-	void	*img_go2_up;
-	void	*img_left;
-	void	*img_go_left;
-	void	*img_right;
-	void	*img_go_right;
-}			t_player;
-
 typedef	struct s_pos
 {
 	int	x;
@@ -47,17 +33,22 @@ typedef struct s_data
 	void		*p_img;
 	void		*f_img;
 	void		*w_img;
+	int			move_count;
+	int			collec_count;
 }				t_data;
 
 void	free_all(char **strs);
 void	free_all_img(t_data *data);
 int		ft_tablen(char **strs);
 int		exit_game(t_data *data);
+
+int		element_to_count(char **map, char element);
 char	**map_parse(int fd);
 char	**map_check(char *file_path);
 
 t_data	set_data(char **map);
-void	map_render(t_data data);
+void	*set_img(void *mlx, char *path);
+void	map_render(t_data *data);
 
 int		key_actions(int key, t_data *data);
 #endif

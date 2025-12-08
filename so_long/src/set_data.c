@@ -64,7 +64,9 @@ t_data	set_data(char **map)
 	data.size.height = ft_tablen(map);
 	data.size.width = ft_strlen(map[0]) - 1;
 	data.p_pos.x = set_pos_x(map);
-	data.p_pos.y = set_pos_x(map);
+	data.p_pos.y = set_pos_y(map);
+	data.collec_count = element_to_count(map, 'C');
+	data.move_count = 0;
 	data.window = mlx_new_window(data.mlx, data.size.width * TILE_SIZE,
 			data.size.height * TILE_SIZE, "so_long");
 	return (data);

@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 	if (!map)
 		return (0);
 	data = set_data(map);
-	map_render(data);
+	map_render(&data);
 	mlx_hook(data.window, 2, 1L<<0, key_actions, &data);
 	mlx_hook(data.window, 17, 0, exit_game, &data);
 	mlx_loop(data.mlx);

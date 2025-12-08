@@ -64,7 +64,7 @@ int	element_to_count(char **map, char element)
 		}
 		i++;
 	}
-	return (ft_printf("%c = %d\n", element, counter), counter);
+	return (counter);
 }
 
 char	**map_check(char *file_path)
