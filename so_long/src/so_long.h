@@ -57,17 +57,19 @@ int		ft_tablen(char **strs);
 int		exit_game(t_data *data);
 
 int		element_to_count(char **map, char element);
+char	**new_bigger_tab(int old_size, char **old_tab, char *line);
 char	**map_parse(int fd);
 char	**map_check(char *file_path);
+int		isacces(char **map);
 
 t_data	set_data(char **map);
 void	*set_img(void *mlx, char *path);
+int		set_pos_y(char **map);
+int		set_pos_x(char **map);
 
-void	background_render(t_data *data);
-void	elements_render(t_data *data);
-void	player_render(t_data *data);
-void	player_render_key(t_data *data, int key);
+void	map_render_key(t_data *data, int key);
 void	map_render(t_data *data);
+void	re_render_key(t_data *data, int key);
 
 int		key_actions(int key, t_data *data);
 #endif

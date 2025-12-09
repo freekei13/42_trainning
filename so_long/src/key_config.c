@@ -110,11 +110,6 @@ int	key_actions(int key, t_data *data)
 	if (key == 'd')
 		d_key_action(key, data);
 	if (key == 'd' || key == 'a' || key == 's' || key == 'w')
-	{
-		//mlx_clear_window(data->mlx, data->window);
-		background_render(data);
-		elements_render(data);
-		player_render_key(data, key);
-	}
+		map_render_key(data, key);
 	return (0);
 }

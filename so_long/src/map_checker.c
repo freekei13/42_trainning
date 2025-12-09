@@ -88,5 +88,7 @@ char	**map_check(char *file_path)
 		return (free_all(map), ft_printf("Error: 0 or more than 1 Start position\n"), NULL);
 	if (element_to_count(map, 'C') == 0)
 		return (free_all(map), ft_printf("Error: 0 Collectible\n"), NULL);
+	if (isacces(map) == 0)
+		return (free_all(map), ft_printf("Error: No access to Exit and Collectible\n"), NULL);
 	return (ft_printf("--All check passed!--\n"), map);
 }
