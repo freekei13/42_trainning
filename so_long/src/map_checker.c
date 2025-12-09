@@ -73,7 +73,7 @@ char	**map_check(char *file_path)
 	char	**map;
 
 	fd = open(file_path, O_RDONLY);
-	if (!fd)
+	if (fd == -1)
 		return (0);
 	map = map_parse(fd);
 	if (!map)

@@ -57,9 +57,12 @@ t_data	set_data(char **map)
 	data.mlx = mlx_init();
 	data.c_img = set_img(data.mlx, "./sprite/collectible.xpm");
 	data.e_img = set_img(data.mlx, "./sprite/exit.xpm");
-	data.p_img = set_img(data.mlx, "./sprite/character_down.xpm");
 	data.f_img = set_img(data.mlx, "./sprite/floor.xpm");
 	data.w_img = set_img(data.mlx, "./sprite/wall.xpm");
+	data.p_img.p_down = set_img(data.mlx, "./sprite/character_down.xpm");
+	data.p_img.p_up = set_img(data.mlx, "./sprite/character_up.xpm");
+	data.p_img.p_right = set_img(data.mlx, "./sprite/character_right.xpm");
+	data.p_img.p_left = set_img(data.mlx, "./sprite/character_left.xpm");
 	data.map = map;
 	data.size.height = ft_tablen(map);
 	data.size.width = ft_strlen(map[0]) - 1;

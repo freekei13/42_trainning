@@ -25,7 +25,10 @@ int	ft_tablen(char **strs)
 
 void	free_all_img(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->p_img);
+	mlx_destroy_image(data->mlx, data->p_img.p_down);
+	mlx_destroy_image(data->mlx, data->p_img.p_up);
+	mlx_destroy_image(data->mlx, data->p_img.p_right);
+	mlx_destroy_image(data->mlx, data->p_img.p_left);
 	mlx_destroy_image(data->mlx, data->c_img);
 	mlx_destroy_image(data->mlx, data->e_img);
 	mlx_destroy_image(data->mlx, data->f_img);

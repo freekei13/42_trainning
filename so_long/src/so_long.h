@@ -20,6 +20,20 @@ typedef	struct s_pos
 	int	y;
 }		t_pos;
 
+typedef struct s_player
+{
+	void	*p_down;
+	void	*p_go1_down;
+	void	*p_go2_down;
+	void	*p_up;
+	void	*p_go1_up;
+	void	*p_go2_up;
+	void	*p_right;
+	void	*p_go_right;
+	void	*p_left;
+	void	*p_go_left;
+}			t_player;
+
 
 typedef struct s_data
 {
@@ -30,7 +44,7 @@ typedef struct s_data
 	t_pos		p_pos;
 	void		*c_img;
 	void		*e_img;
-	void		*p_img;
+	t_player	p_img;
 	void		*f_img;
 	void		*w_img;
 	int			move_count;
@@ -48,6 +62,11 @@ char	**map_check(char *file_path);
 
 t_data	set_data(char **map);
 void	*set_img(void *mlx, char *path);
+
+void	background_render(t_data *data);
+void	elements_render(t_data *data);
+void	player_render(t_data *data);
+void	player_render_key(t_data *data, int key);
 void	map_render(t_data *data);
 
 int		key_actions(int key, t_data *data);
