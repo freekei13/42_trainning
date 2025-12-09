@@ -6,7 +6,7 @@
 #    By: freekei <freekei@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 00:13:10 by csamakka          #+#    #+#              #
-#    Updated: 2025/12/09 17:01:23 by freekei          ###   ########.fr        #
+#    Updated: 2025/12/09 19:53:12 by freekei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,6 @@ SRC = src/main.c src/get_next_line.c src/get_next_line_utils.c src/map_checker.c
 		src/flood_fill_algo.c
 OBJ = $(SRC:.c=.o)
 
-LIB = libft/libft.a
-LIB_P = libft/
 PRINTF = ft_printf/libftprintf.a
 PRINTF_P = ft_printf/
 
@@ -30,9 +28,6 @@ all:$(NAME)
 $(GNL):$(OBJ_GNL)
 	$(AR) $@ $^
 
-$(LIB):
-	@make bonus -C $(LIB_P)
-
 $(PRINTF):
 	@make -C $(PRINTF_P)
 	
@@ -42,17 +37,15 @@ $(PRINTF):
 mlx:
 	@make -C ./mlx_linux
 	
-$(NAME):$(OBJ) $(GNL) $(LIB) $(PRINTF)
+$(NAME):$(OBJ) $(GNL) $(PRINTF)
 	$(CC) $(FLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LIB) $(PRINTF) -o $(NAME) -g
 
 clean:
 	@make clean -C ./mlx_linux
-	@make clean -C $(LIB_P)
 	@make clean -C $(PRINTF_P)
 	$(RM) $(OBJ)
 	
 fclean: clean
-	@make fclean -C $(LIB_P)
 	@make fclean -C $(PRINTF_P)
 	$(RM) $(NAME)
 	

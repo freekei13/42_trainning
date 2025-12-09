@@ -5,7 +5,6 @@
 # endif
 # include "get_next_line.h"
 # include "../ft_printf/ft_printf.h"
-# include "../libft/libft.h"
 # include <mlx.h>
 
 typedef struct s_map
