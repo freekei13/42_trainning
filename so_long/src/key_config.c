@@ -4,7 +4,7 @@
 void	w_key_action(int key, t_data *data)
 {
 	if (data->map[data->p_pos.y - 1][data->p_pos.x] == '1')
-			return ;
+		return ;
 	else if (data->map[data->p_pos.y - 1][data->p_pos.x] == 'C')
 	{
 		data->collec_count -= 1;
@@ -15,7 +15,7 @@ void	w_key_action(int key, t_data *data)
 	{
 		if (data->collec_count == 0)
 			exit_game(data);
-		ft_printf("You have to steal all pokeball before leaving ! Back to Work!!\n");
+		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
 	data->map[data->p_pos.y][data->p_pos.x] = '0';
@@ -28,7 +28,7 @@ void	w_key_action(int key, t_data *data)
 void	s_key_action(int key, t_data *data)
 {
 	if (data->map[data->p_pos.y + 1][data->p_pos.x] == '1')
-			return ;
+		return ;
 	else if (data->map[data->p_pos.y + 1][data->p_pos.x] == 'C')
 	{
 		data->collec_count -= 1;
@@ -39,7 +39,7 @@ void	s_key_action(int key, t_data *data)
 	{
 		if (data->collec_count == 0)
 			exit_game(data);
-		ft_printf("You have to steal all pokeball before leaving ! Back to Work!!\n");
+		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
 	data->map[data->p_pos.y][data->p_pos.x] = '0';
@@ -52,7 +52,7 @@ void	s_key_action(int key, t_data *data)
 void	a_key_action(int key, t_data *data)
 {
 	if (data->map[data->p_pos.y][data->p_pos.x - 1] == '1')
-			return ;
+		return ;
 	else if (data->map[data->p_pos.y][data->p_pos.x - 1] == 'C')
 	{
 		data->collec_count -= 1;
@@ -63,7 +63,7 @@ void	a_key_action(int key, t_data *data)
 	{
 		if (data->collec_count == 0)
 			exit_game(data);
-		ft_printf("You have to steal all pokeball before leaving ! Back to Work!!\n");
+		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
 	data->map[data->p_pos.y][data->p_pos.x] = '0';
@@ -76,7 +76,7 @@ void	a_key_action(int key, t_data *data)
 void	d_key_action(int key, t_data *data)
 {
 	if (data->map[data->p_pos.y][data->p_pos.x + 1] == '1')
-			return ;
+		return ;
 	else if (data->map[data->p_pos.y][data->p_pos.x + 1] == 'C')
 	{
 		data->collec_count -= 1;
@@ -87,7 +87,7 @@ void	d_key_action(int key, t_data *data)
 	{
 		if (data->collec_count == 0)
 			exit_game(data);
-		ft_printf("You have to steal all pokeball before leaving ! Back to Work!!\n");
+		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
 	data->map[data->p_pos.y][data->p_pos.x] = '0';

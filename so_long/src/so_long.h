@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# ifndef TILE_SIZE
-#  define TILE_SIZE 16
+# ifndef TILE
+#  define TILE 16
 # endif
 # include "get_next_line.h"
 # include "../ft_printf/ft_printf.h"
@@ -13,7 +13,7 @@ typedef struct s_map
 	int	height;
 }		t_map;
 
-typedef	struct s_pos
+typedef struct s_pos
 {
 	int	x;
 	int	y;
@@ -32,7 +32,6 @@ typedef struct s_player
 	void	*p_left;
 	void	*p_go_left;
 }			t_player;
-
 
 typedef struct s_data
 {

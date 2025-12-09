@@ -22,7 +22,7 @@ int	set_pos_x(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-				return(j);
+				return (j);
 			j++;
 		}
 		i++;
@@ -42,7 +42,7 @@ int	set_pos_y(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-				return(i);
+				return (i);
 			j++;
 		}
 		i++;
@@ -70,7 +70,7 @@ t_data	set_data(char **map)
 	data.p_pos.y = set_pos_y(map);
 	data.collec_count = element_to_count(map, 'C');
 	data.move_count = 0;
-	data.window = mlx_new_window(data.mlx, data.size.width * TILE_SIZE,
-			data.size.height * TILE_SIZE, "so_long");
+	data.window = mlx_new_window(data.mlx, data.size.width * TILE,
+			data.size.height * TILE, "so_long");
 	return (data);
 }

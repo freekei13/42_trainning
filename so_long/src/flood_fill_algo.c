@@ -33,6 +33,8 @@ char	**dup_map(char **map)
 
 	height = ft_tablen(map);
 	tmp = malloc(sizeof(char *) * height);
+	if (!tmp)
+		return (NULL);
 	i = 0;
 	while (i < height - 1)
 	{
