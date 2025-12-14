@@ -1,16 +1,13 @@
 NAME = pipex
-SRC = pipex.c
+SRC = src/pipex.c src/utils.c src/env_path.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-FLAGS =
+FLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 LIB = ./libft/libft.a
 LIB_P = ./libft
-
-PRINT = ./ft_printf/libftprintf.a
-PRINT_P = ./ft_printf
 
 all: $(NAME)
 
@@ -23,17 +20,12 @@ $(NAME):$(OBJ) $(LIB) $(PRINT)
 $(LIB):
 	@make -C $(LIB_P)
 
-$(PRINT):
-	@make -C $(PRINT_P)
-
 clean:
 	$(RM) $(OBJ)
 	@make clean -C $(LIB_P)
-	@make clean -C $(PRINT_P)
 
 fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C $(LIB_P)
-	@make fclean -C $(PRINT_P)
 
 re: fclean all
