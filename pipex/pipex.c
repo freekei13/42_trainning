@@ -65,52 +65,65 @@ int	main(int argc, char **argv, char **envp)
 	char	**args2;
 	pid_t	pid1;
 	pid_t	pid2;
+	int 	status;
 
 	if (argc < 5 || argc > 5)
 		return (0);
 	if (access(argv[1], F_OK) == -1 || access(argv[1], R_OK) == -1)
 		perror("infile");
 	if (access(argv[4], F_OK) == -1 || access(argv[4], W_OK) == -1)
-		perror("outfile");
+		return (perror("outfile"), 0);
 	fd_in = open(argv[1], O_RDONLY);
 	fd_out = open(argv[4], O_WRONLY);
 	if (pipe(pipefd1) == -1)
-		perror("ERROR");
+		return (perror("pipe"), 1);
 	paths = paths_parse(envp);
 	args1 = ft_split(argv[2], ' ');
 	args2 = ft_split(argv[3], ' ');
 	pid1 = fork();
-	char *cmd_path1 = find_full_path(paths, args1[0]);
-	char *cmd_path2 = find_full_path(paths, args2[0]);
-	if (cmd_path1 == NULL || cmd_path2 == NULL)
-		perror("ERROR");
+	if (pid1 == -1)
+		return (perror("pid1"), 1);
 	if (pid1 == 0)
 	{
+		char *cmd_path1 = find_full_path(paths, args1[0]);
+		if (cmd_path1 == NULL)
+			perror("cmd");
 		dup2(fd_in, 0);
 		dup2(pipefd1[1], 1);
 		close(fd_out);
 		close(pipefd1[0]);
 		close(fd_in);
 		close(pipefd1[1]);
-		execve(cmd_path1, args1, envp);
-		exit(1);
+		if (execve(cmd_path1, args1, envp) == -1)
+		{
+			perror("execve1");
+			exit(1);
+		}
 	}
 	pid2 = fork();
+	if (pid2 == -1)
+		return (perror("pid2"), 1);
 	if (pid2 == 0)
 	{
+		char *cmd_path2 = find_full_path(paths, args2[0]);
+		if (cmd_path2 == NULL)
+			perror("cmd");
 		dup2(pipefd1[0], 0);
 		dup2(fd_out, 1);
 		close(fd_in);
 		close(pipefd1[1]);
 		close(fd_out);
 		close(pipefd1[0]);
-		execve(cmd_path2, args2, envp);
-		exit(1);
+		if (execve(cmd_path2, args2, envp) == -1)
+		{
+			perror("execve2");
+			exit(1);
+		}
 	}
 	close(fd_in);
 	close(fd_out);
 	close(pipefd1[0]);
 	close(pipefd1[1]);
-	int status;
-	waitpid(P_ALL, &status, 0);
+	waitpid(pid1, &status, 0);
+	waitpid(pid2, &status, 0);
 }
