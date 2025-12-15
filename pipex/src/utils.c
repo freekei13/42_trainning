@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/15 15:14:14 by csamakka          #+#    #+#             */
+/*   Updated: 2025/12/15 15:15:36 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	open_file(char *path, int in_out)
@@ -24,4 +36,71 @@ int	open_file(char *path, int in_out)
 		return (fd);
 	}
 	return (-1);
+}
+
+char	**paths_parse(char **env)
+{
+	int		i;
+	char	*path_s;
+	char	*tmp;
+	char	**paths;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strnstr(env[i], "PATH=", ft_strlen(env[i])) != NULL)
+		{
+			if (env[i][0] == 'P' && env[i][1] == 'A' && env[i][2] == 'T'
+				&& env[i][3] == 'H' && env[i][4] == '=')
+				break ;
+		}
+		i++;
+	}
+	if (!env[i])
+		return (NULL);
+	tmp = ft_strchr(env[i], '=') + 1;
+	path_s = ft_substr(tmp, 0, ft_strlen(tmp));
+	paths = ft_split(path_s, ':');
+	free(path_s);
+	return (paths);
+}
+
+char	*full_path_parse(char *path, char *cmd)
+{
+	int		size;
+	char	*full_path;
+	char	*tmp;
+
+	size = ft_strlen(path);
+	if (path[size - 1] == '/')
+	{
+		full_path = ft_strjoin(path, cmd);
+		return (full_path);
+	}
+	tmp = ft_strjoin(path, "/");
+	full_path = ft_strjoin(tmp, cmd);
+	free(tmp);
+	return (full_path);
+}
+
+char	*find_full_path(char *cmd, char **env)
+{
+	int		i;
+	char	*full_path;
+	char	**paths;
+
+	i = 0;
+	if (!cmd)
+		return (NULL);
+	paths = paths_parse(env);
+	while (paths[i])
+	{
+		full_path = full_path_parse(paths[i], cmd);
+		if (access(full_path, F_OK) == 0)
+			return (free_all(paths), full_path);
+		free(full_path);
+		i++;
+	}
+	free_all(paths);
+	return (NULL);
 }

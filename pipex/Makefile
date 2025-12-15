@@ -1,5 +1,5 @@
 NAME = pipex
-SRC = src/pipex.c src/utils.c src/env_path.c
+SRC = src/pipex.c src/utils.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

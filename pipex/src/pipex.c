@@ -1,8 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/15 15:16:13 by csamakka          #+#    #+#             */
+/*   Updated: 2025/12/15 15:16:15 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-void	exec_cmd(char *cmd_path, char **cmd, char **env)
+void	exec_cmd(char *arg, char *cmd_path, char **cmd, char **env)
 {
-
+	if (!cmd_path)
+	{
+		ft_putstr_fd(cmd[0], 2);
+		ft_putendl_fd(": command not found", 2);
+		free_all(cmd);
+		exit(127);
+	}
+	if (execve(cmd_path, cmd, env) == -1)
+	{
+		perror(arg);
+		free_all(cmd);
+		free(cmd_path);
+		exit(126);
+	}
 }
 
 void	f_child(char **av, char **env, int *pipefd)
@@ -19,20 +44,7 @@ void	f_child(char **av, char **env, int *pipefd)
 	close(pipefd[1]);
 	cmd = ft_split(av[2], ' ');
 	cmd_path = find_full_path(cmd[0], env);
-	if (!cmd_path)
-	{
-		ft_putstr_fd(cmd[0], 2);
-		ft_putendl_fd(": command not found", 2);
-		free_all(cmd);
-		exit(127);
-	}
-	if (execve(cmd_path, cmd, env) == -1)
-	{
-		perror(av[2]);
-		free_all(cmd);
-		free(cmd_path);
-		exit(126);
-	}
+	exec_cmd(av[2], cmd_path, cmd, env);
 }
 
 void	s_child(char **av, char **env, int *pipefd)
@@ -49,20 +61,7 @@ void	s_child(char **av, char **env, int *pipefd)
 	close(pipefd[1]);
 	cmd = ft_split(av[3], ' ');
 	cmd_path = find_full_path(cmd[0], env);
-	if (!cmd_path)
-	{
-		ft_putstr_fd(cmd[0], 2);
-		ft_putendl_fd(": command not found", 2);
-		free_all(cmd);
-		exit(127);
-	}
-	if (execve(cmd_path, cmd, env) == -1)
-	{
-		perror(av[3]);
-		free_all(cmd);
-		free(cmd_path);
-		exit(126);
-	}
+	exec_cmd(av[3], cmd_path, cmd, env);
 }
 
 void	pipex(int ac, char **av, char **env)
@@ -70,7 +69,8 @@ void	pipex(int ac, char **av, char **env)
 	pid_t	first_child;
 	pid_t	second_child;
 	int		pipefd[2];
-	int		status;
+	int		status_f;
+	int		status_s;
 
 	if (ac < 5 || ac > 5)
 	{
@@ -86,8 +86,8 @@ void	pipex(int ac, char **av, char **env)
 		s_child(av, env, pipefd);
 	close(pipefd[0]);
 	close(pipefd[1]);
-	waitpid(first_child, &status, 0);
-	waitpid(second_child, &status, 0);
+	waitpid(first_child, &status_f, 0);
+	waitpid(second_child, &status_s, 0);
 }
 
 int	main(int argc, char **argv, char **env)
