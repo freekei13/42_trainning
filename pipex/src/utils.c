@@ -23,5 +23,5 @@ int	open_file(char *path, int in_out)
 		}
 		return (fd);
 	}
-	exit(-1);
+	return (-1);
 }

@@ -44,14 +44,18 @@ char	*find_full_path(char *cmd, char **env)
 	char	**paths;
 
 	i = 0;
+	if (!cmd)
+		return (NULL);
 	paths = paths_parse(env);
 	while (paths[i])
 	{
 		full_path = full_path_parse(paths[i], cmd);
+		ft_putendl_fd(full_path, 2);
 		if (access(full_path, F_OK) == 0)
-			return (full_path);
+			return (free_all(paths), full_path);
 		free(full_path);
 		i++;
 	}
+	free_all(paths);
 	return (NULL);
 }
