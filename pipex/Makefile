@@ -11,6 +11,9 @@ RM = rm -f
 LIB = ./libft/libft.a
 LIB_P = ./libft
 
+GNL = ./get_next_line/gnl.a
+GNL_P = ./get_next_line
+
 all: $(NAME)
 
 $(NAME):$(OBJ) $(LIB)
@@ -21,16 +24,22 @@ $(NAME):$(OBJ) $(LIB)
 
 $(LIB):
 	@make -C $(LIB_P)
-bonus: $(OBJ_BONUS) $(LIB)
+
+$(GNL):
+	@make -C $(GNL_P)
+
+bonus: $(OBJ_BONUS) $(LIB) $(GNL)
 	$(CC) $(FLAGS) $^ -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
 	$(RM) $(OBJ_BONUS)
 	@make clean -C $(LIB_P)
+	@make clean -C $(GNL_P)
 
 fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C $(LIB_P)
+	@make fclean -C $(GNL_P)
 
 re: fclean all

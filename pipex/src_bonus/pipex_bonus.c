@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:16:13 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/16 01:42:32 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/16 21:24:12 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,58 +58,118 @@ void	l_child(char *av, char **env, int fd, int prev_fd)
 	exec_cmd(av, cmd_path, cmd, env);
 }
 
-void	pipex(int ac, char **av, char **env)
+void	parent_role(int n_cmd, int i, int *fd, int *pipefd)
+{
+	if (i != n_cmd - 1)
+		{
+			close(*fd);
+			close(pipefd[1]);
+			*fd = pipefd[0];
+		}
+		else
+			close(*fd);
+}
+
+void	pipex_loop(char **av, char **env, t_data data)
 {
 	pid_t	n_pid;
 	int		pipefd[2];
-	int		status;
-	int		n_cmd;
-	int		start_cmd;
-	int		fd_in;
-	int		fd_out;
 	int		prev_fd;
 	int		i;
-
-	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
-		n_cmd = ac - 4;
-	else
-		n_cmd = ac - 3;
-	start_cmd = ac - n_cmd - 1;
-	fd_in = open_file(av[1], 0);
-	fd_out = open_file(av[ac - 1], 1);
-	prev_fd = fd_in;
+	
+	prev_fd = data.fd_in;
 	i = 0;
-	while (i < n_cmd)
+	while (i < data.n_cmd)
 	{
-		if (i == n_cmd - 1)
+		if (i == data.n_cmd - 1)
 		{
 			n_pid = fork();
 			if (n_pid == 0)
-				l_child(av[start_cmd + i], env, fd_out, prev_fd);
+				l_child(av[data.start_cmd + i], env, data.fd_out, prev_fd);
 		}
 		else
 		{
 			pipe(pipefd);
 			n_pid = fork();
 			if (n_pid == 0)
-				n_child(av[start_cmd + i], env, prev_fd, pipefd);
+				n_child(av[data.start_cmd + i], env, prev_fd, pipefd);
 		}
-		if (i != n_cmd - 1)
-		{
-			close(prev_fd);
-			close(pipefd[1]);
-			prev_fd = pipefd[0];
-		}
-		else
-			close(prev_fd);
+		parent_role(data.n_cmd, i, &prev_fd, pipefd);
 		i++;
 	}
-	close(fd_in);
-	close(fd_out);
-	while (n_cmd > 0)
+}
+
+void	here_doc(char **av, int *fd_in)
+{
+	pid_t	pid;
+	int		pipefd[2];
+	char	*input;
+	
+	if (pipe(pipefd) == -1)
 	{
-		wait(&status);
-		n_cmd--;
+		perror("here_doc");
+		exit(0);
+	}
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("here_doc");
+		exit(0);
+	}
+	if (pid == 0)
+	{
+		close(pipefd[0]);
+		while (1)
+		{
+			input = get_next_line(0);
+			if (ft_strncmp(av[2], input, ft_strlen(input) - 1) == 0)
+			{
+				free(input);
+				exit(0);
+			}
+			ft_putstr_fd(input, pipefd[1]);
+			free(input);
+		}
+	}
+	close(pipefd[1]);
+	*fd_in = pipefd[0];
+	dup2(*fd_in, 0);
+	wait(NULL);
+}
+
+void	pipex(int ac, char **av, char **env)
+{
+	t_data	data;
+
+	if (ac < 5)
+	{
+		ft_putstr_fd("file1 cmd1 cmd2 cmdn file2\n", 2);
+		exit(0);
+	}
+	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
+	{
+		if (ac < 6)
+		{
+			ft_putstr_fd("here_doc LIMITER cmd1 cmd2 cmdn file", 2);
+			exit(0);
+		}
+		here_doc(av, &data.fd_in);
+		data.n_cmd = ac - 4;
+	}
+	else
+	{
+		data.n_cmd = ac - 3;
+		data.fd_in = open_file(av[1], 0);
+	}
+	data.start_cmd = ac - data.n_cmd - 1;
+	data.fd_out = open_file(av[ac - 1], 1);
+	pipex_loop(av, env, data);
+	close(data.fd_in);
+	close(data.fd_out);
+	while (data.n_cmd > 0)
+	{
+		wait(&data.status);
+		data.n_cmd--;
 	}
 }
 
