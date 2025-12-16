@@ -11,4 +11,4 @@ Ce dépôt contient les fichiers entraînement, les exercises etc...
 - [x] born2beRoot
 - [ ] push_swap		*Waiting for evaluate* - *No bonus*
 - [ ] so_long		*Waiting for evaluate* - *No bonus*
-- [ ] pipex			*In Progress*
+- [ ] pipex			*Waiting fro evaluate* - *bonus in progress*
