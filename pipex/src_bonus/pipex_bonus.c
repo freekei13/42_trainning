@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:16:13 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/15 20:24:07 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/16 01:42:32 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	exec_cmd(char *arg, char *cmd_path, char **cmd, char **env)
 {
@@ -30,64 +30,87 @@ void	exec_cmd(char *arg, char *cmd_path, char **cmd, char **env)
 	}
 }
 
-void	f_child(char **av, char **env, int *pipefd)
+void	n_child(char *av, char **env, int fd, int *pipefd)
 {
-	int		fd;
 	char	**cmd;
 	char	*cmd_path;
-
-	fd = open_file(av[1], 0);
+	
 	dup2(fd, 0);
 	dup2(pipefd[1], 1);
-	close(fd);
 	close(pipefd[0]);
 	close(pipefd[1]);
-	cmd = ft_split(av[2], ' ');
+	cmd = ft_split(av, ' ');
 	cmd_path = find_full_path(cmd[0], env);
-	exec_cmd(av[2], cmd_path, cmd, env);
+	exec_cmd(av, cmd_path, cmd, env);
 }
 
-void	s_child(char **av, char **env, int *pipefd)
+void	l_child(char *av, char **env, int fd, int prev_fd)
 {
-	int		fd;
 	char	**cmd;
 	char	*cmd_path;
-
-	fd = open_file(av[4], 1);
+	
 	dup2(fd, 1);
-	dup2(pipefd[0], 0);
+	dup2(prev_fd, 0);
 	close(fd);
-	close(pipefd[0]);
-	close(pipefd[1]);
-	cmd = ft_split(av[3], ' ');
+	close(prev_fd);
+	cmd = ft_split(av, ' ');
 	cmd_path = find_full_path(cmd[0], env);
-	exec_cmd(av[3], cmd_path, cmd, env);
+	exec_cmd(av, cmd_path, cmd, env);
 }
 
 void	pipex(int ac, char **av, char **env)
 {
-	pid_t	first_child;
-	pid_t	second_child;
+	pid_t	n_pid;
 	int		pipefd[2];
-	int		status_f;
-	int		status_s;
+	int		status;
+	int		n_cmd;
+	int		start_cmd;
+	int		fd_in;
+	int		fd_out;
+	int		prev_fd;
+	int		i;
 
-	if (ac != 5)
+	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
+		n_cmd = ac - 4;
+	else
+		n_cmd = ac - 3;
+	start_cmd = ac - n_cmd - 1;
+	fd_in = open_file(av[1], 0);
+	fd_out = open_file(av[ac - 1], 1);
+	prev_fd = fd_in;
+	i = 0;
+	while (i < n_cmd)
 	{
-		ft_putstr_fd("pipex: file1 cmd1 cmd2 file2", 2);
-		return ;
+		if (i == n_cmd - 1)
+		{
+			n_pid = fork();
+			if (n_pid == 0)
+				l_child(av[start_cmd + i], env, fd_out, prev_fd);
+		}
+		else
+		{
+			pipe(pipefd);
+			n_pid = fork();
+			if (n_pid == 0)
+				n_child(av[start_cmd + i], env, prev_fd, pipefd);
+		}
+		if (i != n_cmd - 1)
+		{
+			close(prev_fd);
+			close(pipefd[1]);
+			prev_fd = pipefd[0];
+		}
+		else
+			close(prev_fd);
+		i++;
 	}
-	pipe(pipefd);
-	first_child = fork();
-	if (first_child == 0)
-		f_child(av, env, pipefd);
-	second_child = fork();
-	if (second_child == 0)
-		s_child(av, env, pipefd);
-	close(pipefd[0]);
-	close(pipefd[1]);
-	waitpid(first_child, &status_f, 0);
-	waitpid(second_child, &status_s, 0);
+	close(fd_in);
+	close(fd_out);
+	while (n_cmd > 0)
+	{
+		wait(&status);
+		n_cmd--;
+	}
 }
 
 int	main(int argc, char **argv, char **env)
