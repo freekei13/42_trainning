@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:16:13 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/16 21:24:12 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/17 21:01:45 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	exec_cmd(char *arg, char *cmd_path, char **cmd, char **env)
 {
 	if (!cmd_path)
 	{
-		ft_putstr_fd(cmd[0], 2);
+		if (cmd[0] == NULL)
+			ft_putstr_fd("", 2);
+		else
+			ft_putstr_fd(cmd[0], 2);
 		ft_putendl_fd(": command not found", 2);
 		free_all(cmd);
 		exit(127);
@@ -30,15 +33,17 @@ void	exec_cmd(char *arg, char *cmd_path, char **cmd, char **env)
 	}
 }
 
-void	n_child(char *av, char **env, int fd, int *pipefd)
+void	n_child(char *av, char **env, t_data *data, int *pipefd)
 {
 	char	**cmd;
 	char	*cmd_path;
 	
-	dup2(fd, 0);
+	dup2(data->prev_fd, 0);
 	dup2(pipefd[1], 1);
 	close(pipefd[0]);
 	close(pipefd[1]);
+	close(data->prev_fd);
+	close(data->fd_out);
 	cmd = ft_split(av, ' ');
 	cmd_path = find_full_path(cmd[0], env);
 	exec_cmd(av, cmd_path, cmd, env);
@@ -58,43 +63,54 @@ void	l_child(char *av, char **env, int fd, int prev_fd)
 	exec_cmd(av, cmd_path, cmd, env);
 }
 
-void	parent_role(int n_cmd, int i, int *fd, int *pipefd)
+void	parent_role(t_data *data, int i, int *pipefd)
 {
-	if (i != n_cmd - 1)
-		{
-			close(*fd);
-			close(pipefd[1]);
-			*fd = pipefd[0];
-		}
-		else
-			close(*fd);
+	if (i != data->n_cmd - 1)
+	{
+		close(data->prev_fd);
+		close(pipefd[1]);
+		data->prev_fd = pipefd[0];
+	}
 }
 
-void	pipex_loop(char **av, char **env, t_data data)
+void	pipex_loop(char **av, char **env, t_data *data)
 {
 	pid_t	n_pid;
 	int		pipefd[2];
-	int		prev_fd;
 	int		i;
 	
-	prev_fd = data.fd_in;
+	data->prev_fd = data->fd_in;
 	i = 0;
-	while (i < data.n_cmd)
+	while (i < data->n_cmd)
 	{
-		if (i == data.n_cmd - 1)
+		if (i == data->n_cmd - 1)
 		{
 			n_pid = fork();
+			if (n_pid == -1)
+			{
+				perror("n_pid");
+				exit(0);
+			}
 			if (n_pid == 0)
-				l_child(av[data.start_cmd + i], env, data.fd_out, prev_fd);
+				l_child(av[data->start_cmd + i], env, data->fd_out, data->prev_fd);
 		}
 		else
 		{
-			pipe(pipefd);
+			if (pipe(pipefd) == -1)
+			{
+				perror("pipe");
+				exit(0);
+			}
 			n_pid = fork();
+			if (n_pid == -1)
+			{
+				perror("n_pid");
+				exit(0);
+			}
 			if (n_pid == 0)
-				n_child(av[data.start_cmd + i], env, prev_fd, pipefd);
+				n_child(av[data->start_cmd + i], env, data, pipefd);
 		}
-		parent_role(data.n_cmd, i, &prev_fd, pipefd);
+		parent_role(data, i, pipefd);
 		i++;
 	}
 }
@@ -122,9 +138,12 @@ void	here_doc(char **av, int *fd_in)
 		while (1)
 		{
 			input = get_next_line(0);
-			if (ft_strncmp(av[2], input, ft_strlen(input) - 1) == 0)
+			if (ft_strncmp(av[2], input, ft_strlen(av[2])) == 0
+				&& ft_strlen(av[2]) == ft_strlen(input) - 1)
 			{
 				free(input);
+				close(pipefd[1]);
+				//get_next_line(-1);
 				exit(0);
 			}
 			ft_putstr_fd(input, pipefd[1]);
@@ -133,7 +152,6 @@ void	here_doc(char **av, int *fd_in)
 	}
 	close(pipefd[1]);
 	*fd_in = pipefd[0];
-	dup2(*fd_in, 0);
 	wait(NULL);
 }
 
@@ -163,9 +181,11 @@ void	pipex(int ac, char **av, char **env)
 	}
 	data.start_cmd = ac - data.n_cmd - 1;
 	data.fd_out = open_file(av[ac - 1], 1);
-	pipex_loop(av, env, data);
-	close(data.fd_in);
+	pipex_loop(av, env, &data);
 	close(data.fd_out);
+	if (data.fd_in != data.prev_fd)
+		close(data.fd_in);
+	close(data.prev_fd);
 	while (data.n_cmd > 0)
 	{
 		wait(&data.status);

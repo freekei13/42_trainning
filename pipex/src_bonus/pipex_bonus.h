@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:15:58 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/16 20:26:47 by csamakka         ###   ########.fr       */
+/*   Updated: 2025/12/17 18:21:13 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data
 {
 	int	fd_in;
 	int	fd_out;
+	int	prev_fd;
 	int	n_cmd;
 	int	start_cmd;
 	int	status;
