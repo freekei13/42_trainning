@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 15:15:58 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/17 18:21:13 by csamakka         ###   ########.fr       */
+/*   Created: 2026/01/05 14:35:51 by csamakka          #+#    #+#             */
+/*   Updated: 2026/01/05 14:49:06 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 # include <fcntl.h>
@@ -34,5 +34,6 @@ typedef struct s_data
 char	*find_full_path(char *cmd, char **env);
 int		open_file(char *path, int in_out);
 int		ft_tablen(char **strs);
+void	print_error_exit(char *str);
 
 #endif

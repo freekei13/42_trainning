@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:14:14 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/16 01:41:53 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/05 15:56:17 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,10 @@ char	*find_full_path(char *cmd, char **env)
 	}
 	free_all(paths);
 	return (NULL);
+}
+
+void	print_error_exit(char *str)
+{
+	perror(str);
+	exit(0);
 }
