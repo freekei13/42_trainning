@@ -1,6 +1,7 @@
 NAME = pipex
 SRC = src/pipex.c src/utils.c
-SRC_BONUS = src_bonus/pipex_bonus.c src_bonus/utils_bonus.c
+SRC_BONUS = src_bonus/pipex_bonus.c src_bonus/utils_bonus.c \
+			src_bonus/loop_bonus.c src_bonus/role_bonus.c
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 

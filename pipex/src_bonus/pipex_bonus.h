@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:35:51 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/05 14:49:06 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/06 08:29:29 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,13 @@ char	*find_full_path(char *cmd, char **env);
 int		open_file(char *path, int in_out);
 int		ft_tablen(char **strs);
 void	print_error_exit(char *str);
+
+void	pipex_loop(char **av, char **env, t_data *data);
+void	here_doc_loop(char **av, int *pipefd);
+
+void	n_child(char *av, char **env, t_data *data, int *pipefd);
+void	l_child(char *av, char **env, int fd, int prev_fd);
+void	parent_role(t_data *data, int i, int *pipefd);
+void	l_child_role(pid_t pid, t_data *data, char **av, char **env);
 
 #endif
