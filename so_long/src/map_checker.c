@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:12 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/15 15:20:14 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:44:35 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,26 @@ int	element_to_count(char **map, char element)
 	return (counter);
 }
 
+int	file_path_check(char *file_path)
+{
+	int		len;
+	int		i;
+	char	*filename;
+
+	len = ft_strlen(file_path);
+	filename = ft_substr(file_path, len - 4, 4);
+	if (ft_strncmp(filename, ".ber", 4) != 0)
+		return (0);
+	return (1);
+}
+
 char	**map_check(char *file_path)
 {
 	int		fd;
 	char	**map;
 
+	if (file_path_check(file_path) == 0)
+		return (0);
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		return (0);

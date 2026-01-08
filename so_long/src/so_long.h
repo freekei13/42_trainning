@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:43 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/15 15:20:45 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:40:59 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	free_all(char **strs);
 void	free_all_img(t_data *data);
 int		ft_tablen(char **strs);
 int		exit_game(t_data *data);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		element_to_count(char **map, char element);
 char	**new_bigger_tab(int old_size, char **old_tab, char *line);
