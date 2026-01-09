@@ -47,6 +47,7 @@ ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG
 **Resources**
 --
 - 42 gitbook - https://42-cursus.gitbook.io/guide/
+- Google (stackoverflow, random blogs, etc)
 - Chatgpt - To explain Turkish sort.
     - I give AI an instruction to guide me through explainations without final code.
 - Students
