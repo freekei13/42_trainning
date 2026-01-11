@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:20:09 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/01 14:15:21 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/11 21:37:40 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	repeat_check(char **inputs)
 		j = i + 1;
 		while (inputs[j])
 		{
-			if (ft_strncmp(inputs[i], inputs[j], 12) == 0)
+			if (ft_atoi(inputs[i]) == ft_atoi(inputs[j]))
 				return (0);
 			j++;
 		}
