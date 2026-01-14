@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:43 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/08 10:40:59 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:32:32 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,9 @@ typedef struct s_pos
 typedef struct s_player
 {
 	void	*p_down;
-	void	*p_go1_down;
-	void	*p_go2_down;
 	void	*p_up;
-	void	*p_go1_up;
-	void	*p_go2_up;
 	void	*p_right;
-	void	*p_go_right;
 	void	*p_left;
-	void	*p_go_left;
 }			t_player;
 
 typedef struct s_data
