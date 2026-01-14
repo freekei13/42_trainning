@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:19:49 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/14 13:35:00 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:01:08 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	w_key_action(t_data *data)
 	{
 		if (data->collec_count == 0)
 		{
+			ft_printf("Move: %d\n", data->move_count + 1);
 			ft_printf("Your job is done here! Good job !");
 			exit_game(data);
 		}
@@ -54,6 +55,7 @@ void	s_key_action(t_data *data)
 	{
 		if (data->collec_count == 0)
 		{
+			ft_printf("Move: %d\n", data->move_count + 1);
 			ft_printf("Your job is done here! Good job !");
 			exit_game(data);
 		}
@@ -81,6 +83,7 @@ void	a_key_action(t_data *data)
 	{
 		if (data->collec_count == 0)
 		{
+			ft_printf("Move: %d\n", data->move_count + 1);
 			ft_printf("Your job is done here! Good job !");
 			exit_game(data);
 		}
@@ -108,6 +111,7 @@ void	d_key_action(t_data *data)
 	{
 		if (data->collec_count == 0)
 		{
+			ft_printf("Move: %d\n", data->move_count + 1);
 			ft_printf("Your job is done here! Good job !");
 			exit_game(data);
 		}
