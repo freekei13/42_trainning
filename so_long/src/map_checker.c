@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:12 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/08 10:44:35 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:34:01 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	file_path_check(char *file_path)
 	len = ft_strlen(file_path);
 	filename = ft_substr(file_path, len - 4, 4);
 	if (ft_strncmp(filename, ".ber", 4) != 0)
-		return (0);
-	return (1);
+		return (free(filename), 0);
+	return (free(filename), 1);
 }
 
 char	**map_check(char *file_path)
@@ -103,6 +103,7 @@ char	**map_check(char *file_path)
 	if (fd == -1)
 		return (0);
 	map = map_parse(fd);
+	close(fd);
 	if (!map)
 		return (0);
 	if (ismap_rectang(map) == 0)
