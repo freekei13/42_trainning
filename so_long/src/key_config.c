@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:19:49 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/14 14:01:08 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:23:52 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	w_key_action(t_data *data)
 		if (data->collec_count == 0)
 		{
 			ft_printf("Move: %d\n", data->move_count + 1);
-			ft_printf("Your job is done here! Good job !");
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
 		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
@@ -56,7 +56,7 @@ void	s_key_action(t_data *data)
 		if (data->collec_count == 0)
 		{
 			ft_printf("Move: %d\n", data->move_count + 1);
-			ft_printf("Your job is done here! Good job !");
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
 		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
@@ -84,7 +84,7 @@ void	a_key_action(t_data *data)
 		if (data->collec_count == 0)
 		{
 			ft_printf("Move: %d\n", data->move_count + 1);
-			ft_printf("Your job is done here! Good job !");
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
 		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
@@ -112,7 +112,7 @@ void	d_key_action(t_data *data)
 		if (data->collec_count == 0)
 		{
 			ft_printf("Move: %d\n", data->move_count + 1);
-			ft_printf("Your job is done here! Good job !");
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
 		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
