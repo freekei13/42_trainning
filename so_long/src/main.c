@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:05 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/15 15:20:07 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:04:39 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc > 2 || argc < 2)
-		return (0);
+		return (write(2, "Pls enter a map's path\n", 23), 0);
 	map = map_check(argv[1]);
 	if (!map)
 		return (0);
