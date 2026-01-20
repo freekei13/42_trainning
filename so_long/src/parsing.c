@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:21 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/20 14:28:39 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:31:29 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	check_map_component(char **map)
 				&& map[i][j] != 'E' && map[i][j] != 'P'
 				&& map[i][j] != 'C' && map[i][j] != '\n')
 				return (0);
-			write(1, &map[i][j], 1);
 			j++;
 		}
 		i++;
@@ -75,6 +74,6 @@ char	**map_parse(int fd)
 		i++;
 	}
 	if (check_map_component(map) == 0)
-		return (NULL);
+		return (free_all(map), NULL);
 	return (map);
 }
