@@ -37,6 +37,14 @@ To run so_longse the school’s graphical library: the MiniLibXse the school’s
 ```
 ./so_long map/map2.ber
 ```
+
+Player's keys commands
+- w - Up
+- s - Down
+- a - Left
+- d - Right
+- Esc - Quit game
+
 **Resources**
 --
 - 42 gitbook - https://42-cursus.gitbook.io/guide/
