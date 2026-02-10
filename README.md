@@ -9,6 +9,8 @@ Ce dépôt contient les fichiers entraînement, les exercises etc...
 - [x] ft_printf
 - [x] get_next_line
 - [x] born2beRoot
-- [ ] push_swap		*Waiting for evaluate* - *No bonus*
-- [ ] so_long		*Waiting for evaluate* - *No bonus*
-- [ ] pipex			*Waiting fro evaluate* - *bonus in progress*
+- [x] push_swap
+- [x] so_long
+- [x] pipex	+ bonus
+- [ ] philosophers *in progress*
+- [ ] minishell *waiting*
