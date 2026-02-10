@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:20:21 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/15 15:20:23 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:31:29 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,28 @@ char	**new_bigger_tab(int old_size, char **old_tab, char *line)
 	new[j] = line;
 	new[j + 1] = NULL;
 	return (new);
+}
+
+int	check_map_component(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '0' && map[i][j] != '1'
+				&& map[i][j] != 'E' && map[i][j] != 'P'
+				&& map[i][j] != 'C' && map[i][j] != '\n')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 char	**map_parse(int fd)
@@ -51,5 +73,7 @@ char	**map_parse(int fd)
 		map = new;
 		i++;
 	}
+	if (check_map_component(map) == 0)
+		return (free_all(map), NULL);
 	return (map);
 }

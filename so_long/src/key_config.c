@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:19:49 by csamakka          #+#    #+#             */
-/*   Updated: 2026/01/07 12:53:44 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:23:52 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	w_key_action(t_data *data)
 	else if (data->map[data->p_pos.y - 1][data->p_pos.x] == 'E')
 	{
 		if (data->collec_count == 0)
+		{
+			ft_printf("Move: %d\n", data->move_count + 1);
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
+		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
@@ -50,7 +54,11 @@ void	s_key_action(t_data *data)
 	else if (data->map[data->p_pos.y + 1][data->p_pos.x] == 'E')
 	{
 		if (data->collec_count == 0)
+		{
+			ft_printf("Move: %d\n", data->move_count + 1);
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
+		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
@@ -74,7 +82,11 @@ void	a_key_action(t_data *data)
 	else if (data->map[data->p_pos.y][data->p_pos.x - 1] == 'E')
 	{
 		if (data->collec_count == 0)
+		{
+			ft_printf("Move: %d\n", data->move_count + 1);
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
+		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}
@@ -98,7 +110,11 @@ void	d_key_action(t_data *data)
 	else if (data->map[data->p_pos.y][data->p_pos.x + 1] == 'E')
 	{
 		if (data->collec_count == 0)
+		{
+			ft_printf("Move: %d\n", data->move_count + 1);
+			ft_printf("Your job is done here! Good job !\n");
 			exit_game(data);
+		}
 		ft_printf("You have to steal all pokeball before leaving !\n");
 		return ;
 	}

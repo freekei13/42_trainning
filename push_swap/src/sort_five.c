@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_five.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freekei <freekei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 10:46:40 by csamakka          #+#    #+#             */
-/*   Updated: 2025/11/30 19:41:36 by freekei          ###   ########.fr       */
+/*   Updated: 2026/01/12 15:50:05 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	five_args_sort(t_list **stack_a, t_list **stack_b)
 		return ;
 	min = find_index_pos(*stack_a, find_min_index(*stack_a));
 	pre_sort_five(stack_a, stack_b, min);
-	second_min = find_index_pos(*stack_a, 1);
-	pre_sort_five(stack_a, stack_b, second_min);
+	second_min = find_index_pos(*stack_a, find_min_index(*stack_a));
+	pre_sort_four(stack_a, stack_b, second_min);
 	three_args_sort(stack_a, stack_b);
 	push_a(stack_a, stack_b);
 	push_a(stack_a, stack_b);
+
 }

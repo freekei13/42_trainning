@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:20 by csamakka          #+#    #+#             */
-/*   Updated: 2025/12/01 15:47:24 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:48:01 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		find_index_pos(t_list *stack_a, int index);
 int		find_max(int first, int second);
 
 void	three_args_sort(t_list **stack_a, t_list **stack_b);
+void	pre_sort_four(t_list **stack_a, t_list **stack_b, int min);
 void	four_args_sort(t_list **stack_a, t_list **stack_b);
 void	five_args_sort(t_list **stack_a, t_list **stack_b);
 
