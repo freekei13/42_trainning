@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/09 23:52:39 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/14 16:39:39 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <pthread.h>
 
 typedef struct s_data
 {
@@ -25,11 +26,11 @@ typedef struct s_data
 
 typedef struct s_philo
 {
+	int	id;
 	int	fork_right;
 	int	fork_left;
 	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
+	int	last_meal;
 	int	must_eat;
 }		t_philo;
 
