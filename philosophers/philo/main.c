@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/14 17:14:26 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:43:56 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,20 @@ int	args_check(int ac, char **av)
 
 void	*print_(void *id)
 {
-	int	num;
+	int		num;
+	struct	timeval	tv;
+	long	t1;
+	long	t2;
 	
+	gettimeofday(&tv, NULL);
 	num = *(int *)id;
-	printf("%d is presented\n", num);
-	usleep(200);
-	printf("%d is terminated\n", num);
+	t1 = tv.tv_usec / 1000;
+	t2 = tv.tv_usec / 1000;
+	printf("%ld philosopher%d is presented\n", t2 - t1, num);
+	usleep(200000);
+	gettimeofday(&tv, NULL);
+	t2 = tv.tv_usec / 1000;
+	printf("%ld philosopher%d is terminated\n", t2 - t1, num);
 	return NULL;
 }
 

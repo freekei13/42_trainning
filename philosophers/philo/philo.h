@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/14 16:39:39 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:23:43 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,23 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 typedef struct s_data
 {
-	int	philo_nb;
-	int	fork_nb;
-}		t_data;
+	int				philo_nb;
+	pthread_mutex_t	*forks;
+}					data;
 
 typedef struct s_philo
 {
-	int	id;
-	int	fork_right;
-	int	fork_left;
-	int	time_to_die;
-	int	last_meal;
-	int	must_eat;
-}		t_philo;
+	int		id;
+	int		fork_right;
+	int		fork_left;
+	int		time_to_die;
+	long	last_meal;
+	int		must_eat;
+}			philo;
 
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
