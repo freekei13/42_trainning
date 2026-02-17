@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/17 14:43:56 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/17 18:37:22 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,34 @@ void	*print_(void *id)
 	return NULL;
 }
 
+void	thread_create(int nb, pthread_t *threads)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb)
+	{
+		pthread_create(&threads[i], NULL, print_, &i);
+		i++;
+	}
+	i = 0;
+	while (i < nb)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
+	data		db;
+	pthread_t	*threads;
+
 	if (args_check(ac, av) == 0)
 		return (0);
-	
-	pthread_t	thread[ft_atoi(av[1])];
-	int			i;
-	
-	i = 0;
-	while (i < ft_atoi(av[1]))
-	{
-		pthread_create(&thread[i], NULL, print_, &i);
-		i++;
-	}
-	i = 0;
-	while (i < ft_atoi(av[1]))
-	{
-		pthread_join(thread[i], NULL);
-		i++;
-	}
+	threads = malloc(sizeof(pthread_t) * ft_atoi(av[1]));
+	if (!threads)
+		return (0);
+	thread_create(ft_atoi(av[1]), threads);
+	db_parsing(&db, av[1]);
 }

@@ -6,18 +6,18 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/17 14:23:43 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/17 18:39:03 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/time.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_data
 {
@@ -38,5 +38,7 @@ typedef struct s_philo
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 void	ft_putstr_fd(char *s, int fd);
+
+void	db_parsing(data *db, char *av);
 
 #endif
