@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/19 23:34:50 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/22 02:23:51 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 int		ft_isdigit(int c);
 long	ft_atol(const char *nptr);
 void	ft_putstr_fd(char *s, int fd);
+long	ms_now(struct timeval time_start);
 
 void	db_parsing(data *db, char **av);
 

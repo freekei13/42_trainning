@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:23:38 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/19 21:32:46 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/22 02:30:41 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
+}
+
+long	ms_now(struct timeval time_start)
+{
+	struct timeval 	time_now;
+	long			ms;
+	long			time_now_ms;
+	long			time_start_ms;
+	
+	gettimeofday(&time_now, NULL);
+	time_start_ms = (time_start.tv_sec * 1000) + (time_start.tv_usec / 1000);
+	time_now_ms = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
+	ms = time_now_ms - time_start_ms;
+	return (ms);
 }
