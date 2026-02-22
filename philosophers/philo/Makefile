@@ -7,7 +7,10 @@ OBJ_PATH = obj/
 
 SRC		=	main.c \
 			parsing.c \
-			utils.c
+			utils.c \
+			simulation.c \
+			checks.c
+
 SRCS	= 	$(addprefix $(SRC_PATH), $(SRC))
 OBJ 	= 	$(SRC:.c=.o)
 OBJS	=	$(addprefix $(OBJ_PATH), $(OBJ))
