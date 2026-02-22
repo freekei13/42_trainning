@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/22 02:22:50 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:42:01 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,28 @@ void	*routine(void *philo_db)
 	philo			*p_db;
 	
 	p_db = (philo *)philo_db;
-	
-	if (p_db->id % 2 == 0)
+	while (ms_now(p_db->last_meal) < p_db->db->time_to_die)
 	{
-		pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
-		pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+		if (p_db->id % 2 == 0)
+		{
+			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+		}
+		else
+		{
+			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+		}
+		printf("%ld philo%d is eating\n", ms_now(p_db->db->start_time), p_db->id + 1);
+		usleep(p_db->db->time_to_eat * 1000);
+		gettimeofday(&p_db->last_meal, NULL);
+		pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]);
+		pthread_mutex_unlock(&p_db->db->forks[p_db->fork_left]);
+		printf("%ld philo%d is sleeping\n", ms_now(p_db->db->start_time), p_db->id + 1);
+		usleep(p_db->db->time_to_sleep * 1000);
+		printf("%ld philo%d is thinking\n", ms_now(p_db->db->start_time), p_db->id + 1);
 	}
-	else
-	{
-		pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
-		pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
-	}
-	printf("%ld philo%d is eating\n", ms_now(p_db->db->start_time), p_db->id + 1);
-	usleep(p_db->db->time_to_eat * 1000);
-	pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]);
-	pthread_mutex_unlock(&p_db->db->forks[p_db->fork_left]);
-	printf("%ld philo%d has eaten\n", ms_now(p_db->db->start_time), p_db->id + 1);
+	p_db->db->someone_die++;
 	return NULL;
 }
 
