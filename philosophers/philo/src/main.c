@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/22 15:42:01 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:28:54 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,40 @@ void	*routine(void *philo_db)
 	philo			*p_db;
 	
 	p_db = (philo *)philo_db;
-	while (ms_now(p_db->last_meal) < p_db->db->time_to_die)
+	while (ms_now(p_db->last_meal) < p_db->db->time_to_die
+		&& ms_now(p_db->last_meal) < p_db->db->time_to_eat
+		&& p_db->db->someone_die == 0)
 	{
-		if (p_db->id % 2 == 0)
+		if (p_db->db->someone_die == 0)
 		{
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+			if (p_db->id % 2 == 0)
+			{
+				pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+				printf("%ld %d has taken a fork\n", ms_now(p_db->db->start_time), p_db->id + 1);
+				pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+				printf("%ld %d has taken a fork\n", ms_now(p_db->db->start_time), p_db->id + 1);
+			}
+			else
+			{
+				pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+				printf("%ld %d has taken a fork\n", ms_now(p_db->db->start_time), p_db->id + 1);
+				pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+				printf("%ld %d has taken a fork\n", ms_now(p_db->db->start_time), p_db->id + 1);
+			}
+			printf("%ld %d is eating\n", ms_now(p_db->db->start_time), p_db->id + 1);
+			usleep(p_db->db->time_to_eat * 1000);
+			gettimeofday(&p_db->last_meal, NULL);
+			pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]);
+			pthread_mutex_unlock(&p_db->db->forks[p_db->fork_left]);
 		}
-		else
+		if (p_db->db->someone_die == 0)
 		{
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+			printf("%ld %d is sleeping\n", ms_now(p_db->db->start_time), p_db->id + 1);
+			usleep(p_db->db->time_to_sleep * 1000);
 		}
-		printf("%ld philo%d is eating\n", ms_now(p_db->db->start_time), p_db->id + 1);
-		usleep(p_db->db->time_to_eat * 1000);
-		gettimeofday(&p_db->last_meal, NULL);
-		pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]);
-		pthread_mutex_unlock(&p_db->db->forks[p_db->fork_left]);
-		printf("%ld philo%d is sleeping\n", ms_now(p_db->db->start_time), p_db->id + 1);
-		usleep(p_db->db->time_to_sleep * 1000);
-		printf("%ld philo%d is thinking\n", ms_now(p_db->db->start_time), p_db->id + 1);
+		if (p_db->db->someone_die == 0)
+			printf("%ld %d is thinking\n", ms_now(p_db->db->start_time), p_db->id + 1);
 	}
-	p_db->db->someone_die++;
 	return NULL;
 }
 
@@ -96,6 +108,7 @@ int	main(int ac, char **av)
 {
 	data		db;
 	pthread_t	*threads;
+	pthread_t	monitor;
 	philo		*philo_db;
 
 	if (args_check(ac, av) == 0)
