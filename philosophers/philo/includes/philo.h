@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/22 21:02:47 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:13:48 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	struct	timeval	start_time;
 	int				someone_die;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	p_die;
 }					data;
 
 typedef struct s_philo
@@ -61,6 +62,7 @@ long	ms_now(struct timeval time_start);
 int		db_parsing(data *db, char **av);
 
 void	*routine(void *philo_db);
+void	*reaper(void *philo_db);
 void	thread_create(data *db, philo *philo_db);
 
 int		args_check(int ac, char **av);
