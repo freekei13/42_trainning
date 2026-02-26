@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:23:38 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/22 02:30:41 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:48:47 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,16 @@ long	ms_now(struct timeval time_start)
 	time_now_ms = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
 	ms = time_now_ms - time_start_ms;
 	return (ms);
+}
+
+void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb_mutex)
+	{
+		pthread_mutex_destroy(&mutex[i]);
+		i++;
+	}
 }

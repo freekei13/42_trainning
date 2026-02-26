@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/23 17:13:48 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:48:56 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <limits.h>
 
 # define MAX_PHILOS	250
+# define MSG_ERR_PHILO "Error: Number of philophers must be 2 to %d\n"
 # define MSG_ERR_DIGIT	"Error: Arguments must be in digit !\
 between 0 and 2147483647.\n"
 # define MSG_ERR_NARG	"Error: number of arguments must be 4 or 5.\n\
@@ -58,15 +60,9 @@ int		ft_isdigit(int c);
 long	ft_atol(const char *nptr);
 void	ft_putstr_fd(char *s, int fd);
 long	ms_now(struct timeval time_start);
-
-int		db_parsing(data *db, char **av);
-
-void	*routine(void *philo_db);
-void	*reaper(void *philo_db);
-void	thread_create(data *db, philo *philo_db);
+void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex);
 
 int		args_check(int ac, char **av);
-int		check_mutex(int mutex_return, int mutex_num, pthread_mutex_t **mutex);
-int		check_thread_create(int thread_return, int thread_num, pthread_t **threads);
 
+int		db_parsing(data *db, char **av);
 #endif
