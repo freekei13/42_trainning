@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/26 18:48:56 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/26 22:44:38 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_philo
 	int				id;
 	int				fork_right;
 	int				fork_left;
+	struct	timeval	time_born;
 	struct	timeval	last_meal;
 	int				meal_eaten;
 	data			*db;
@@ -65,4 +66,7 @@ void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex);
 int		args_check(int ac, char **av);
 
 int		db_parsing(data *db, char **av);
+void	p_db_parsing(data *db, philo *p_db, int index);
+
+void	simulation_start(data *db, philo **p_db);
 #endif

@@ -1,6 +1,6 @@
 NAME	= 	philo
 CC		= 	gcc
-CFLAGS	= 	-Werror -Wall -Wextra -pthread
+CFLAGS	= 	-Werror -Wall -Wextra -pthread -g
 
 SRC_PATH = src/
 OBJ_PATH = obj/
