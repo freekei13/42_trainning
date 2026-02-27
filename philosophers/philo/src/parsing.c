@@ -6,22 +6,22 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/27 01:41:38 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:11:17 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	mutex_inits(pthread_mutex_t **mutex)
+int mutex_inits(pthread_mutex_t *mutex, int nb_mutex)
 {
-	int	i;
-	
+	int i;
+
 	i = 0;
-	while (mutex[i])
+	while (i < nb_mutex)
 	{
-		if (pthread_mutex_init(mutex[i], NULL) != 0)
+		if (pthread_mutex_init(&mutex[i], NULL) != 0)
 		{
-			mutex_destroy(*mutex, i);
+			mutex_destroy(mutex, i);
 			ft_putstr_fd(MSG_ERR_MUTEX, 2);
 			return (-1);
 		}
@@ -30,7 +30,23 @@ int	mutex_inits(pthread_mutex_t **mutex)
 	return (0);
 }
 
-int	db_parsing(data *db, char **av)
+int db_mutex_inits(mutex *db_mutex)
+{
+	if (pthread_mutex_init(&db_mutex->p_die, NULL) != 0)
+	{
+		ft_putstr_fd(MSG_ERR_MUTEX, 2);
+		return (-1);
+	}
+	if (pthread_mutex_init(&db_mutex->p_print, NULL) != 0)
+	{
+		ft_putstr_fd(MSG_ERR_MUTEX, 2);
+		pthread_mutex_destroy(&db_mutex->p_die);
+		return (-1);
+	}
+	return (0);
+}
+
+int db_parsing(data *db, char **av)
 {
 	db->philo_nb = ft_atol(av[1]);
 	db->time_to_die = ft_atol(av[2]);
@@ -47,19 +63,33 @@ int	db_parsing(data *db, char **av)
 	db->forks = malloc(sizeof(pthread_mutex_t) * db->philo_nb);
 	if (!db->forks)
 		return (ft_putstr_fd(MSG_ERR_MALLOC, 2), free(db->threads), -1);
-	if (mutex_inits(&db->forks) != 0)
+	if (mutex_inits(db->forks, db->philo_nb) != 0)
 		return (free(db->threads), free(db->forks), -1);
-	if (pthread_mutex_init(&db->p_die, NULL) != 0)
+	if (db_mutex_inits(&db->db_mutex) != 0)
 	{
 		mutex_destroy(db->forks, db->philo_nb);
-		pthread_mutex_destroy(&db->p_die);
-		ft_putstr_fd(MSG_ERR_MUTEX, 2);
 		return (free(db->threads), free(db->forks), -1);
 	}
 	return (0);
 }
 
-void	p_db_parsing(data *db, philo *p_db, int index)
+int philo_mutex_init(p_mutex *philo_mutex)
+{
+	if (pthread_mutex_init(&philo_mutex->last_meal, NULL) != 0)
+	{
+		ft_putstr_fd(MSG_ERR_MUTEX, 2);
+		return (-1);
+	}
+	if (pthread_mutex_init(&philo_mutex->meal_eaten, NULL) != 0)
+	{
+		ft_putstr_fd(MSG_ERR_MUTEX, 2);
+		pthread_mutex_destroy(&philo_mutex->last_meal);
+		return (-1);
+	}
+	return (0);
+}
+
+void p_db_parsing(data *db, philo *p_db, int index)
 {
 	p_db->id = index;
 	p_db->fork_right = index % db->philo_nb;
@@ -68,4 +98,5 @@ void	p_db_parsing(data *db, philo *p_db, int index)
 	gettimeofday(&p_db->last_meal, NULL);
 	p_db->meal_eaten = 0;
 	p_db->db = db;
+	philo_mutex_init(&p_db->philo_mutex);
 }
