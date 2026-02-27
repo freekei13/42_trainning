@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:25:31 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/26 23:56:30 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 01:50:31 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ last_meal : %ld\n\
 meal_eaten : %d\n\
 philo_nb : %d\n", p_db->id, p_db->fork_right, p_db->fork_left,
 		p_db->time_born.tv_usec, p_db->last_meal.tv_usec, p_db->meal_eaten, p_db->db->philo_nb);
+	gettimeofday(&p_db->last_meal, NULL);
+	printf("last_meal : %ld\n", p_db->last_meal.tv_usec);
 	return (NULL);
 }
 void	*reaper(void *data_share)
@@ -36,7 +38,7 @@ void	*reaper(void *data_share)
 	return (NULL);
 }
 
-void	simulation_start(data *db, philo **p_db)
+void	simulation_start(data *db, philo *p_db)
 {
 	int i;
 
@@ -47,8 +49,8 @@ void	simulation_start(data *db, philo **p_db)
 			pthread_create(&db->threads[i], NULL, reaper, db);
 		else
 		{
-			p_db_parsing(db, p_db[i - 1], i);
-			pthread_create(&db->threads[i], NULL, routine, p_db[i - 1]);
+			p_db_parsing(db, &p_db[i - 1], i);
+			pthread_create(&db->threads[i], NULL, routine, &p_db[i - 1]);
 		}
 		i++;
 	}

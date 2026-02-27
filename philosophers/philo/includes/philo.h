@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/26 22:44:38 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 01:41:43 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int		args_check(int ac, char **av);
 int		db_parsing(data *db, char **av);
 void	p_db_parsing(data *db, philo *p_db, int index);
 
-void	simulation_start(data *db, philo **p_db);
+void	simulation_start(data *db, philo *p_db);
 #endif
