@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/27 15:11:17 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 21:17:52 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int db_mutex_inits(mutex *db_mutex)
 
 int db_parsing(data *db, char **av)
 {
-	db->philo_nb = ft_atol(av[1]);
+	db->philo_nb = (int)ft_atol(av[1]);
 	db->time_to_die = ft_atol(av[2]);
 	db->time_to_eat = ft_atol(av[3]);
 	db->time_to_sleep = ft_atol(av[4]);
 	if (av[5])
-		db->must_eat = ft_atol(av[5]);
+		db->must_eat = (int)ft_atol(av[5]);
 	else
 		db->must_eat = -1;
 	db->someone_die = 0;
@@ -86,6 +86,13 @@ int philo_mutex_init(p_mutex *philo_mutex)
 		pthread_mutex_destroy(&philo_mutex->last_meal);
 		return (-1);
 	}
+	if (pthread_mutex_init(&philo_mutex->done_eat, NULL) != 0)
+	{
+		ft_putstr_fd(MSG_ERR_MUTEX, 2);
+		pthread_mutex_destroy(&philo_mutex->last_meal);
+		pthread_mutex_destroy(&philo_mutex->meal_eaten);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -97,6 +104,7 @@ void p_db_parsing(data *db, philo *p_db, int index)
 	gettimeofday(&p_db->time_born, NULL);
 	gettimeofday(&p_db->last_meal, NULL);
 	p_db->meal_eaten = 0;
+	p_db->done_eat = 0;
 	p_db->db = db;
 	philo_mutex_init(&p_db->philo_mutex);
 }

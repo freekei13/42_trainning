@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/27 15:10:31 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 21:22:07 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ between 0 and 2147483647.\n"
 # define MSG_ERR_MALLOC	"Error: Could not allocate memory.\n"
 # define MSG_ERR_MUTEX	"Error: Could not create mutex.\n"
 
+# define MSG_FORK "%ld %d has taken a fork\n"
+# define MSG_EAT "%ld %d is eating\n"
+# define MSG_SLEEP "%ld %d is sleeping\n"
+# define MSG_THINK "%ld %d is thinking\n"
+# define MSG_DIE "%ld %d die\n"
+
 typedef struct s_mutex
 {
 	pthread_mutex_t	p_die;
@@ -42,6 +48,7 @@ typedef struct s_p_mutex
 {
 	pthread_mutex_t	last_meal;
 	pthread_mutex_t	meal_eaten;
+	pthread_mutex_t done_eat;
 }					p_mutex;
 
 typedef struct s_data
@@ -66,6 +73,7 @@ typedef struct s_philo
 	struct	timeval	time_born;
 	struct	timeval	last_meal;
 	int				meal_eaten;
+	int				done_eat;
 	p_mutex			philo_mutex;
 	data			*db;
 }					philo;
