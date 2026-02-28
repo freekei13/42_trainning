@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/27 21:17:52 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/02/27 23:47:48 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void p_db_parsing(data *db, philo *p_db, int index)
 	p_db->id = index;
 	p_db->fork_right = index % db->philo_nb;
 	p_db->fork_left = index - 1;
-	gettimeofday(&p_db->time_born, NULL);
 	gettimeofday(&p_db->last_meal, NULL);
 	p_db->meal_eaten = 0;
 	p_db->done_eat = 0;
