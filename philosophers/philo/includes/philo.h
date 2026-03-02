@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 02:34:29 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 16:08:48 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,8 @@ void	taking_forks(philo *p_db);
 void	eating_philo(philo *p_db);
 int		someone_die(philo *p_db);
 int		someone_full(philo *p_db);
+
+int		someone_die_check(philo *p_db);
+int		someone_full_check(philo *p_db);
+int		reaper_monitor(philo *p_db);
 #endif
