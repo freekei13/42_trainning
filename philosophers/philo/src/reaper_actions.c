@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:36:08 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 16:08:23 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 20:15:24 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ int	reaper_monitor(philo *p_db)
 			return (-1);
 	}
 	else
-	{
 		pthread_mutex_unlock(&p_db->philo_mutex.done_eat);
-		return (0);
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 01:43:32 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 02:41:13 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 20:41:54 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	printing_philo(philo *p_db, char *message)
 void	taking_forks(philo *p_db)
 {
 	if (p_db->id % 2 != 0)
-		{
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
-			printing_philo(p_db, MSG_FORK);
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
-			printing_philo(p_db, MSG_FORK);
-		}
-		else
-		{
-			usleep(p_db->db->time_to_eat);
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
-			printing_philo(p_db, MSG_FORK);
-			pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
-			printing_philo(p_db, MSG_FORK);
-		}
+	{
+		pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+		printing_philo(p_db, MSG_FORK);
+		pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+		printing_philo(p_db, MSG_FORK);
+	}
+	else
+	{
+		usleep(p_db->db->time_to_eat / 10);
+		pthread_mutex_lock(&p_db->db->forks[p_db->fork_left]);
+		printing_philo(p_db, MSG_FORK);
+		pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
+		printing_philo(p_db, MSG_FORK);
+	}
 }
 
 void	eating_philo(philo *p_db)

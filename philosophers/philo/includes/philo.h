@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 16:08:48 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 20:38:05 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_philo
 	struct	timeval	last_meal;
 	int				meal_eaten;
 	int				done_eat;
+	long			time_to_think;
 	p_mutex			philo_mutex;
 	data			*db;
 }					philo;

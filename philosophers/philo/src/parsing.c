@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 02:33:16 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 20:38:51 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void p_db_parsing(data *db, philo *p_db, int index)
 	gettimeofday(&p_db->last_meal, NULL);
 	p_db->meal_eaten = 0;
 	p_db->done_eat = 0;
+	p_db->time_to_think = 0;
 	p_db->db = db;
 	philo_mutex_init(&p_db->philo_mutex);
 }
