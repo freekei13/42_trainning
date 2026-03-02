@@ -9,7 +9,8 @@ SRC		=	main.c \
 			parsing.c \
 			utils.c \
 			simulation.c \
-			checks.c
+			checks.c \
+			routine_actions.c
 
 SRCS	= 	$(addprefix $(SRC_PATH), $(SRC))
 OBJ 	= 	$(SRC:.c=.o)

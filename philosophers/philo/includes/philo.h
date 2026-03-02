@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/28 21:39:31 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 02:34:29 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	long			must_eat;
 	struct	timeval	start_time;
 	int				someone_die;
+	int				all_full;
 	pthread_mutex_t	*forks;
 	mutex			db_mutex;
 }					data;
@@ -73,7 +74,6 @@ typedef struct s_philo
 	struct	timeval	last_meal;
 	int				meal_eaten;
 	int				done_eat;
-	long			time_left;
 	p_mutex			philo_mutex;
 	data			*db;
 }					philo;
@@ -90,4 +90,10 @@ int		db_parsing(data *db, char **av);
 void	p_db_parsing(data *db, philo *p_db, int index);
 
 void	simulation_start(data *db, philo *p_db);
+
+void	printing_philo(philo *p_db, char *message);
+void	taking_forks(philo *p_db);
+void	eating_philo(philo *p_db);
+int		someone_die(philo *p_db);
+int		someone_full(philo *p_db);
 #endif

@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/28 21:13:11 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/02 02:33:16 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int db_parsing(data *db, char **av)
 	else
 		db->must_eat = -1;
 	db->someone_die = 0;
+	db->all_full = 0;
 	db->threads = malloc(sizeof(pthread_t) * (db->philo_nb + 1));
 	if (!db->threads)
 		return (ft_putstr_fd(MSG_ERR_MALLOC, 2), -1);
@@ -98,13 +99,12 @@ int philo_mutex_init(p_mutex *philo_mutex)
 
 void p_db_parsing(data *db, philo *p_db, int index)
 {
-	p_db->id = index;
-	p_db->fork_right = index % db->philo_nb;
-	p_db->fork_left = index - 1;
+	p_db->id = index + 1;
+	p_db->fork_right = (index + 1) % db->philo_nb;
+	p_db->fork_left = index;
 	gettimeofday(&p_db->last_meal, NULL);
 	p_db->meal_eaten = 0;
 	p_db->done_eat = 0;
-	p_db->time_left = 0;
 	p_db->db = db;
 	philo_mutex_init(&p_db->philo_mutex);
 }
