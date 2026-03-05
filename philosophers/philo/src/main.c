@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/02/27 20:42:33 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:38:18 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ int	main(int ac, char **av)
 		return (-1);
 	philo_db = malloc(sizeof(philo) * db.philo_nb);
 	if (!philo_db)
+	{
+		db_cleaner(&db);
 		return (ft_putstr_fd(MSG_ERR_MALLOC, 2), -1);
+	}
 	simulation_start(&db, philo_db);
+	p_db_cleaner(philo_db, db.philo_nb);
+	db_cleaner(&db);
+	free(philo_db);
 	return (0);
 }

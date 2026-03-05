@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 18:26:55 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:23:58 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,9 @@ int		stop_simulation(philo *p_db);
 int		someone_die_check(philo *p_db);
 int		someone_full_check(philo *p_db);
 int		reaper_monitor(philo *p_db);
+
+void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex);
+void	threads_join(pthread_t *threads, int nb_threads);
+void	db_cleaner(data *db);
+void	p_db_cleaner(philo *p_db, int nb);
 #endif

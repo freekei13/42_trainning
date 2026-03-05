@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:25:31 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 18:26:40 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:36:14 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,25 @@ void	simulation_start(data *db, philo *p_db)
 	while (i < db->philo_nb + 1)
 	{
 		if (i == db->philo_nb)
-			pthread_create(&db->threads[i], NULL, reaper, p_db);
+		{
+			if (pthread_create(&db->threads[i], NULL, reaper, p_db) != 0)
+			{
+				threads_join(db->threads, db->philo_nb);
+				p_db_cleaner(p_db, db->philo_nb);
+				db_cleaner(db);
+				return (void)(ft_putstr_fd(MSG_ERR_THREAD, 2));
+			}
+		}
 		else
 		{
 			p_db_parsing(db, &p_db[i], i);
 			if (pthread_create(&db->threads[i], NULL, routine, &p_db[i]) != 0)
-				return (void)(ft_putstr_fd(MSG_ERR_THREAD, 2));//free threads  et p_db
+			{
+				threads_join(db->threads, i);
+				p_db_cleaner(p_db, i);
+				db_cleaner(db);
+				return (void)(ft_putstr_fd(MSG_ERR_THREAD, 2));
+			}
 		}
 		i++;
 	}

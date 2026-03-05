@@ -10,8 +10,10 @@ SRC		=	main.c \
 			utils.c \
 			simulation.c \
 			checks.c \
-			routine_actions.c \
-			reaper_actions.c
+			routine_actions_a.c \
+			routine_actions_b.c \
+			reaper_actions.c \
+			cleaners.c
 
 SRCS	= 	$(addprefix $(SRC_PATH), $(SRC))
 OBJ 	= 	$(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:23:38 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/01 20:53:42 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 20:56:00 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ long	ms_now(struct timeval time_start)
 	return (ms);
 }
 
-void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex)
+int	stop_simulation(philo *p_db)
 {
-	int	i;
-
-	i = 0;
-	while (i < nb_mutex)
+	pthread_mutex_lock(&p_db->db->db_mutex.p_die);
+	if (p_db->db->someone_die > 0 || p_db->db->all_full >= p_db->db->philo_nb)
 	{
-		pthread_mutex_destroy(&mutex[i]);
-		i++;
+		pthread_mutex_unlock(&p_db->db->db_mutex.p_die);
+		return (-1);
 	}
+	pthread_mutex_unlock(&p_db->db->db_mutex.p_die);
+	return (0);
 }
