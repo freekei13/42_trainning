@@ -20,20 +20,54 @@ OBJ 	= 	$(SRC:.c=.o)
 OBJS	=	$(addprefix $(OBJ_PATH), $(OBJ))
 INC 	= 	-I ./includes/
 
-all: $(NAME)
+RED     = \033[31m
+GREEN   = \033[32m
+YELLOW  = \033[33m
+BLUE    = \033[34m
+RESET   = \033[0m
 
+all: header $(NAME)
+
+header:
+	@echo "____________________"
+	@echo "|  Philosopher 42  |"
+	@echo "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
+	
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@CURRENT=$$(( $$(ls $(OBJ_PATH)*.o 2>/dev/null | wc -l) + 1)); \
+	TOTAL=$(words $(SRC)); \
+	FILLED=$$(printf '%.0s██' $$(seq 1 $$CURRENT)); \
+	DOT=$$(( $$CURRENT % 3 )); \
+	REMAINDER=$$(( $$TOTAL - $$CURRENT )); \
+	if [ $$DOT -eq 1 ]; then \
+		MSG="Compiling."; \
+	elif [ $$DOT -eq 2 ]; then \
+		MSG="Compiling.."; \
+	else \
+		MSG="Compiling..."; \
+	fi; \
+	if [ $$REMAINDER -gt 0 ]; then \
+    	EMPTY=$$(printf '%0.s░░' $$(seq 1 $$REMAINDER)); \
+	else \
+    	EMPTY=""; \
+	fi; \
+	printf "\r[$$FILLED$$EMPTY] $(GREEN)%-30s$(RESET)" "$$MSG"
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	@printf "\r[$(BLUE)██████████████████$(RESET)] $(GREEN)Compiling...Done!$(RESET)%-20s\n" ""
+	@$(CC) $(CFLAGS) $^ -o $@
+	@echo ""
+	@echo "✅ $(NAME) compiled successfully!✅"
 
 clean:
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
+	@echo "🗑️  Objects cleaned"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "🗑️  $(NAME) removed"
 
 re: fclean all
 
