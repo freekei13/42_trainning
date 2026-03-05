@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:25:31 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/03 15:52:27 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 18:26:40 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@ void	*routine(void *philo_db)
 	p_db = (philo *)philo_db;
 	while (1)
 	{
-		if (someone_die(p_db) != 0 || someone_full(p_db) != 0)
+		if (stop_simulation(p_db) != 0)
 			return (NULL);
-		if (someone_die(p_db) != 0)
+		if (taking_forks(p_db) != 0)
 			return (NULL);
-		taking_forks(p_db);
-		if (someone_die(p_db) != 0)
+		if (stop_simulation(p_db) != 0)
 			return (NULL);
 		eating_philo(p_db);
-		if (someone_die(p_db) != 0)
+		if (stop_simulation(p_db) != 0)
 			return (NULL);
 		printing_philo(p_db, MSG_SLEEP);
 		usleep(p_db->db->time_to_sleep * 1000);
-		if (someone_die(p_db) != 0)
+		if (stop_simulation(p_db) != 0)
 			return (NULL);
 		printing_philo(p_db, MSG_THINK);
 		pthread_mutex_lock(&p_db->philo_mutex.last_meal);
@@ -62,7 +61,8 @@ void	*reaper(void *philo_db)
 			i = 0;
 			usleep(1000);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (NULL);
 }

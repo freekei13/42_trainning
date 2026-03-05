@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:36:08 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/02 20:15:24 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/05 16:38:51 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,19 @@ int	someone_full_check(philo *p_db)
 		pthread_mutex_unlock(&p_db->philo_mutex.meal_eaten);
 		pthread_mutex_lock(&p_db->philo_mutex.done_eat);
 		p_db->done_eat++;
-		p_db->db->all_full++;
 		pthread_mutex_unlock(&p_db->philo_mutex.done_eat);
+		pthread_mutex_lock(&p_db->db->db_mutex.p_die);
+		p_db->db->all_full++;
 		if (p_db->db->all_full >= p_db->db->philo_nb)
+		{
+			pthread_mutex_unlock(&p_db->db->db_mutex.p_die);
 			return (-1);
+		}
 		else
+		{
+			pthread_mutex_unlock(&p_db->db->db_mutex.p_die);
 			return (0);
+		}
 	}
 	pthread_mutex_unlock(&p_db->philo_mutex.meal_eaten);
 	return (0);
