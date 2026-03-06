@@ -1,6 +1,6 @@
 NAME	= 	philo
-CC		= 	gcc
-CFLAGS	= 	-Werror -Wall -Wextra -pthread -g
+CC		= 	cc
+CFLAGS	= 	-Werror -Wall -Wextra -pthread
 
 SRC_PATH = src/
 OBJ_PATH = obj/
@@ -20,18 +20,12 @@ OBJ 	= 	$(SRC:.c=.o)
 OBJS	=	$(addprefix $(OBJ_PATH), $(OBJ))
 INC 	= 	-I ./includes/
 
-RED     = \033[31m
 GREEN   = \033[32m
 YELLOW  = \033[33m
 BLUE    = \033[34m
 RESET   = \033[0m
 
-all: header $(NAME)
-
-header:
-	@echo "____________________"
-	@echo "|  Philosopher 42  |"
-	@echo "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
+all: $(NAME)
 	
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
@@ -48,7 +42,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		MSG="Compiling..."; \
 	fi; \
 	if [ $$REMAINDER -gt 0 ]; then \
-    	EMPTY=$$(printf '%0.s░░' $$(seq 1 $$REMAINDER)); \
+    	EMPTY=$$(printf '%.0s░░' $$(seq 1 $$REMAINDER)); \
 	else \
     	EMPTY=""; \
 	fi; \
@@ -56,7 +50,8 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@printf "\r[$(BLUE)██████████████████$(RESET)] $(GREEN)Compiling...Done!$(RESET)%-20s\n" ""
+	@CURRENT=$(words $(SRC)); \
+	printf "\r[$(BLUE)$$(printf '%.0s██' $$(seq 1 $$CURRENT))$(RESET)] $(GREEN)Compiling...Done!$(RESET)%-20s\n" ""
 	@$(CC) $(CFLAGS) $^ -o $@
 	@echo ""
 	@echo "✅ $(NAME) compiled successfully!✅"
