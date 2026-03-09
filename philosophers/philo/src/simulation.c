@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:25:31 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/06 00:19:14 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 00:19:36 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*reaper(void *philo_db)
 	return (NULL);
 }
 
-void	simulation_start(data *db, philo *p_db)
+int	simulation_start(data *db, philo *p_db)
 {
 	int i;
 
@@ -79,21 +79,30 @@ void	simulation_start(data *db, philo *p_db)
 		{
 			if (pthread_create(&db->threads[i], NULL, reaper, p_db) != 0)
 			{
-				threads_join(db->threads, db->philo_nb);
+				p_db->db->someone_die = 1;
+				threads_join(db->threads, i);
 				p_db_cleaner(p_db, db->philo_nb);
 				db_cleaner(db);
-				return (void)(ft_putstr_fd(MSG_ERR_THREAD, 2));
+				return (ft_putstr_fd(MSG_ERR_THREAD, 2), -1);
 			}
 		}
 		else
 		{
-			p_db_parsing(db, &p_db[i], i);
-			if (pthread_create(&db->threads[i], NULL, routine, &p_db[i]) != 0)
+			if (p_db_parsing(db, &p_db[i], i) != 0)
 			{
+				p_db->db->someone_die = 1;
 				threads_join(db->threads, i);
 				p_db_cleaner(p_db, i);
 				db_cleaner(db);
-				return (void)(ft_putstr_fd(MSG_ERR_THREAD, 2));
+				return (-1);
+			}
+			if (pthread_create(&db->threads[i], NULL, routine, &p_db[i]) != 0)
+			{
+				p_db->db->someone_die = 1;
+				threads_join(db->threads, i);
+				p_db_cleaner(p_db, i);
+				db_cleaner(db);
+				return (ft_putstr_fd(MSG_ERR_THREAD, 2), -1);
 			}
 		}
 		i++;
@@ -104,4 +113,5 @@ void	simulation_start(data *db, philo *p_db)
 		pthread_join(db->threads[i], NULL);
 		i++;
 	}
+	return (0);
 }

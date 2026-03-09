@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_actions.c                                  :+:      :+:    :+:   */
+/*   routine_actions_a.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 01:43:32 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 21:02:15 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 00:16:01 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,10 @@ int	taking_forks(philo *p_db)
 		usleep(p_db->db->time_to_eat / 10);
 		if (taking_fork_left(p_db) != 0)
 			return (-1);
-		pthread_mutex_lock(&p_db->db->forks[p_db->fork_right]);
-		if (stop_simulation(p_db) == -1)
-			return (pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]), -1);
-		printing_philo(p_db, MSG_FORK);
 		if (p_db->db->philo_nb == 1)
-			return (pthread_mutex_unlock(&p_db->db->forks[p_db->fork_right]), -1);
-		
+			return (pthread_mutex_unlock(&p_db->db->forks[p_db->fork_left]), -1);
+		if (taking_fork_right(p_db) != 0)
+			return (-1);
 	}
 	else
 	{

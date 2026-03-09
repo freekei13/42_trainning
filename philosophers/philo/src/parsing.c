@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 18:44:05 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/09 22:25:52 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int philo_mutex_init(p_mutex *philo_mutex)
 	return (0);
 }
 
-void p_db_parsing(data *db, philo *p_db, int index)
+int p_db_parsing(data *db, philo *p_db, int index)
 {
 	p_db->id = index + 1;
 	p_db->fork_right = (index + 1) % db->philo_nb;
@@ -107,5 +107,7 @@ void p_db_parsing(data *db, philo *p_db, int index)
 	p_db->done_eat = 0;
 	p_db->time_to_think = 0;
 	p_db->db = db;
-	philo_mutex_init(&p_db->philo_mutex);
+	if (philo_mutex_init(&p_db->philo_mutex) != 0)
+		return (-1);
+	return (0);
 }
