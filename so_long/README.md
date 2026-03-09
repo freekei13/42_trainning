@@ -1,53 +1,53 @@
-*This project has been created as part of the 42 curriculum by <csamakka>*
+*This project has been created as part of the 42 curriculum by [csamakka].*
 
-**Description**
---
-Using the school’s graphical library: the MiniLibX to create a game in 2D.
+## Description
 
-The player’s goal is to collect all collectibles on the map and then escape by choosing
-the shortest possible route.
+So Long is a small 2D top-down game built using the school's graphical library, **MiniLibX**.
 
-The W, A, S, and D keys must be used to move the main character.
+The goal is simple: collect all collectibles scattered across the map, then reach the exit using the shortest possible route. The player navigates a 2D grid using the W, A, S, and D keys and cannot move through walls. Every move increments a counter displayed in the shell.
 
-The player should be able to move in these four directions: up, down, left, and
-right.
+Key rules:
+- Collect all items before reaching the exit
+- Movement is restricted to four directions: up, down, left, right
+- Walls are impassable
+- The number of moves is displayed in the shell after each step
 
-The player should not be able to move into walls.
+## Instructions
 
-At every move, the current number of movements must be displayed in the shell.
+### 1. Compile MiniLibX
 
-You have to use a 2D view (top-down or profile).
+The `mlx_linux` directory must be present at the root of the repository before compiling.
 
-**Instructions**
---
-type ***make mlx*** in the terminal for compiling the library **MiniLibX**.
-(mlx_linux) have to be in repertory.
-```
+```bash
 make mlx
 ```
-type ***make*** in the terminal for compiling **so_long** after compiling **MiniLibX** 
-To execute the program : 
-```
+
+### 2. Compile So Long
+
+```bash
 make
 ```
-To run so_longse the school’s graphical library: the MiniLibXse the school’s graphical library: the MiniLibX
-```
+
+### 3. Run the game
+
+```bash
 ./so_long map/map.ber
-```
-```
 ./so_long map/map2.ber
 ```
 
-Player's keys commands
-- w - Up
-- s - Down
-- a - Left
-- d - Right
-- Esc - Quit game
+### Controls
 
-**Resources**
---
-- 42 gitbook - https://42-cursus.gitbook.io/guide/
-- Google (stackoverflow, random blogs, etc)
-- A video on Intra42 for MiniLibX
-- Students
+| Key | Action |
+|-----|--------|
+| `W` | Move up |
+| `S` | Move down |
+| `A` | Move left |
+| `D` | Move right |
+| `Esc` | Quit the game |
+
+## Resources
+
+- [42 Cursus GitBook](https://42-cursus.gitbook.io/guide/) — General 42 project guide
+- [MiniLibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx) — Unofficial MiniLibX reference
+- MiniLibX introduction video available on Intra42
+- Fellow 42 students
