@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:25:31 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/10 00:19:36 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:12:02 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*routine(void *philo_db)
 {
-	philo *p_db;
-	
-	p_db = (philo *)philo_db;
+	t_philo	*p_db;
+
+	p_db = (t_philo *)philo_db;
 	while (1)
 	{
 		if (stop_simulation(p_db) != 0)
@@ -32,25 +32,17 @@ void	*routine(void *philo_db)
 		usleep(p_db->db->time_to_sleep * 1000);
 		if (stop_simulation(p_db) != 0)
 			return (NULL);
-		printing_philo(p_db, MSG_THINK);
-		pthread_mutex_lock(&p_db->philo_mutex.last_meal);
-		p_db->time_to_think = (p_db->db->time_to_die
-				- ms_now(p_db->last_meal)
-				- p_db->db->time_to_eat) / 2;
-		pthread_mutex_unlock(&p_db->philo_mutex.last_meal);
-		if (p_db->time_to_think <= 0)
-			p_db->time_to_think = 0;
-		usleep(p_db->time_to_think * 1000);
+		thinking_philo(p_db);
 	}
 	return (NULL);
 }
 
 void	*reaper(void *philo_db)
 {
-	philo	*p_db;
+	t_philo	*p_db;
 	int		i;
-	
-	p_db = (philo *)philo_db;
+
+	p_db = (t_philo *)philo_db;
 	i = 0;
 	while (1)
 	{
@@ -67,9 +59,31 @@ void	*reaper(void *philo_db)
 	return (NULL);
 }
 
-int	simulation_start(data *db, philo *p_db)
+void	simulation_cleaner(t_data *db, t_philo *p_db, int index, char *msg)
 {
-	int i;
+	p_db->db->someone_die = 1;
+	threads_join(db->threads, index);
+	p_db_cleaner(p_db, index);
+	db_cleaner(db);
+	if (msg)
+		ft_putstr_fd(msg, 2);
+}
+
+void	simulation_join(t_data *db)
+{
+	int	i;
+
+	i = 0;
+	while (i < db->philo_nb + 1)
+	{
+		pthread_join(db->threads[i], NULL);
+		i++;
+	}
+}
+
+int	simulation_start(t_data *db, t_philo *p_db)
+{
+	int	i;
 
 	gettimeofday(&db->start_time, NULL);
 	i = 0;
@@ -78,40 +92,17 @@ int	simulation_start(data *db, philo *p_db)
 		if (i == db->philo_nb)
 		{
 			if (pthread_create(&db->threads[i], NULL, reaper, p_db) != 0)
-			{
-				p_db->db->someone_die = 1;
-				threads_join(db->threads, i);
-				p_db_cleaner(p_db, db->philo_nb);
-				db_cleaner(db);
-				return (ft_putstr_fd(MSG_ERR_THREAD, 2), -1);
-			}
+				return (simulation_cleaner(db, p_db, i, MSG_ERR_THREAD), -1);
 		}
 		else
 		{
 			if (p_db_parsing(db, &p_db[i], i) != 0)
-			{
-				p_db->db->someone_die = 1;
-				threads_join(db->threads, i);
-				p_db_cleaner(p_db, i);
-				db_cleaner(db);
-				return (-1);
-			}
+				return (simulation_cleaner(db, p_db, i, NULL), -1);
 			if (pthread_create(&db->threads[i], NULL, routine, &p_db[i]) != 0)
-			{
-				p_db->db->someone_die = 1;
-				threads_join(db->threads, i);
-				p_db_cleaner(p_db, i);
-				db_cleaner(db);
-				return (ft_putstr_fd(MSG_ERR_THREAD, 2), -1);
-			}
+				return (simulation_cleaner(db, p_db, i, MSG_ERR_THREAD), -1);
 		}
 		i++;
 	}
-	i = 0;
-	while (i < db->philo_nb + 1)
-	{
-		pthread_join(db->threads[i], NULL);
-		i++;
-	}
+	simulation_join(db);
 	return (0);
 }

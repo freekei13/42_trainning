@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   reaper_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:36:08 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 16:38:51 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:04:25 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	someone_die_check(philo *p_db)
+int	someone_die_check(t_philo *p_db)
 {
 	pthread_mutex_lock(&p_db->philo_mutex.last_meal);
 	if (ms_now(p_db->last_meal) >= p_db->db->time_to_die)
@@ -30,7 +30,7 @@ int	someone_die_check(philo *p_db)
 	return (0);
 }
 
-int	someone_full_check(philo *p_db)
+int	someone_full_check(t_philo *p_db)
 {
 	pthread_mutex_lock(&p_db->philo_mutex.meal_eaten);
 	if (p_db->meal_eaten >= p_db->db->must_eat && p_db->db->must_eat != -1)
@@ -56,7 +56,7 @@ int	someone_full_check(philo *p_db)
 	return (0);
 }
 
-int	reaper_monitor(philo *p_db)
+int	reaper_monitor(t_philo *p_db)
 {
 	pthread_mutex_lock(&p_db->philo_mutex.done_eat);
 	if (p_db->done_eat == 0)
