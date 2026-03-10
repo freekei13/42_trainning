@@ -6,7 +6,7 @@
 /*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:27:44 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/10 11:58:20 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 13:22:50 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,10 @@ int	args_check(int ac, char **av)
 		return (ft_putstr_fd(MSG_ERR_DIGIT, 2), -1);
 	if (ft_atol(av[1]) < 1 || ft_atol(av[1]) > MAX_PHILOS)
 		return (printf(MSG_ERR_PHILO, MAX_PHILOS));
+	if (av[5])
+	{
+		if (ft_atol(av[5]) == 0)
+			return (-1);
+	}
 	return (0);
 }
