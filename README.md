@@ -25,8 +25,8 @@ The 42 curriculum is project-based and peer-evaluated, with no traditional lectu
 | push_swap | Sorting algorithm with a limited instruction set | ✅ Done |
 | so_long | 2D game using a graphical library (MLX) | ✅ Done |
 | pipex | Unix pipe and process management | ✅ Done (+ bonus) |
-| philosophers | Concurrency with threads and mutexes | 🔄 In progress |
-| minishell | Bash-like shell implementation | ⏳ Waiting |
+| philosophers | Concurrency with threads and mutexes | ✅ Done |
+| minishell | Bash-like shell implementation | 🔄 In progress|
 
 ---
 
