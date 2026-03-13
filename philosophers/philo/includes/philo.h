@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:41 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/09 22:34:03 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:02:56 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ typedef struct s_mutex
 {
 	pthread_mutex_t	p_die;
 	pthread_mutex_t	p_print;
-}					mutex;
+}					t_mutex;
 
 typedef struct s_p_mutex
 {
 	pthread_mutex_t	last_meal;
 	pthread_mutex_t	meal_eaten;
-	pthread_mutex_t done_eat;
-}					p_mutex;
+	pthread_mutex_t	done_eat;
+}					t_p_mutex;
 
 typedef struct s_data
 {
@@ -58,25 +58,25 @@ typedef struct s_data
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			must_eat;
-	struct	timeval	start_time;
+	struct timeval	start_time;
 	int				someone_die;
 	int				all_full;
 	pthread_mutex_t	*forks;
-	mutex			db_mutex;
-}					data;
+	t_mutex			db_mutex;
+}					t_data;
 
 typedef struct s_philo
 {
 	int				id;
 	int				fork_right;
 	int				fork_left;
-	struct	timeval	last_meal;
+	struct timeval	last_meal;
 	int				meal_eaten;
 	int				done_eat;
 	long			time_to_think;
-	p_mutex			philo_mutex;
-	data			*db;
-}					philo;
+	t_p_mutex		philo_mutex;
+	t_data			*db;
+}					t_philo;
 
 int		ft_isdigit(int c);
 long	ft_atol(const char *nptr);
@@ -86,22 +86,24 @@ void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex);
 
 int		args_check(int ac, char **av);
 
-int		db_parsing(data *db, char **av);
-int		p_db_parsing(data *db, philo *p_db, int index);
+int		db_parsing(t_data *db, char **av);
+int		p_db_parsing(t_data *db, t_philo *p_db, int index);
 
-int		simulation_start(data *db, philo *p_db);
+int		simulation_start(t_data *db, t_philo *p_db);
 
-void	printing_philo(philo *p_db, char *message);
-int		taking_forks(philo *p_db);
-void	eating_philo(philo *p_db);
-int		stop_simulation(philo *p_db);
+void	printing_philo(t_philo *p_db, char *message);
+int		taking_forks(t_philo *p_db);
+void	eating_philo(t_philo *p_db);
+int		stop_simulation(t_philo *p_db);
 
-int		someone_die_check(philo *p_db);
-int		someone_full_check(philo *p_db);
-int		reaper_monitor(philo *p_db);
+void	thinking_philo(t_philo *p_db);
+
+int		someone_die_check(t_philo *p_db);
+int		someone_full_check(t_philo *p_db);
+int		reaper_monitor(t_philo *p_db);
 
 void	mutex_destroy(pthread_mutex_t *mutex, int nb_mutex);
 void	threads_join(pthread_t *threads, int nb_threads);
-void	db_cleaner(data *db);
-void	p_db_cleaner(philo *p_db, int nb);
+void	db_cleaner(t_data *db);
+void	p_db_cleaner(t_philo *p_db, int nb);
 #endif

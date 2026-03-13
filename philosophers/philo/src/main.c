@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:13:26 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/09 22:30:26 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:03:36 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	data		db;
-	philo		*philo_db;
-	
+	t_data		db;
+	t_philo		*philo_db;
+
 	if (args_check(ac, av) != 0)
 		return (-1);
 	if (db_parsing(&db, av) != 0)
 		return (-1);
-	philo_db = malloc(sizeof(philo) * db.philo_nb);
+	philo_db = malloc(sizeof(t_philo) * db.philo_nb);
 	if (!philo_db)
 	{
 		db_cleaner(&db);

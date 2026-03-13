@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 23:23:38 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 20:56:00 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:05:18 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	ft_putstr_fd(char *s, int fd)
 
 long	ms_now(struct timeval time_start)
 {
-	struct timeval 	time_now;
+	struct timeval	time_now;
 	long			ms;
 	long			time_now_ms;
 	long			time_start_ms;
-	
+
 	gettimeofday(&time_now, NULL);
 	time_start_ms = (time_start.tv_sec * 1000) + (time_start.tv_usec / 1000);
 	time_now_ms = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
@@ -72,7 +72,7 @@ long	ms_now(struct timeval time_start)
 	return (ms);
 }
 
-int	stop_simulation(philo *p_db)
+int	stop_simulation(t_philo *p_db)
 {
 	pthread_mutex_lock(&p_db->db->db_mutex.p_die);
 	if (p_db->db->someone_die > 0 || p_db->db->all_full >= p_db->db->philo_nb)

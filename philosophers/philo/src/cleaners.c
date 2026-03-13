@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaners.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 18:39:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/05 20:32:10 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:03:22 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	threads_join(pthread_t *threads, int nb_threads)
 		i++;
 	}
 }
-void	db_cleaner(data *db)
+
+void	db_cleaner(t_data *db)
 {
 	mutex_destroy(db->forks, db->philo_nb);
 	pthread_mutex_destroy(&db->db_mutex.p_die);
@@ -44,7 +45,7 @@ void	db_cleaner(data *db)
 	free(db->threads);
 }
 
-void	p_db_cleaner(philo *p_db, int nb)
+void	p_db_cleaner(t_philo *p_db, int nb)
 {
 	int	i;
 

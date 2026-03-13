@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:35:59 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/09 22:25:52 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:04:04 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int mutex_inits(pthread_mutex_t *mutex, int nb_mutex)
+int	mutex_inits(pthread_mutex_t *mutex, int nb_mutex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb_mutex)
@@ -30,7 +30,7 @@ int mutex_inits(pthread_mutex_t *mutex, int nb_mutex)
 	return (0);
 }
 
-int db_mutex_inits(mutex *db_mutex)
+int	db_mutex_inits(t_mutex *db_mutex)
 {
 	if (pthread_mutex_init(&db_mutex->p_die, NULL) != 0)
 	{
@@ -46,7 +46,7 @@ int db_mutex_inits(mutex *db_mutex)
 	return (0);
 }
 
-int db_parsing(data *db, char **av)
+int	db_parsing(t_data *db, char **av)
 {
 	db->philo_nb = (int)ft_atol(av[1]);
 	db->time_to_die = ft_atol(av[2]);
@@ -74,7 +74,7 @@ int db_parsing(data *db, char **av)
 	return (0);
 }
 
-int philo_mutex_init(p_mutex *philo_mutex)
+int	philo_mutex_init(t_p_mutex *philo_mutex)
 {
 	if (pthread_mutex_init(&philo_mutex->last_meal, NULL) != 0)
 	{
@@ -97,7 +97,7 @@ int philo_mutex_init(p_mutex *philo_mutex)
 	return (0);
 }
 
-int p_db_parsing(data *db, philo *p_db, int index)
+int	p_db_parsing(t_data *db, t_philo *p_db, int index)
 {
 	p_db->id = index + 1;
 	p_db->fork_right = (index + 1) % db->philo_nb;
