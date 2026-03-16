@@ -4,6 +4,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 
 typedef enum e_type
 {
