@@ -39,21 +39,7 @@ t_token	*lexer(char *line)
 		}
 		else
 		{
-			if (line[i] == '\"')
-			{
-				start = i + 1;
-				while (line[i + 1] != '\"')
-					i++;
-				if (!line[i])
-				{
-					while(1)
-					{
-						tmp = get_next_line(0);
-					}
-				}
-				add_token_back(&tokens, new_token(ft_substr(line, start, i - start + 1)), WORD);
-			}
-
+			//Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
 		}
 	}
 	return (tokens);
