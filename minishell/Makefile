@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Werror -Wextra -lreadline
+FLAGS = -Wall -Werror -Wextra -g
 
 SRC_PATH = src/
 OBJ_PATH = obj/
@@ -23,7 +23,7 @@ $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	$(CC) $(FLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT) $(GNL)
-	$(CC) $(FLAGS) $^ -o $@
+	$(CC) $(FLAGS) -lreadline $^ -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)

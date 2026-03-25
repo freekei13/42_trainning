@@ -24,4 +24,9 @@ typedef struct	s_token
 	struct s_token	*next;
 } 					t_token;
 
+t_token	*new_token(char *value, int type);
+void	add_token_back(t_token **lst, t_token *new);
+void	free_tokens(t_token *lst);
+
+t_token	*lexer(char *line);
 #endif
