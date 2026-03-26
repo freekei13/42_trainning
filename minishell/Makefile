@@ -1,8 +1,8 @@
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
-SRC_PATH = src/
+SRC_PATH = lexer/
 OBJ_PATH = obj/
 
 SRC = main.c lst_tokens.c lexing.c
@@ -20,10 +20,10 @@ all: $(NAME)
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	mkdir -p $(OBJ_PATH)
-	$(CC) $(FLAGS) $(INC) -c $< -o $@
+	$(CC) $(FLAGS) $(INC) -c $< -lreadline -o $@
 
 $(NAME): $(OBJS) $(LIBFT) $(GNL)
-	$(CC) $(FLAGS) -lreadline $^ -o $@
+	$(CC) $(FLAGS) $^ -lreadline -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
