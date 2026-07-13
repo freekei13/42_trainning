@@ -1,12 +1,12 @@
-NAME = megaphone
+NAME = mapb
 CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = megaphone.cpp
+SRC = main.cpp Contact.cpp Phonebook.cpp
 OBJ = $(SRC:.cpp=.o)
 
-all: $(NAME)
+all:$(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):$(OBJ)
 	$(CC) $(FLAGS) $^ -o $@
 
 %.o:%.cpp
@@ -14,8 +14,10 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -f $(OBJ)
+
 fclean: clean
 	rm -f $(NAME)
+
 re: fclean all
 
 .PHONY: all clean fclean re
