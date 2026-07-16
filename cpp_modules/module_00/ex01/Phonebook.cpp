@@ -1,4 +1,5 @@
 #include "Phonebook.hpp"
+#include <iomanip>
 
 Phonebook::Phonebook()
 {
@@ -40,6 +41,22 @@ void    Phonebook::addContact()
 }
 
 void    Phonebook::viewContactList()
+{
+    std::cout << nbContact << " contact(s) in the Phonebook" << std::endl;
+    std::cout << "Index" << std::setw(10) << "|";
+    std::cout << "Firstname" << std::setw(10) << "|";
+    std::cout << "Lastname" << std::setw(10) << "|";
+    std::cout << "Nickname" << std::setw(10) << std::endl;
+    for (int i = 0; i < (nbContact % 8); i++)
+    {
+        std::cout << i << std::setw(10) << "|";
+        std::cout << contactList[i].getFirstName() << std::setw(10) << "|";
+        std::cout << contactList[i].getLastName() << std::setw(10) << "|";
+        std::cout << contactList[i].getNickName() << std::setw(10) << std::endl;
+    }
+}
+
+void    Phonebook::viewContact(int index)
 {
     
 }
