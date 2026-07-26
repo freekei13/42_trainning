@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   signal_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 10:41:15 by csamakka          #+#    #+#             */
-/*   Updated: 2026/07/26 00:18:09 by marvin           ###   ########.fr       */
+/*   Created: 2026/05/19 21:03:59 by csamakka          #+#    #+#             */
+/*   Updated: 2026/07/26 00:12:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "signals.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	sigint_mod(int sig)
 {
-	size_t	i;
+	g_signal = sig;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+void	sigint_mod_exec(int sig)
+{
+	g_signal = sig;
+	write(1, "\n", 1);
+	return ;
+}
+
+void	sigint_mod_heredoc_parent(int sig)
+{
+	g_signal = sig;
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	sigint_mod_silent(int sig)
+{
+	g_signal = sig;
 }

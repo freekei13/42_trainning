@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_tokens.c                                       :+:      :+:    :+:   */
+/*   lst_redirects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 18:28:53 by csamakka          #+#    #+#             */
-/*   Updated: 2026/04/12 19:18:19 by csamakka         ###   ########.fr       */
+/*   Created: 2026/04/01 21:40:10 by csamakka          #+#    #+#             */
+/*   Updated: 2026/04/02 01:27:27 by csamakka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parsing.h"
 #include "lexing.h"
 
-t_token	*new_token(char *value, int type)
+t_redirect	*new_redirect(char *value, int type)
 {
-	t_token	*token;
+	t_redirect	*redirect;
 
-	token = malloc(sizeof(t_token));
-	if (!token || value == NULL)
+	redirect = malloc(sizeof(t_redirect));
+	if (!redirect)
 		return (NULL);
-	token->value = ft_strdup(value);
-	token->type = type;
-	token->next = NULL;
-	return (token);
+	redirect->file = ft_strdup(value);
+	redirect->type = type;
+	redirect->next = NULL;
+	return (redirect);
 }
 
-void	add_token_back(t_token **lst, t_token *new)
+void	add_redirect_back(t_redirect **lst, t_redirect *new)
 {
-	t_token	*current;
+	t_redirect	*current;
 
 	if (!*lst)
 	{
@@ -40,16 +41,16 @@ void	add_token_back(t_token **lst, t_token *new)
 	current->next = new;
 }
 
-void	free_tokens(t_token *lst)
+void	free_redirects(t_redirect *lst)
 {
-	t_token	*current;
-	t_token	*next;
+	t_redirect	*current;
+	t_redirect	*next;
 
 	current = lst;
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->value);
+		free(current->file);
 		free(current);
 		current = next;
 	}

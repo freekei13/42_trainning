@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 10:41:15 by csamakka          #+#    #+#             */
-/*   Updated: 2026/07/26 00:18:09 by marvin           ###   ########.fr       */
+/*   Created: 2026/07/26 01:58:01 by marvin            #+#    #+#             */
+/*   Updated: 2026/07/26 01:58:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	i;
+# include "builtin.h"
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-}
+#endif

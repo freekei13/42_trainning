@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   pwd_bi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 10:41:15 by csamakka          #+#    #+#             */
-/*   Updated: 2026/07/26 00:18:09 by marvin           ###   ########.fr       */
+/*   Created: 2026/04/15 10:03:15 by lalamino          #+#    #+#             */
+/*   Updated: 2026/07/26 04:24:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtin.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	pwd(char **env, t_exec *exc_data)
 {
-	size_t	i;
+	int	fd;
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	exc_data->data->exit_status = 0;
+	if (exc_data->fd_out == -1)
+		fd = 1;
+	else
+		fd = exc_data->fd_out;
+	ft_putendl_fd(find_env(env, "PWD"), fd);
 }

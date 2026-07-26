@@ -3,14 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 18:36:15 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/30 18:36:17 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/07/26 01:59:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+# define PIPE_UNEXPECTED "minishell: syntax error near unexpected token `|'\n"
+# define REDIR_UN "minishell: syntax error near unexpected token `newline'\n"
+# include "lexing.h"
+
+typedef struct s_ast	t_ast;
+
+typedef struct s_redirect
+{
+	int					type;
+	char				*file;
+	int					fd;
+	struct s_redirect	*next;
+}	t_redirect;
+
+typedef struct s_cmd
+{
+	char				**args;
+	struct s_redirect	*redirects;
+}	t_cmd;
+
+typedef struct s_pipe
+{
+	struct s_ast	*left;
+	struct s_ast	*right;
+}	t_pipe;
+
+typedef struct s_error
+{
+	int		status_code;
+	char	*err_message;
+}	t_error;
+
+typedef struct s_ast
+{
+	enum
+	{
+		AST_CMD,
+		AST_PIPE,
+		AST_ERROR
+	}	e_type;
+	union
+	{
+		t_cmd	cmd;
+		t_pipe	pipe;
+		t_error	err;
+	}	u_data;
+}	t_ast;
+
+t_redirect	*new_redirect(char *value, int type);
+void		add_redirect_back(t_redirect **lst, t_redirect *new);
+void		free_redirects(t_redirect *lst);
+t_ast		*parser(t_token *tokens);
+int			lst_word_counter(t_token *tokens);
+void		*err_ast(t_ast *node, char *message);
+void		syntax_err_node(t_ast *node, int index);
+
+void		free_ast(t_ast *ast);
 #endif

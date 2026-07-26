@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csamakka <csamakka@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 18:28:39 by csamakka          #+#    #+#             */
-/*   Updated: 2026/03/30 18:33:58 by csamakka         ###   ########.fr       */
+/*   Updated: 2026/07/25 23:48:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,51 @@ void	quotes_status(int *quote)
 		*quote = 1;
 }
 
-void	word_token(t_token **tokens, char *line, int *index)
+void	word_end(t_cursor *cur, t_wdata *data)
 {
-	int		counter;
-	int		single_q;
-	int		double_q;
-	char	*word;
-
-	single_q = 0;
-	double_q = 0;
-	counter = *index;
-	while ((line[counter] != ' ' && line[counter] != '|'
-			&& line[counter] != '<' && line[counter] != '>')
-		|| (double_q == 1 || single_q == 1))
+	while ((cur->line[data->counter] != ' ' && cur->line[data->counter] != '|'
+			&& cur->line[data->counter] != '<'
+			&& cur->line[data->counter] != '>')
+		|| (data->double_q == 1 || data->single_q == 1))
 	{
-		if (!line[counter])
+		if (!(cur->line[data->counter]))
 			break ;
-		if (line[counter] == '\"' && single_q == 0)
-			quotes_status(&double_q);
-		if (line[counter] == '\'' && double_q == 0)
-			quotes_status(&single_q);
-		counter++;
+		if (cur->line[data->counter] == '\"' && data->single_q == 0)
+			quotes_status(&data->double_q);
+		if (cur->line[data->counter] == '\'' && data->double_q == 0)
+			quotes_status(&data->single_q);
+		data->counter++;
 	}
-	word = ft_substr(line, *index, counter - *index);
-	add_token_back(tokens, new_token(word, WORD));
-	free(word);
-	*index = counter;
 }
 
-void	redirec_token(t_token **tokens, char *line, char token, int *index)
+void	word_token(t_token **tokens, t_cursor *cur, char **env, int ext_status)
 {
-	if (line[*index + 1] == token)
+	t_wdata	data;
+
+	data.single_q = 0;
+	data.double_q = 0;
+	data.counter = cur->index;
+	word_end(cur, &data);
+	data.word = ft_substr(cur->line, cur->index, data.counter - cur->index);
+	data.word_final = quote_sep(data.word, env, ext_status);
+	if (data.word_final != NULL && (data.word_final[0] != '\0'
+			|| ft_strchr(data.word, '\'') || ft_strchr(data.word, '\"')))
+		add_token_back(tokens, new_token(data.word_final, WORD));
+	free(data.word);
+	if (data.word_final != NULL)
+		free(data.word_final);
+	cur->index = data.counter;
+}
+
+void	redirec_token(t_token **tokens, char token, t_cursor *cur)
+{
+	if (cur->line[cur->index + 1] == token)
 	{
 		if (token == '>')
 			add_token_back(tokens, new_token(">>", APPEND));
 		else if (token == '<')
 			add_token_back(tokens, new_token("<<", HEREDOC));
-		*index += 2;
+		cur->index += 2;
 	}
 	else
 	{
@@ -64,32 +72,33 @@ void	redirec_token(t_token **tokens, char *line, char token, int *index)
 			add_token_back(tokens, new_token(">", REDIRECT_OUT));
 		else if (token == '<')
 			add_token_back(tokens, new_token("<", REDIRECT_IN));
-		*index += 1;
+		cur->index += 1;
 	}
 }
 
-t_token	*tokenize(char *line)
+t_token	*tokenize(char *line, char **env, int ext_status)
 {
-	t_token	*tokens;
-	int		i;
+	t_token		*tokens;
+	t_cursor	cur;
 
 	tokens = NULL;
-	i = 0;
-	while (line[i])
+	cur.line = line;
+	cur.index = 0;
+	while (line[cur.index])
 	{
-		if (line[i] == ' ')
-			i++;
-		else if (line[i] == '|')
+		if (line[cur.index] == ' ')
+			cur.index++;
+		else if (line[cur.index] == '|')
 		{
 			add_token_back(&tokens, new_token("|", PIPE));
-			i++;
+			cur.index++;
 		}
-		else if (line[i] == '>')
-			redirec_token(&tokens, line, '>', &i);
-		else if (line[i] == '<')
-			redirec_token(&tokens, line, '<', &i);
+		else if (line[cur.index] == '>')
+			redirec_token(&tokens, '>', &cur);
+		else if (line[cur.index] == '<')
+			redirec_token(&tokens, '<', &cur);
 		else
-			word_token(&tokens, line, &i);
+			word_token(&tokens, &cur, env, ext_status);
 	}
 	return (tokens);
 }
