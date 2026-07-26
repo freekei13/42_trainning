@@ -12,6 +12,7 @@ class Phonebook
         Phonebook();
         int getNbContact();
         void    addContact();
-        void    viewContact();
+        void    viewContactList();
+        void    viewContact(int index);
 };
 #endif
