@@ -50,9 +50,18 @@ void    Phonebook::viewContactList()
     for (int i = 0; i < (nbContact % 8); i++)
     {
         std::cout << i << std::setw(10) << "|";
-        std::cout << contactList[i].getFirstName() << std::setw(10) << "|";
-        std::cout << contactList[i].getLastName() << std::setw(10) << "|";
-        std::cout << contactList[i].getNickName() << std::setw(10) << std::endl;
+        if (contactList[i].getFirstName().length() > 10)
+            std::cout << contactList[i].getFirstName() << std::setw(9) << ".|";
+        else
+            std::cout << contactList[i].getFirstName() << std::setw(10) << "|";
+        if (contactList[i].getLastName().length() > 10)
+            std::cout << contactList[i].getLastName() << std::setw(9) << ".|";
+        else
+            std::cout << contactList[i].getLastName() << std::setw(10) << "|";
+        if (contactList[i].getNickName().length() > 10)
+            std::cout << contactList[i].getNickName() << std::setw(9) << "." << std::endl;
+        else
+            std::cout << contactList[i].getNickName() << std::setw(10) << std::endl;
     }
 }
 
