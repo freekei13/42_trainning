@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Werror
 
 MAIN_PATH = main/
 
@@ -13,11 +13,13 @@ OBJ = $(SRCS:.c=.o)
 all:$(NAME)
 
 $(NAME):$(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/libft -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I ./include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
+mlx:
+	make -C mlx_linux/
 clean:
 	rm -f $(OBJ)
 
