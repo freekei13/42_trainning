@@ -18,3 +18,10 @@ int	dir_color_init(t_data *data, char *map_info)
 	}
 	return (0);
 }
+
+int flood_fill(char **map)
+{
+	if (!map)
+		return (1);
+	
+}

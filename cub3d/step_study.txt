@@ -1,4 +1,4 @@
 Cub3D study steps:
 
 - Create .h for structs player map and data
-- Parsing .cub to Array2D
+- Parsing .cub to t_data
