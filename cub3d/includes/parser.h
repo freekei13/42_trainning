@@ -42,5 +42,10 @@ typedef struct s_data
     t_map       map;
 }               t_data;
 
-char    **map_parser(char *map_path);
+char    **map_info_parser(char *map_path);
+int	    dir_color_init(t_data *data, char *map_info);
+int     map_data_init(t_data *data, char **map_info);
+int     dir_init(t_data *data, char *map_info);
+int	    floor_ceil_init(t_data *data, char *map_info);
+
 #endif

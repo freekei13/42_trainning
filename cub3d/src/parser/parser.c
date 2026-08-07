@@ -1,46 +1,30 @@
 #include "parser.h"
 
-char   **parser_construct(int fd)
+int    map_data_init(t_data *data, char **map_info)
 {
-    int     i;
-    char    *map_read;
-    char    **map;
+	int     i;
+	int     map_counter;
 
-    map = NULL;
-    i = 0;
-    while (1)
-    {
-        map_read = get_next_line(fd);
-        if (!map_read)
-            break ;
-        map = realloc(map, sizeof(char *) * (2 + i));
-        if (!map)
-            return (NULL);
-        map[i] = ft_strdup(map_read);
-        map[i + 1] = NULL;
-        free(map_read);
-        i++;
-    }
-    return (map);
-}
-
-char    **map_parser(char *map_path)
-{
-    int     path_len;
-    int     fd;
-    char    **map;
-
-    path_len = ft_strlen(map_path);
-    if (ft_strncmp(map_path + path_len - 4, ".cub", 5) != 0)
-    {
-        ft_putstr_fd("Path invalid\n", 2);
-        return (NULL);
-    }
-    fd = open(map_path, O_RDONLY);
-    if (fd == -1)
-        return (NULL);
-    map = parser_construct(fd);
-    if (!map)
-        return (NULL);
-    return (map);
+	data->map.map = NULL;
+	map_counter = 0;
+	i = 0;
+	while (map_info[i])
+	{
+		if (dir_color_init(data, map_info[i]) != 0)
+			return (1);
+		if (map_info[i][0] != '\n' && map_info[i][0] != 'N'
+				&& map_info[i][0] != 'S' && map_info[i][0] != 'W'
+				&& map_info[i][0] != 'E' && map_info[i][0] != 'F'
+				&& map_info[i][0] != 'C')
+		{
+			data->map.map = realloc(data->map.map, sizeof(char *) * (2 + map_counter));
+			if (!data->map.map)
+				return (1);
+			data->map.map[map_counter] = ft_strdup(map_info[i]);
+			data->map.map[map_counter + 1] = NULL;
+			map_counter++;
+		}
+		i++;
+	}
+	return (0);
 }
