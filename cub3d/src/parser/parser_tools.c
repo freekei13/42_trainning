@@ -19,9 +19,49 @@ int	dir_color_init(t_data *data, char *map_info)
 	return (0);
 }
 
-int flood_fill(char **map)
+int flood_fill(char **map, int p_x, int p_y)
 {
-	if (!map)
+	int	height;
+	int	widgth;
+	int i;
+
+	if (!map[p_x])
+		return (0);
+	i = 0;
+	while (map[i])
+		i++;
+	height = i;
+	widgth = ft_strlen(map[p_x]) - 1;
+	if (p_x < 0 || p_x >= height || p_y < 0 || p_y >= widgth)
+		return (0);
+	else if (map[p_x][p_y] == '1' || map[p_x][p_y] == 'F')
+	{
+		if (map[p_x][p_y] == 'F' && (!map[p_x + 1] || !map[p_x][p_y + 1]
+			|| !map[p_x - 1] || !map[p_x][p_y - 1] || map[p_x + 1][p_y] == ' '
+			|| map[p_x][p_y + 1] == ' ' || map[p_x - 1][p_y] == ' '
+			|| map[p_x][p_y - 1] == ' '))
+			return (1);
+		return (0);
+	}
+	if (!map[p_x + 1] || !map[p_x][p_y + 1] || !map[p_x - 1]
+		|| !map[p_x][p_y - 1] || map[p_x + 1][p_y] == ' '
+		|| map[p_x][p_y + 1] == ' ' || map[p_x - 1][p_y] == ' '
+		|| map[p_x][p_y - 1] == ' ')
 		return (1);
-	
+	map[p_x][p_y] = 'F';
+	if (flood_fill(map, p_x + 1, p_y) == 1)
+		return (1);
+	if (flood_fill(map, p_x - 1, p_y) == 1)
+		return (1);
+	if (flood_fill(map, p_x, p_y + 1) == 1)
+		return (1);
+	if (flood_fill(map, p_x, p_y - 1) == 1)
+		return (1);
+	i = 0;
+	while (map[i])
+	{
+		printf("%s", map[i]);
+		i++;
+	}
+	return (0);
 }

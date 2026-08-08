@@ -47,5 +47,6 @@ int	    dir_color_init(t_data *data, char *map_info);
 int     map_data_init(t_data *data, char **map_info);
 int     dir_init(t_data *data, char *map_info);
 int	    floor_ceil_init(t_data *data, char *map_info);
+int     flood_fill(char **map, int p_x, int p_y);
 
 #endif

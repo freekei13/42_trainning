@@ -31,5 +31,6 @@ int main(int ac, char **av)
     printf("path texture EA:\n%s\n", data.map.texture_ea);
     printf("floor color:\n%d\n", data.map.color_f);
     printf("ceiling color:\n%d\n", data.map.color_c);
+    printf("%d\n", flood_fill(data.map.map, 11, 26));
     return (0);
 }
