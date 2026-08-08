@@ -19,36 +19,66 @@ int	dir_color_init(t_data *data, char *map_info)
 	return (0);
 }
 
+void	free_t_map(t_map map_data)
+{
+	if (map_data.texture_no)
+		free(map_data.texture_no);
+	if (map_data.texture_so)
+		free(map_data.texture_so);
+	if (map_data.texture_we)
+		free(map_data.texture_we);
+	if (map_data.texture_ea)
+		free(map_data.texture_ea);
+	if (map_data.map)
+		free_all(map_data.map);
+}
+
+int	string_count(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+		i++;
+	return (i);
+}
+
+char	**dup_map(char **map)
+{
+	char	**dup;
+	int		i;
+
+	dup = malloc(sizeof(char *) * (string_count(map) + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (map[i])
+	{
+		dup[i] = ft_strdup(map[i]);
+		i++;
+	}
+	dup[i] = NULL;
+	return (dup);
+}
+
 int flood_fill(char **map, int p_x, int p_y)
 {
-	int	height;
-	int	widgth;
-	int i;
+	int		height;
+	int		widgth;
 
 	if (!map[p_x])
 		return (0);
-	i = 0;
-	while (map[i])
-		i++;
-	height = i;
+	height = string_count(map);
 	widgth = ft_strlen(map[p_x]) - 1;
-	if (p_x < 0 || p_x >= height || p_y < 0 || p_y >= widgth)
+	if (p_x < 0 || p_x >= height || p_y < 0 || p_y >= widgth
+		|| map[p_x][p_y] == '1' || map[p_x][p_y] == 'X')
 		return (0);
-	else if (map[p_x][p_y] == '1' || map[p_x][p_y] == 'F')
-	{
-		if (map[p_x][p_y] == 'F' && (!map[p_x + 1] || !map[p_x][p_y + 1]
-			|| !map[p_x - 1] || !map[p_x][p_y - 1] || map[p_x + 1][p_y] == ' '
-			|| map[p_x][p_y + 1] == ' ' || map[p_x - 1][p_y] == ' '
-			|| map[p_x][p_y - 1] == ' '))
-			return (1);
-		return (0);
-	}
-	if (!map[p_x + 1] || !map[p_x][p_y + 1] || !map[p_x - 1]
+	if (!map[p_x + 1] || map[p_x][p_y + 1] == '\n' || !map[p_x - 1]
 		|| !map[p_x][p_y - 1] || map[p_x + 1][p_y] == ' '
 		|| map[p_x][p_y + 1] == ' ' || map[p_x - 1][p_y] == ' '
 		|| map[p_x][p_y - 1] == ' ')
 		return (1);
-	map[p_x][p_y] = 'F';
+	map[p_x][p_y] = 'X';
 	if (flood_fill(map, p_x + 1, p_y) == 1)
 		return (1);
 	if (flood_fill(map, p_x - 1, p_y) == 1)
@@ -57,11 +87,5 @@ int flood_fill(char **map, int p_x, int p_y)
 		return (1);
 	if (flood_fill(map, p_x, p_y - 1) == 1)
 		return (1);
-	i = 0;
-	while (map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
 	return (0);
 }
