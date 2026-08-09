@@ -1,4 +1,9 @@
 Cub3D study steps:
 
 - Create .h for structs player map and data
-- Parsing .cub to t_data
+- Parsing .cub to t_data with map checks(if player surround by wall,
+                                         if there are more than 1 player)
+    - t_map
+        - init data (path to texture of all directions, color of floor and ceilling, map)
+    - t_player
+        - init data (player position, vecteurs(direction and plane))
