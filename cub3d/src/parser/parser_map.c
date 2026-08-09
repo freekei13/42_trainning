@@ -79,7 +79,7 @@ int	floor_ceil_init(t_data *data, char *map_info)
 		return (1);
 	rgb = ft_split(tmps[1], ',');
 	if (!rgb || !(rgb[0] && rgb[1] && rgb[2]))
-		return (1);
+		return (free_all(tmps), 1);
 	if (ft_strncmp(tmps[0], "F", 2) == 0 && tmps[1])
 		data->map.color_f = create_rgb(ft_atoi(rgb[0]),
 			ft_atoi(rgb[1]), ft_atoi(rgb[2]));

@@ -4,7 +4,7 @@ FLAGS = -Werror -Wall -Wextra -g
 
 PARSER_PATH = src/parser/
 
-SRC_PARSER = parser.c parser_tools.c parser_map.c
+SRC_PARSER = parser.c parser_tools.c parser_map.c parser_player.c
 
 SRCS = 	src/main.c \
 		$(addprefix $(PARSER_PATH), $(SRC_PARSER))

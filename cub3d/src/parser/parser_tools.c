@@ -70,19 +70,19 @@ int flood_fill(char **map, int p_x, int p_y)
 	int		height;
 	int		widgth;
 
-	if (!map[p_x])
-		return (0);
 	height = string_count(map);
-	widgth = ft_strlen(map[p_x]) - 1;
-	if (p_x < 0 || p_x >= height || p_y < 0 || p_y >= widgth
-		|| map[p_x][p_y] == '1' || map[p_x][p_y] == 'X')
+	if (p_y < 0 || p_x < 0)
 		return (0);
-	if (!map[p_x + 1] || map[p_x][p_y + 1] == '\n' || !map[p_x - 1]
-		|| !map[p_x][p_y - 1] || map[p_x + 1][p_y] == ' '
-		|| map[p_x][p_y + 1] == ' ' || map[p_x - 1][p_y] == ' '
-		|| map[p_x][p_y - 1] == ' ')
+	widgth = ft_strlen(map[p_y]) - 1;
+	if (p_x >= widgth || p_y >= height || map[p_y][p_x] == '1'
+		|| map[p_y][p_x] == 'X')
+		return (0);
+	if (!map[p_y + 1] || map[p_y][p_x + 1] == '\n' || p_y - 1 < 0
+		|| p_x - 1 < 0 || map[p_y + 1][p_x] == ' '
+		|| map[p_y][p_x + 1] == ' ' || map[p_y - 1][p_x] == ' '
+		|| map[p_y][p_x - 1] == ' ')
 		return (1);
-	map[p_x][p_y] = 'X';
+	map[p_y][p_x] = 'X';
 	if (flood_fill(map, p_x + 1, p_y) == 1)
 		return (1);
 	if (flood_fill(map, p_x - 1, p_y) == 1)
