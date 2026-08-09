@@ -28,3 +28,55 @@ int    map_data_init(t_data *data, char **map_info)
 	}
 	return (0);
 }
+
+void	t_player_init(t_player *player, int x, int y, char dir)
+{
+	if (dir == 'N' || dir == 'S' || dir == 'W' || dir == 'E')
+	{
+		player->player_nb += 1;
+		//Le +0.5 évite que le joueur démarre collé à un 
+		//mur ou pile sur une frontière de case (ce qui peut 
+		//casser tes calculs de collision dès le premier frame).
+		player->pos_x = (double)x + 0.5;
+		player->pos_y = (double)y + 0.5;
+		if (dir == 'N')
+		{
+			player->dir_x = 0;
+			player->dir_y = -1;
+			player->plane_x = 0.66;
+			player->plane_y = 0;
+		}
+	}
+	(void)player;
+}
+
+int	player_position(t_data *data)
+{
+	int	i;
+	int	j;
+
+	if (!data->map.map)
+		return (1);
+	i = 0;
+	while (data->map.map[i])
+	{
+		j = 0;
+		while (data->map.map[i][j])
+		{	
+			if (data->player.player_nb > 1)
+				return (1);
+			t_player_init(&data->player, j, i, data->map.map[i][j]);
+			j++;			
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	player_data_init(t_data *data)
+{
+	data->player.player_nb = 0;
+	if (player_position(data) == 1)
+		return (1);
+	return (0);
+}

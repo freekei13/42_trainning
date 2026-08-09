@@ -37,6 +37,8 @@ int	string_count(char **strs)
 {
 	int	i;
 
+	if (!strs)
+		return (0);
 	i = 0;
 	while (strs[i])
 		i++;
@@ -48,6 +50,8 @@ char	**dup_map(char **map)
 	char	**dup;
 	int		i;
 
+	if (!map)
+		return (NULL);
 	dup = malloc(sizeof(char *) * (string_count(map) + 1));
 	if (!dup)
 		return (NULL);

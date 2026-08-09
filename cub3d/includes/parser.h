@@ -13,12 +13,18 @@ typedef struct s_player
     //indispensable pour le mouvement fluide et le raycasting)
     double  pos_x;
     double  pos_y;
+    //dir (dirX, dirY) : le vecteur qui pointe dans la direction où regarde le joueur.
+    //plane (planeX, planeY) : le "plan de caméra", perpendiculaire à dir, qui définit
+    //le champ de vision (FOV). C'est ce vecteur qui te permettra plus tard de balayer
+    //tous les rayons de l'écran gauche à droite
+
     //vecteur direction
     double  dir_x;
     double  dir_y;
     //vecteur plan camera
     double  plane_x;
     double  plane_y;
+    int     player_nb;
 }           t_player;
 
 typedef struct s_map
@@ -50,5 +56,6 @@ int	    floor_ceil_init(t_data *data, char *map_info);
 char	**dup_map(char **map);
 void	free_t_map(t_map map_data);
 int     flood_fill(char **map_data, int p_x, int p_y);
+int     player_data_init(t_data *data);
 
 #endif
