@@ -3,11 +3,14 @@ CC = cc
 FLAGS = -Werror -Wall -Wextra -g
 
 PARSER_PATH = src/parser/
+RENDER_PATH = src/render/
 
 SRC_PARSER = parser.c parser_tools.c parser_map.c parser_player.c
+SRC_RENDER = render.c
 
 SRCS = 	src/main.c \
-		$(addprefix $(PARSER_PATH), $(SRC_PARSER))
+		$(addprefix $(PARSER_PATH), $(SRC_PARSER)) \
+		$(addprefix $(RENDER_PATH), $(SRC_RENDER))
 
 OBJ = $(SRCS:.c=.o)
 

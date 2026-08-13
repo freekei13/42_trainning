@@ -7,3 +7,10 @@ Cub3D study steps:
         - init data (path to texture of all directions, color of floor and ceilling, map)
     - t_player
         - init data (player position, vecteurs(direction and plane))
+- Rendering
+    - create custom mlx_pixel_put (see Mlx42docs)
+    - draw a squar with custom mlx_pixel_put
+    - draw a squar for player
+    - rend player and wall
+    - key hook config for mouvement (inprogress)
+
