@@ -1,6 +1,5 @@
 #include "parser.h"
 #include "render.h"
-#include <X11/Xlib.h>
 
 //119 w
 //115 s
@@ -17,7 +16,7 @@ int key_config(int keycode, void *param)
 {
     t_data  *data;
 
-    data = param; 
+    data = param;
     if (keycode == 'w')
         movements(data, 0, -0.05);
     else if (keycode == 's')
@@ -26,7 +25,7 @@ int key_config(int keycode, void *param)
         movements(data, -0.05, 0);
     else if (keycode == 'd')
         movements(data, 0.05, 0);
-    map_render(*data);
+    //map_render(data);
     return (0);
 }
 
@@ -76,7 +75,6 @@ int main(int ac, char **av)
         free_t_map(data.map);
         return (0);
     }
-    XAutoRepeatOff((Display *)data.mlx);
     data.mlx_win = mlx_new_window(data.mlx, 1920, 1080, "TMP_TEST");
     if (!data.mlx_win)
     {
@@ -94,12 +92,17 @@ int main(int ac, char **av)
     data.img_p.addr = mlx_get_data_addr(data.img_p.img, &data.img_p.bits_per_pixel,
         &data.img_p.line_length, &data.img_p.endian);
     draw_squar(&data.img_p, 32, 0x00FF0000);
-    // map render
-    map_render(data);
-    
+    // map render 2D
+    //map_render(&data);
+
+    // map render 3D
+    data.screen.img = mlx_new_image(data.mlx, 1920, 1080);
+    data.screen.addr = mlx_get_data_addr(data.screen.img, &data.screen.bits_per_pixel,
+        &data.screen.line_length, &data.screen.endian);
+    map_d_render(&data);
+        
     // key hook
-    mlx_key_hook(data.mlx_win, key_config, &data);
+    mlx_hook(data.mlx_win, 2, 1L<<0, (int (*)())(void *)key_config, &data);
     mlx_loop(data.mlx);
-    XAutoRepeatOn((Display *)data.mlx);
     return (0);
 }

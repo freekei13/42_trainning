@@ -28,10 +28,6 @@ typedef struct s_player
     double  plane_x;
     double  plane_y;
     int     player_nb;
-    int     w_key;
-    int     s_key;
-    int     a_key;
-    int     d_key;
 }           t_player;
 
 typedef struct s_map
@@ -55,6 +51,7 @@ typedef struct s_data
     t_map       map;
     t_img       img;
     t_img       img_p;
+    t_img       screen;
 }               t_data;
 
 #endif

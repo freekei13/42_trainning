@@ -36,9 +36,5 @@ int	player_data_init(t_data *data)
 		return (1);
 	if (data->player.player_nb < 1 || data->player.player_nb > 1)
 		return (1);
-	data->player.w_key = 0;
-	data->player.s_key = 0;
-	data->player.a_key = 0;
-	data->player.d_key = 0;
 	return (0);
 }

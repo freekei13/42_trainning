@@ -29,24 +29,48 @@ void    draw_squar(void *img, int size, int color)
     }
 }
 
-void    map_render(t_data data)
+void    map_render(t_data *data)
 {
     int y;
     int x;
 
+    mlx_clear_window(data->mlx, data->mlx_win);
     y = 0;
-    while (data.map.map[y])
+    while (data->map.map[y])
     {
         x = 0;
-        while (data.map.map[y][x])
+        while (data->map.map[y][x])
         {
-            if (data.map.map[y][x] == '1')
-                mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img,
+            if (data->map.map[y][x] == '1')
+                mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img,
                     x * 64, y * 64);
             x++;
         }
         y++;
     }
-    mlx_put_image_to_window(data.mlx, data.mlx_win, data.img_p.img,
-        data.player.pos_x * 64, data.player.pos_y * 64);
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_p.img,
+        data->player.pos_x * 64, data->player.pos_y * 64);
+}
+
+void    map_d_render(t_data *data)
+{
+    int x;
+    int y;
+
+    ft_memset(data->screen.addr, 0, data->screen.line_length * 1080);
+    y = 0;
+    while (y < 1080)
+    {
+        x = 0;
+        while (x < 1920)
+        {
+            if (x < 1920 / 2)
+                my_mlx_pixel_put(&data->screen, x, y, 0x00FF0000);
+            else
+                my_mlx_pixel_put(&data->screen, x, y, 0x13031990);
+            x++;
+        }
+        y++;
+    }
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->screen.img, 0, 0);
 }
