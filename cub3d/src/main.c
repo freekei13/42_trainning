@@ -1,5 +1,6 @@
 #include "parser.h"
 #include "render.h"
+#include <X11/Xlib.h>
 
 //119 w
 //115 s
@@ -17,14 +18,15 @@ int key_config(int keycode, void *param)
     t_data  *data;
 
     data = param; 
-    if (keycode == 119)
-        movements(data, 0, -1);
-    else if (keycode == 115)
-        movements(data, 0, 1);
-    else if (keycode == 97)
-        movements(data, -1, 0);
-    else if (keycode == 100)
-        movements(data, 1, 0);
+    if (keycode == 'w')
+        movements(data, 0, -0.05);
+    else if (keycode == 's')
+        movements(data, 0, 0.05);
+    else if (keycode == 'a')
+        movements(data, -0.05, 0);
+    else if (keycode == 'd')
+        movements(data, 0.05, 0);
+    map_render(*data);
     return (0);
 }
 
@@ -68,21 +70,36 @@ int main(int ac, char **av)
     free_all(map_info);
     // init mlx data
     data.mlx = mlx_init();
+    if (!data.mlx)
+    {
+        ft_putstr_fd("mlx init failed\n", 2);
+        free_t_map(data.map);
+        return (0);
+    }
+    XAutoRepeatOff((Display *)data.mlx);
     data.mlx_win = mlx_new_window(data.mlx, 1920, 1080, "TMP_TEST");
+    if (!data.mlx_win)
+    {
+        ft_putstr_fd("new window fail\n",2);
+        free_t_map(data.map);
+        return (0);
+    }
     // create a squar 64
     data.img.img = mlx_new_image(data.mlx, 64, 64);
     data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
         &data.img.line_length, &data.img.endian);
-    draw_squar(&data.img.img, 64, 0x13031990);
+    draw_squar(&data.img, 64, 0x13031990);
     // create a player 
     data.img_p.img = mlx_new_image(data.mlx, 32, 32);
     data.img_p.addr = mlx_get_data_addr(data.img_p.img, &data.img_p.bits_per_pixel,
         &data.img_p.line_length, &data.img_p.endian);
-    draw_squar(&data.img_p.img, 32, 0x00FF0000);
+    draw_squar(&data.img_p, 32, 0x00FF0000);
     // map render
     map_render(data);
+    
     // key hook
     mlx_key_hook(data.mlx_win, key_config, &data);
     mlx_loop(data.mlx);
+    XAutoRepeatOn((Display *)data.mlx);
     return (0);
 }

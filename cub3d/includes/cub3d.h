@@ -28,6 +28,10 @@ typedef struct s_player
     double  plane_x;
     double  plane_y;
     int     player_nb;
+    int     w_key;
+    int     s_key;
+    int     a_key;
+    int     d_key;
 }           t_player;
 
 typedef struct s_map
