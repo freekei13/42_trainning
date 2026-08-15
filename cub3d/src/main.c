@@ -15,6 +15,8 @@ void    movements(t_data *data, double x, double y)
 int key_config(int keycode, void *param)
 {
     t_data  *data;
+    double  old_dir_x;
+    double  old_plane_x;
 
     data = param;
     if (keycode == 'w')
@@ -25,7 +27,26 @@ int key_config(int keycode, void *param)
         movements(data, -0.05, 0);
     else if (keycode == 'd')
         movements(data, 0.05, 0);
+    else if (keycode == 'q')
+    {
+        old_dir_x = data->player.dir_x;
+        data->player.dir_x = data->player.dir_x * cos(-0.03) - data->player.dir_y * sin(-0.03);
+        data->player.dir_y = old_dir_x * sin(-0.03) + data->player.dir_y * cos(-0.03);
+        old_plane_x = data->player.plane_x;
+        data->player.plane_x = data->player.plane_x * cos(-0.03) - data->player.plane_y * sin(-0.03);
+        data->player.plane_y = old_plane_x * sin(-0.03) + data->player.plane_y * cos(-0.03);
+    }
+    else if (keycode == 'e')
+    {
+        old_dir_x = data->player.dir_x;
+        data->player.dir_x = data->player.dir_x * cos(0.03) - data->player.dir_y * sin(0.03);
+        data->player.dir_y = old_dir_x * sin(0.03) + data->player.dir_y * cos(0.03);
+        old_plane_x = data->player.plane_x;
+        data->player.plane_x = data->player.plane_x * cos(0.03) - data->player.plane_y * sin(0.03);
+        data->player.plane_y = old_plane_x * sin(0.03) + data->player.plane_y * cos(0.03);
+    }
     //map_render(data);
+    map_d_render(data);
     return (0);
 }
 
@@ -100,7 +121,7 @@ int main(int ac, char **av)
     data.screen.addr = mlx_get_data_addr(data.screen.img, &data.screen.bits_per_pixel,
         &data.screen.line_length, &data.screen.endian);
     map_d_render(&data);
-        
+    //map_render(&data); 
     // key hook
     mlx_hook(data.mlx_win, 2, 1L<<0, (int (*)())(void *)key_config, &data);
     mlx_loop(data.mlx);

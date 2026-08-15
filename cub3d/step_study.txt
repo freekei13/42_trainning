@@ -12,5 +12,8 @@ Cub3D study steps:
     - draw a squar with custom mlx_pixel_put
     - draw a squar for player
     - rend player and wall
-    - key hook config for mouvement (inprogress)
+    - key hook config for mouvement
+    - rend 3dmap
+        - init all element to calculate line height -> calculate drawStart and drawEnd(draw colone)
+
 
