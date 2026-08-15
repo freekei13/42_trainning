@@ -159,7 +159,7 @@ void    map_d_render(t_data *data)
             "stepX = %d\n"
             "stepY = %d\n"
             "perpWallDist = %f\n"
-            "lineHeight = %d\n",
+            "lineHeight = %d\n\r",
         dir_x, dir_y, plane_x, plane_y, camera_x, ray_dir_x, ray_dir_y,
         map_x, map_y, delta_dist_x, delta_dist_y, side_dist_x, side_dist_y,
         step_x, step_y, perp_wall_dist, line_height);
