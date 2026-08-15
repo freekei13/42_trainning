@@ -224,10 +224,13 @@ void    map_d_render(t_data *data)
         int draw_end = line_height / 2 + 1080 / 2;
         if (draw_start < 0) draw_start = 0;
         if (draw_end >= 1080) draw_end = 1080 - 1;
+        int color = 0x13031990;
+        if (side == 1)
+            color = color / 2;
         y = draw_start;
         while (y <= draw_end)
         {
-            my_mlx_pixel_put(&data->screen, x, y, 0x13031990);
+            my_mlx_pixel_put(&data->screen, x, y, color);
             y++;
         }
         x++;
