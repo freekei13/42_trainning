@@ -1,48 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_tools.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csamakka <csamakka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/18 20:32:24 by ssutarmi          #+#    #+#             */
+/*   Updated: 2026/09/02 18:48:57 by csamakka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
 #include "parser.h"
+#include "render.h"
 
-int	dir_color_init(t_data *data, char *map_info)
+int	string_count(char **strs);
+
+int	flood_fill(char **map, int p_x, int p_y)
 {
-	if (ft_strnstr(map_info, "NO ", 3) != NULL
-		|| ft_strnstr(map_info, "SO ", 3) != NULL
-		|| ft_strnstr(map_info, "WE ", 3) != NULL
-		|| ft_strnstr(map_info, "EA ", 3) != NULL)
-	{
-		if (dir_init(data, map_info) != 0)
-			return (1);
-	}
-	else if (ft_strnstr(map_info, "F ", 2) != NULL
-		|| ft_strnstr(map_info, "C ", 2) != NULL)
-	{
-		if (floor_ceil_init(data, map_info) != 0)
-			return (1);
-	}
-	return (0);
-}
-
-void	free_t_map(t_map map_data)
-{
-	if (map_data.texture_no)
-		free(map_data.texture_no);
-	if (map_data.texture_so)
-		free(map_data.texture_so);
-	if (map_data.texture_we)
-		free(map_data.texture_we);
-	if (map_data.texture_ea)
-		free(map_data.texture_ea);
-	if (map_data.map)
-		free_all(map_data.map);
-}
-
-int	string_count(char **strs)
-{
-	int	i;
-
-	if (!strs)
+	if (p_x < 0 || p_y < 0 || p_y >= string_count(map))
+		return (1);
+	if (p_x >= (int)ft_strlen(map[p_y])
+		|| map[p_y][p_x] == ' ' || map[p_y][p_x] == '\n')
+		return (1);
+	if (map[p_y][p_x] == '1' || map[p_y][p_x] == 'X')
 		return (0);
-	i = 0;
-	while (strs[i])
-		i++;
-	return (i);
+	map[p_y][p_x] = 'X';
+	if (flood_fill(map, p_x + 1, p_y) == 1)
+		return (1);
+	if (flood_fill(map, p_x - 1, p_y) == 1)
+		return (1);
+	if (flood_fill(map, p_x, p_y + 1) == 1)
+		return (1);
+	if (flood_fill(map, p_x, p_y - 1) == 1)
+		return (1);
+	return (0);
 }
 
 char	**dup_map(char **map)
@@ -59,37 +51,70 @@ char	**dup_map(char **map)
 	while (map[i])
 	{
 		dup[i] = ft_strdup(map[i]);
+		if (!dup[i])
+		{
+			free_all(dup);
+			return (NULL);
+		}
 		i++;
 	}
 	dup[i] = NULL;
 	return (dup);
 }
 
-int flood_fill(char **map, int p_x, int p_y)
+int	is_valid(char *line, int mode)
 {
-	int		height;
-	int		widgth;
+	if ((mode == 0 || mode == 1) && ft_strncmp(line, "NO ", 3) == 0)
+		return (0);
+	if ((mode == 0 || mode == 1) && ft_strncmp(line, "SO ", 3) == 0)
+		return (0);
+	if ((mode == 0 || mode == 1) && ft_strncmp(line, "WE ", 3) == 0)
+		return (0);
+	if ((mode == 0 || mode == 1) && ft_strncmp(line, "EA ", 3) == 0)
+		return (0);
+	if ((mode == 0 || mode == 2) && ft_strncmp(line, "F ", 2) == 0)
+		return (0);
+	if ((mode == 0 || mode == 2) && ft_strncmp(line, "C ", 2) == 0)
+		return (0);
+	return (1);
+}
 
-	height = string_count(map);
-	if (p_y < 0 || p_x < 0)
+int	string_count(char **strs)
+{
+	int	i;
+
+	if (!strs)
 		return (0);
-	widgth = ft_strlen(map[p_y]) - 1;
-	if (p_x >= widgth || p_y >= height || map[p_y][p_x] == '1'
-		|| map[p_y][p_x] == 'X')
-		return (0);
-	if (!map[p_y + 1] || map[p_y][p_x + 1] == '\n' || p_y - 1 < 0
-		|| p_x - 1 < 0 || map[p_y + 1][p_x] == ' '
-		|| map[p_y][p_x + 1] == ' ' || map[p_y - 1][p_x] == ' '
-		|| map[p_y][p_x - 1] == ' ')
-		return (1);
-	map[p_y][p_x] = 'X';
-	if (flood_fill(map, p_x + 1, p_y) == 1)
-		return (1);
-	if (flood_fill(map, p_x - 1, p_y) == 1)
-		return (1);
-	if (flood_fill(map, p_x, p_y + 1) == 1)
-		return (1);
-	if (flood_fill(map, p_x, p_y - 1) == 1)
-		return (1);
+	i = 0;
+	while (strs[i])
+		i++;
+	return (i);
+}
+
+int	minilibx_init(t_data *data)
+{
+	data->screen.img = NULL;
+	data->mlx_win = NULL;
+	data->mlx = mlx_init();
+	if (!data->mlx)
+	{
+		ft_putstr_fd(ERR_MLX, 2);
+		return (free_data(data), 1);
+	}
+	if (texture_init(data, data->texture) == 1)
+	{
+		ft_putstr_fd(ERR_TXT, 2);
+		return (free_data(data), 1);
+	}
+	data->mlx_win = mlx_new_window(data->mlx, W, H, "ICE CUBE");
+	if (!data->mlx_win)
+	{
+		ft_putstr_fd(ERR_WIN, 2);
+		return (free_data(data), 1);
+	}
+	data->screen.img = mlx_new_image(data->mlx, W, H);
+	data->screen.addr = mlx_get_data_addr(data->screen.img,
+			&data->screen.bits_per_pixel,
+			&data->screen.line_length, &data->screen.endian);
 	return (0);
 }

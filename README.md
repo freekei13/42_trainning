@@ -25,8 +25,9 @@ The 42 curriculum is project-based and peer-evaluated, with no traditional lectu
 | pipex | Unix pipe and process management | ✅ Done (+ bonus) |
 | philosophers | Concurrency with threads and mutexes | ✅ Done |
 | minishell | Bash-like shell implementation | ✅ Done |
-| cub3d | Raycasting engine (Wolfenstein-style 3D renderer) | 🔄 In progress |
+| cub3d | Raycasting engine (Wolfenstein-style 3D renderer) | ✅ Done |
 | cpp-module | Introduction to C++ (piscine C++) | 🔄 In progress |
+| netpractice | Network configuration and troubleshooting exercises | 🔄 In progress |
 ---
 
 ## Getting Started
@@ -53,3 +54,4 @@ Refer to the project's own README for specific compilation and execution instruc
 - **Raycasting & 3D rendering** (`cub3d`) — DDA algorithm, ray-grid intersection, texture mapping, perspective projection, map parsing and validation
 - **C++ fundamentals** (`cpp-module`) — classes, encapsulation, constructors/destructors, orthodox canonical form, references vs pointers, `const` correctness
 - **System administration** — virtual machines, networking basics, service configuration (`born2beroot`)
+- **Networking fundamentals** (`netpractice`) — IP addressing, subnetting, routing, basic network configuration

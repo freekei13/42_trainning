@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssutarmi <ssutarmi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/25 21:13:11 by ssutarmi          #+#    #+#             */
+/*   Updated: 2026/09/01 18:33:57 by ssutarmi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -8,15 +20,24 @@
 # include <stdlib.h>
 # include "cub3d.h"
 
-char    **map_info_parser(char *map_path);
-int	    dir_color_init(t_data *data, char *map_info);
-int     map_data_init(t_data *data, char **map_info);
-int     dir_init(t_data *data, char *map_info);
-int	    floor_ceil_init(t_data *data, char *map_info);
+//PARSER.C
+int		parsing(t_data *data, char **av);
+
+//PARSER_MAP.C
+int		direction_and_color_init(t_data *data, char *map_info);
+
+//PARSER_PLAYER.C
+int		player_data_init(t_data *data);
+
+//PARSER_TOOLS.C
 char	**dup_map(char **map);
-void	free_t_map(t_map map_data);
-int     flood_fill(char **map_data, int p_x, int p_y);
-int     player_data_init(t_data *data);
-int	    player_position(t_data *data);
+int		flood_fill(char **map_data, int p_x, int p_y);
+int		is_valid(char *line, int mode);
+int		string_count(char **strs);
+
+//MEMORY.C
+void	t_data_init(t_data *new);
+void	free_data(t_data *data);
+int		minilibx_init(t_data *data);
 
 #endif
