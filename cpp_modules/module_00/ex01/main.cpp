@@ -16,6 +16,10 @@ int main()
         {
             myPhoneBook.addContact();
         }
+        else if (arg == "SEARCH")
+        {
+
+        }
         else if (arg == "EXIT")
         {
             break ;
