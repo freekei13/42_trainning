@@ -18,3 +18,18 @@ void    Phonebook::addContact(std::string const &fN, std::string const &lN,
     contactNb++;
     std::cout << "Contact saved at index: " << index + 1 << std::endl;
 }
+
+void    Phonebook::searchContact() const
+{
+    int nb = 0;
+    if (contactNb < 8)
+        nb = contactNb;
+    else
+        nb = 8;
+    std::cout << "You have " << nb <<" contacts" << std::endl;
+    if (nb > 0)
+    {
+        std::cout << "Index |" << std::setw(10) << "FirstName" << std::setw(10) << "|"
+            << "LastName" << std::setw(10) << "|" << "NickName" << std::setw(10) << std::endl;
+    }
+}

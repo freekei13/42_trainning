@@ -36,12 +36,14 @@ int main()
         }
         else if (arg == "SEARCH")
         {
-
+            myPhoneBook.searchContact();
         }
         else if (arg == "EXIT")
         {
             break ;
         }
     }
+    std::cout << "Closing My awesome phonebook" << std::endl;
+    std::cout << "You loose all your data..." << std::endl;
     return (0);
 }
