@@ -11,7 +11,8 @@ class   Phonebook
         int contactNb;
     public:
         Phonebook();
-        void    addContact();
+        void    addContact(std::string const &fN, std::string const &lN,
+            std::string const &nN, std::string const &pN, std::string const &dS);
         void    searchContact() const;
         void    displayContact(int index) const;
 };
