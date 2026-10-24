@@ -3,6 +3,7 @@
 # include "Contact.hpp"
 # include <iomanip>
 # include <iostream>
+# include <sstream>
 
 class   Phonebook
 {
@@ -14,7 +15,7 @@ class   Phonebook
         void    addContact(std::string const &fN, std::string const &lN,
             std::string const &nN, std::string const &pN, std::string const &dS);
         void    searchContact() const;
-        void    displayContact(int index) const;
+        void    displayContact() const;
 };
 
 #endif
