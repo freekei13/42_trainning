@@ -47,14 +47,10 @@ void    Account::displayAccountsInfos( void )
     std::cout << "withdrawals:" << _totalNbWithdrawals << std::endl;
 }
 
-Account::Account( void )
-{
-    _nbAccounts++;
-}
-
 Account::Account( int initial_deposit )
 {
     _accountIndex = _nbAccounts;
+    _nbAccounts++;
     _amount = initial_deposit;
     _totalAmount += initial_deposit;
     _nbDeposits = 0;
