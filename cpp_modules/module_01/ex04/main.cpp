@@ -21,20 +21,23 @@ int main(int ac, char **av)
         return (1);
     }
     std::string content;
-    std::string allContent;
     std::string s1(av[2]);
     std::string s2(av[3]);
-    while (std::getline(file, content))
+    std::getline(file, content, '\0');
+    if (file.bad())
     {
-        std::size_t pos = 0;
-        while (content.find(s1, pos) != std::string::npos)
-        {
-            std::size_t found = content.find(s1, pos);
-            content.erase(found, s1.length());
-            content.insert(found, s2);
-            pos += found + s2.length();
-        }
-        allContent.append(content + "\n");
+        std::cerr << "Error: file invalide" << std::endl;
+        return (1);
+    }
+    std::size_t pos = 0;
+    while (1)
+    {
+        std::size_t found = content.find(s1, pos);
+        if (found == std::string::npos)
+            break ;
+        content.erase(found, s1.length());
+        content.insert(found, s2);
+        pos = found + s2.length();
     }
     std::string fileName(av[1]);
     fileName.append(".replace");
@@ -44,8 +47,12 @@ int main(int ac, char **av)
         std::cerr << "Error: fail to open " << fileName << std::endl;
         return (1);
     }
-    std::cout << "Success: " << fileName << " is created: "
-        << "\"" << s1 << "\"" << " are replaced by "
-        << "\"" << s2 << "\"" << std::endl;
-    fileReplace << allContent;
+    fileReplace << content;
+    fileReplace.close();
+    if (fileReplace.fail())
+    {
+        std::cerr << "Error: fail to write " << fileName << std::endl;
+        return (1);
+    }
+    return (0);
 }
