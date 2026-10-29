@@ -10,4 +10,5 @@ int main(int ac, char **av)
 
     Harl karen;
     karen.complain(av[1]);
+    return (0);
 }
