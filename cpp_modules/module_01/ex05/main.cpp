@@ -1,14 +1,11 @@
 #include "Harl.hpp"
 
-int main(int ac, char **av)
+int main()
 {
-    if (ac != 2)
-    {
-        std::cerr << "Error: 1 argument needed" << std::endl;
-        return (1);
-    }
-
     Harl karen;
-    karen.complain(av[1]);
+    karen.complain("DEBUG");
+    karen.complain("INFO");
+    karen.complain("WARNING");
+    karen.complain("ERROR");
     return (0);
 }
