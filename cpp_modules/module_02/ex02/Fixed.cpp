@@ -69,25 +69,25 @@ bool    Fixed::operator!=(const Fixed& other) const
 
 //*******************************************************************//
 
-Fixed   Fixed::operator+(const Fixed& other)
+Fixed   Fixed::operator+(const Fixed& other) const
 {
     Fixed sum(this->toFloat() + other.toFloat());
     return sum;
 }
 
-Fixed   Fixed::operator-(const Fixed& other)
+Fixed   Fixed::operator-(const Fixed& other) const
 {
     Fixed subs(this->toFloat() - other.toFloat());
     return subs;
 }
 
-Fixed   Fixed::operator*(const Fixed& other)
+Fixed   Fixed::operator*(const Fixed& other) const
 {
     Fixed multi(this->toFloat() * other.toFloat());
     return multi;
 }
 
-Fixed   Fixed::operator/(const Fixed& other)
+Fixed   Fixed::operator/(const Fixed& other) const
 {
     Fixed division(this->toFloat() / other.toFloat());
     return division;
