@@ -16,3 +16,25 @@ Point&  Point::operator=(const Point& other)
     (void)other;
     return *this;
 }
+
+Point   Point::operator-(const Point& other) const
+{
+    Point subs(_x.toFloat() - other._x.toFloat(), _y.toFloat() - other._y.toFloat());
+    return subs;
+}
+
+Point   Point::operator*(const Point& other) const
+{
+    Point multi(_x.toFloat() * other._x.toFloat(), _y.toFloat() * other._y.toFloat());
+    return multi;
+}
+
+const Fixed& Point::getX() const
+{
+    return _x;
+}
+
+const Fixed& Point::getY() const
+{
+    return _y;
+}
