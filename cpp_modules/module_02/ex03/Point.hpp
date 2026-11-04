@@ -13,6 +13,8 @@ class Point
         Point(const Point& other);
         ~Point();
         Point& operator=(const Point& other);
+        Point operator-(const Point& other) const;
+        Point operator*(const Point& other) const;
 };
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);
