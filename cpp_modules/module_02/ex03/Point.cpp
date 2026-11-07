@@ -23,12 +23,6 @@ Point   Point::operator-(const Point& other) const
     return subs;
 }
 
-Point   Point::operator*(const Point& other) const
-{
-    Point multi(_x.toFloat() * other._x.toFloat(), _y.toFloat() * other._y.toFloat());
-    return multi;
-}
-
 const Fixed& Point::getX() const
 {
     return _x;
