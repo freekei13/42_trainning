@@ -19,5 +19,5 @@ class Point
 };
 
 bool    bsp(Point const a, Point const b, Point const c, Point const point);
-bool    pointCheck(Point const& u, Point const& v);
+int     pointCheck(Point const& u, Point const& v);
 #endif
