@@ -3,7 +3,7 @@
 
 Fixed::Fixed(): _fNumber(0) {}
 
-Fixed::Fixed(const Fixed& other)
+Fixed::Fixed(const Fixed& other) 
 {
     *this = other;
 }

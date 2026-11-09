@@ -9,7 +9,17 @@ int main()
 
     ClapTrap b(a);
     b.takeDamage(5);
-    a.takeDamage(10);
+    a.takeDamage(3);
 
+    ClapTrap c("T2");
+    c.attack("T1");
+    c.takeDamage(5);
+    c.beRepaired(5);
+    c = a;
+    c.takeDamage(1);
+    std::cout << "-----------" << std::endl;
+    a.takeDamage(0);
+    b.takeDamage(0);
+    c.takeDamage(0);
 
 }
