@@ -1,8 +1,12 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap():
+    _name("CLAP"), 
+    _hitPoint(10),
+    _energyPoint(10), 
+    _attackDamage(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "ClapTrap Default constructor is called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string const& name): _name(name), _hitPoint(10),
@@ -22,18 +26,18 @@ ClapTrap::ClapTrap(ClapTrap const& other):
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << _name << " has been destroyed" << std::endl;
+    std::cout << _name << " ClapTrap has been destroyed" << std::endl;
 }
 
 ClapTrap&   ClapTrap::operator=(ClapTrap const& other)
 {
     if (this != &other)
     {
-        std::cout << _name << " has been assigned" << std::endl;
         _name = other._name;
         _hitPoint = other._hitPoint;
         _energyPoint = other._energyPoint;
         _attackDamage = other._attackDamage;
+        std::cout << " ClapTrap has been assigned to" << other._name << std::endl;
     }
     return *this;
 }

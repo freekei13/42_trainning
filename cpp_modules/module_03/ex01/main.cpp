@@ -1,25 +1,18 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-    ClapTrap a("T1");
+    ScavTrap    a("S1");
     a.attack("something");
-    a.takeDamage(2);
-    a.beRepaired(1);
+    a.takeDamage(10);
+    a.beRepaired(5);
+    a.guardGate();
 
-    ClapTrap b(a);
-    b.takeDamage(5);
-    a.takeDamage(3);
-
-    ClapTrap c("T2");
-    c.attack("T1");
-    c.takeDamage(5);
-    c.beRepaired(5);
-    c = a;
-    c.takeDamage(1);
-    std::cout << "-----------" << std::endl;
+    ScavTrap b = a;
+    b.takeDamage(2);
     a.takeDamage(0);
-    b.takeDamage(0);
-    c.takeDamage(0);
 
+    ScavTrap c;
+    c.attack("a leg");
+    return 0;
 }
