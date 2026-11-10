@@ -17,9 +17,8 @@ int main()
     c.beRepaired(5);
     c = a;
     c.takeDamage(1);
-    std::cout << "-----------" << std::endl;
     a.takeDamage(0);
     b.takeDamage(0);
     c.takeDamage(0);
-
+    return 0;
 }
