@@ -23,17 +23,24 @@ Brain&  Brain::operator=(Brain const& rhs)
     {
         for (int i = 0; i < 100; i++)
             _ideas[i] = rhs._ideas[i];
-        std::cout << "Animal Copy assignment operator is called" << std::endl;
+        std::cout << "Brain Copy assignment operator is called" << std::endl;
     }
     return *this;
 }
 
 const std::string&    Brain::getIdea(unsigned int index) const
 {
-    return  _ideas[index];
+    static const std::string noIdea = "No Idea";
+    if (index >= 100)
+        return noIdea;
+    else
+        return  _ideas[index];
 }
 
 void    Brain::setIdea(unsigned int index, std::string const& idea)
 {
-    _ideas[index] = idea;
+    if (index >= 100)
+        std::cout << "No Idea" << std::endl;
+    else
+        _ideas[index] = idea;
 }

@@ -15,7 +15,8 @@ class Cat: public Animal
 
         Cat&    operator=(Cat const& rhs);
         void    makeSound(void) const;
-        
+        const std::string&  getIdea(unsigned int index) const;
+        void    setIdea(unsigned int index, std::string const& idea);
 };
 
 #endif

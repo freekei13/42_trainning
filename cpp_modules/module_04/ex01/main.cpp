@@ -28,13 +28,44 @@ int main()
     for (int i = 0; i < 100; i++)
         delete animal[i];
 
-    const Animal* a = new Dog();
-    const Animal* b = new Cat();
-    a->makeSound();
-    b->makeSound();
+    Dog* a = new Dog();
 
+    for (int i = 0; i < 100; i++)
+        a->setIdea(i, "Idea_");
+    for (int i = 0; i < 100; i++)
+        std::cout << "a: " << &a->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        std::cout << "a: " << a->getIdea(i) << std::endl;
+    Dog* b = new Dog();
+    *b = *a;
+    for (int i = 0; i < 100; i++)
+        std::cout << "b: " << b->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        std::cout << "b: " << &b->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        b->setIdea(i, "Dog Idea");
+    for (int i = 0; i < 100; i++)
+        std::cout << "b: " << b->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        std::cout << "a: " << a->getIdea(i) << std::endl;
+    
+    Dog* c = new Dog(*a);
+    for (int i = 0; i < 100; i++)
+        std::cout << "c: " << c->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        c->setIdea(i, "Other Idea");
+    for (int i = 0; i < 100; i++)
+        std::cout << "c: " << c->getIdea(i) << std::endl;
+    for (int i = 0; i < 100; i++)
+        std::cout << "a: " << a->getIdea(i) << std::endl;
+
+    c->setIdea(101, "test idea");
+    std::cout << c->getIdea(103) << std::endl;
+
+    
     delete a;
     delete b;
+    delete c;
 
     return 0;
 }
