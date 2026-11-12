@@ -27,3 +27,13 @@ Brain&  Brain::operator=(Brain const& rhs)
     }
     return *this;
 }
+
+const std::string&    Brain::getIdea(unsigned int index) const
+{
+    return  _ideas[index];
+}
+
+void    Brain::setIdea(unsigned int index, std::string const& idea)
+{
+    _ideas[index] = idea;
+}

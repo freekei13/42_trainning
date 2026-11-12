@@ -13,7 +13,7 @@ int main()
     delete i;
     delete j;
 
-    Animal* animal[100];
+    const Animal* animal[100];
     for (int i = 0; i < 100; i++)
     {
         if (i < 50)
@@ -27,6 +27,14 @@ int main()
     
     for (int i = 0; i < 100; i++)
         delete animal[i];
-    
+
+    const Animal* a = new Dog();
+    const Animal* b = new Cat();
+    a->makeSound();
+    b->makeSound();
+
+    delete a;
+    delete b;
+
     return 0;
 }

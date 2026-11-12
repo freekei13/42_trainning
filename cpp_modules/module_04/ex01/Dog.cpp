@@ -9,7 +9,7 @@ Dog::Dog(void): Animal()
 
 Dog::Dog(Dog const& src): Animal(src)
 {
-    _brain = src._brain;
+    _brain = new Brain(*src._brain);
     std::cout << "Dog Copy constructor is called" << std::endl;
 }
 
@@ -24,7 +24,7 @@ Dog& Dog::operator=(Dog const& rhs)
     if (this != &rhs)
     {
         Animal::operator=(rhs);
-        _brain = rhs._brain;
+        *_brain = *rhs._brain;
         std::cout << "Dog Copy assignment operator is called" << std::endl;
     }
     return *this;
