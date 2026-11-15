@@ -1,5 +1,6 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "AAnimal.hpp"
 
 int main()
 {
@@ -62,6 +63,7 @@ int main()
     c->setIdea(101, "test idea");
     std::cout << c->getIdea(103) << std::endl;
 
+    //AAnimal aanimal;
     
     delete a;
     delete b;
