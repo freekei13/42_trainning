@@ -7,7 +7,7 @@ class   Character: public ICharacter
 {
     private:
         std::string _name;
-        AMateria*   inventory[4];
+        AMateria*    _inventory[4];
     public:
         Character();
         Character(Character const& src);
@@ -20,6 +20,5 @@ class   Character: public ICharacter
         void    unequip(int idx);
         void    use(int idx, ICharacter& target);
 };
-
 
 #endif
