@@ -2,7 +2,8 @@
 # define AMATERIA_HPP
 # include <string>
 # include <iostream>
-# include "ICharacter.hpp"
+
+class   ICharacter;
 
 class AMateria
 {
@@ -11,7 +12,7 @@ class AMateria
     public:
         AMateria();
         AMateria(AMateria const& src);
-        ~AMateria();
+        virtual ~AMateria();
         AMateria&   operator=(AMateria const& rhs);
     
         AMateria(std::string const& type);

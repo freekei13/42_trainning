@@ -9,8 +9,8 @@ Cure::~Cure() {}
 Cure&   Cure::operator=(Cure const& rhs)
 {
     if (this != &rhs)
-        _type = rhs._type;
-    return *this
+        AMateria::operator=(rhs);
+    return *this;
 }
 
 AMateria*   Cure::clone() const
