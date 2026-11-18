@@ -1,80 +1,68 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource(): 
-    _lastMateriaUsed("none"),
-    _materiaCount(0) {}
-
-MateriaSource::MateriaSource(MateriaSource const& src):
-    _lastMateriaUsed(src._lastMateriaUsed),
-    _materiaCount(src._materiaCount)
+MateriaSource::MateriaSource()
 {
-    for (int i = 0; i < _materiaCount; i++)
-        _materia[i] = src._materia[i];
+    for (int i = 0; i < 4; i++)
+        _materia[i] = NULL;
+}
+
+MateriaSource::MateriaSource(MateriaSource const& src)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        if (src._materia[i])
+            _materia[i] = src._materia[i]->clone();
+        else
+            _materia[i] = NULL;
+    }
 }
 
 MateriaSource::~MateriaSource()
 {
-    delete[] _materia;
+    for (int i = 0; i < 4; i++)
+        delete _materia[i];
 }
 
 MateriaSource&  MateriaSource::operator=(MateriaSource const& rhs)
 {
     if (this != &rhs)
     {
-        _lastMateriaUsed = rhs._lastMateriaUsed;
-        _materiaCount = rhs._materiaCount;
-        for (int i = 0; i < _materiaCount; i++)
-            _materia[i] = rhs._materia[i];
+        for (int i = 0; i < 4; i++)
+        {
+            delete _materia[i];
+            if (rhs._materia[i])
+                _materia[i] = rhs._materia[i]->clone();
+            else
+                _materia[i] = NULL;
+        }
     }
     return *this;
 }
 
 void    MateriaSource::learnMateria(AMateria* src)
 {
-    if (_materiaCount < 4)
+    if (!src)
+        return ;
+    for (int i = 0; i < 4; i++)
     {
-        if (src->getType() == "cure")
+        if (!_materia[i])
         {
-            _materia[_materiaCount] = new Cure();
-            _materiaCount++;
-        }
-        else if (src->getType() == "ice")
-        {
-            _materia[_materiaCount] = new Ice();
-            _materiaCount++;
+            _materia[i] = src;
+            return ;
         }
     }
-    else
-        std::cout << "Can't learn a new Materia, Materia source is full." << std::endl;
+    delete src;
+    std::cout << "Can not learn Materia, source is full." << std::endl;
 }
 
 AMateria*   MateriaSource::createMateria(std::string const& type)
 {
-    if (_materiaCount < 4)
+    for (int i = 0; i < 4; i++)
     {
-        if (type == "cure")
-        {
-            _materiaCount++;
-            return new Cure();
-        }
-        else if (type == "ice")
-        {
-            _materiaCount++;
-            return new Ice();
-        }
+        if (_materia[i] && _materia[i]->getType() == type)
+            return _materia[i]->clone();
     }
-    else
-        std::cout << "Can't create a new Materia, Materia source is full." << std::endl;
-}
-
-void    MateriaSource::setLastMateriaUsed(std::string const& type)
-{
-    _materiaCount--;
-    delete _materia[_materiaCount];
-    _lastMateriaUsed = type;
-}
-
-std::string const&  MateriaSource::getLastMateriaUsed() const
-{
-    return _lastMateriaUsed;
+    std::cout << "Can not create " << type;
+    std::cout << " Materia, source has not known this type." << std::endl;
+    return 0;
 }
