@@ -62,7 +62,7 @@ void    Character::equip(AMateria* m)
     {
         if (_inventory[i] == m)
         {
-            std::cout << _name << " you have already equiped this materia." << std::endl;
+            std::cout << _name << " has already equiped this materia." << std::endl;
             return ;
         }
     }
