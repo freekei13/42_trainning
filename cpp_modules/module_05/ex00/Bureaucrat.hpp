@@ -3,6 +3,7 @@
 
 # include <string>
 # include <iostream>
+# include <exception>
 
 class   Bureaucrat
 {
@@ -20,6 +21,16 @@ class   Bureaucrat
         int getGrade() const;
         void    getPromote();
         void    getDemote();
+
+        class   GradeTooHighException: public std::exception
+        {
+            virtual const char*  what() const throw();
+        };
+
+        class   GradeTooLowException: public std::exception
+        {
+            virtual const char* what() const throw();
+        };
 };
 
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& src);
