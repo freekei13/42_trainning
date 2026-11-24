@@ -1,32 +1,34 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main()
 {
-	try
-	{
-		Bureaucrat pat("Pat", 150);
-		std::cout << pat << std::endl;
-		pat.getDemote();
-		std::cout << pat << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	Bureaucrat	pat("Pat", 30);
+	std::cout << pat << std::endl;
+	Bureaucrat	jim("Jim", 5);
+	std::cout << jim << std::endl;
 
 	try
 	{
-		Bureaucrat sam("Sam", -1);
-		std::cout << sam << std::endl;
-		sam.getPromote();
-		std::cout << sam << std::endl;
-		Bureaucrat lin("Lin", 1);
-		std::cout << lin << std::endl;
-		lin.getPromote();
+		Form	StockForm("Stock form", 10, 10);
+		std::cout << StockForm << std::endl;
+		jim.signForm(StockForm);
+		std::cout << StockForm << std::endl;
+		pat.signForm(StockForm);
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
+	}
+	
+	try
+	{
+		Form	nonValidForm("NonValide", 0, 150);
+		std::cout << nonValidForm << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
 	}
 	
 	

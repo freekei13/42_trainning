@@ -4,10 +4,14 @@ int	main()
 {
 	try
 	{
-		Bureaucrat pat("Pat", 150);
+		Bureaucrat pat("Pat", 149);
 		std::cout << pat << std::endl;
 		pat.getDemote();
 		std::cout << pat << std::endl;
+		Bureaucrat lin("Lin", 1);
+		std::cout << lin << std::endl;
+		lin.getPromote();
+		std::cout << lin << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -20,9 +24,6 @@ int	main()
 		std::cout << sam << std::endl;
 		sam.getPromote();
 		std::cout << sam << std::endl;
-		Bureaucrat lin("Lin", 1);
-		std::cout << lin << std::endl;
-		lin.getPromote();
 	}
 	catch(const std::exception& e)
 	{

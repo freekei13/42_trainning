@@ -16,8 +16,10 @@ Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs)
 
 Bureaucrat::Bureaucrat(std::string const& name, int grade): _name(name)
 {
-    if (grade < 1 || grade > 150)
-        _grade = 150;
+    if (grade < 1)
+        throw   GradeTooHighException();
+    else if (grade > 150)
+        throw   GradeTooLowException();
     else
         _grade = grade;
 }

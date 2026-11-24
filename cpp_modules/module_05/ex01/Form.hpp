@@ -3,6 +3,7 @@
 
 # include <string>
 # include <iostream>
+# include <ostream>
 # include <exception>
 
 class   Bureaucrat;
