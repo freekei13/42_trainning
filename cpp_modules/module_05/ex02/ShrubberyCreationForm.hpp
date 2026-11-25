@@ -14,6 +14,16 @@ class   ShrubberyCreationForm: public AForm
 
         ShrubberyCreationForm(std::string const& target);
         void    execute(Bureaucrat const& executor);
+
+        class   FileFailOpenException: public std::exception
+        {
+            char const* what() const throw();
+        };
+
+        class   FileFailWriteException: public std::exception
+        {
+            char const* what() const throw();
+        };
 };
 
 #endif
