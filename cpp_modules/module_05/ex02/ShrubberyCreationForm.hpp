@@ -17,12 +17,12 @@ class   ShrubberyCreationForm: public AForm
 
         class   FileFailOpenException: public std::exception
         {
-            char const* what() const throw();
+            virtual char const* what() const throw();
         };
 
         class   FileFailWriteException: public std::exception
         {
-            char const* what() const throw();
+            virtual char const* what() const throw();
         };
 };
 
