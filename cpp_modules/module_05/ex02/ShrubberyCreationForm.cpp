@@ -24,13 +24,14 @@ ShrubberyCreationForm&  ShrubberyCreationForm::operator=(ShrubberyCreationForm c
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const& target):
     AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-void    ShrubberyCreationForm::execute(Bureaucrat const& executor)
+void    ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
     if (!this->isSigned())
         throw   FormNotSignException();
     else if (executor.getGrade() > this->getGradeToExec())
         throw   GradeTooLowException();
-    std::ofstream   file(_target.append("_shrubbery").c_str());
+    std::string fileName = _target + "_shrubbery";
+    std::ofstream   file(fileName.c_str());
     if (!file.is_open())
         throw   FileFailOpenException();
     file << "      /### ####\\      \n"

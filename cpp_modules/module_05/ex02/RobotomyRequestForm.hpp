@@ -13,12 +13,7 @@ class   RobotomyRequestForm: public AForm
         RobotomyRequestForm&    operator=(RobotomyRequestForm const& rhs);
 
         RobotomyRequestForm(std::string const& target);
-        void    execute(Bureaucrat const& executor);
-
-        class   RobotomyFailException: public std::exception
-        {
-            virtual char const* what() const throw();
-        };
+        void    execute(Bureaucrat const& executor) const;
 };
 
 #endif

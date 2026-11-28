@@ -13,16 +13,18 @@ class   ShrubberyCreationForm: public AForm
         ShrubberyCreationForm&  operator=(ShrubberyCreationForm const& rhs);
 
         ShrubberyCreationForm(std::string const& target);
-        void    execute(Bureaucrat const& executor);
+        void    execute(Bureaucrat const& executor) const;
 
         class   FileFailOpenException: public std::exception
         {
-            virtual char const* what() const throw();
+            public:
+                virtual char const* what() const throw();
         };
 
         class   FileFailWriteException: public std::exception
         {
-            virtual char const* what() const throw();
+            public:
+                virtual char const* what() const throw();
         };
 };
 
